@@ -1,0 +1,17 @@
+
+      GetPage(
+        name: RouteNames.appInit,
+        page: () => const AppInitPage(),
+      ),
+      GetPage(
+        name: RouteNames.chat,
+        page: () => const ChatPage(),
+      ),
+      GetPage(
+        name: RouteNames.contacts,
+        page: () => const ContactsPage(),
+      ),
+      GetPage(
+        name: RouteNames.mine,
+        page: () => const MinePage(),
+      ),

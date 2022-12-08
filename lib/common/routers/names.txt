@@ -1,0 +1,4 @@
+static const appInit = '/app_init';
+static const chat = '/chat';
+static const contacts = '/contacts';
+static const mine = '/mine';
