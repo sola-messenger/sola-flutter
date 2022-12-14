@@ -2,11 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:sola/widgets/input_column_field.dart';
-import 'package:sola/widgets/more_input_column_field.dart';
-import 'package:sola/widgets/preod_radio_column_field.dart';
-import 'package:sola/widgets/price_radio_column_field.dart';
-import 'package:sola/widgets/radio_column_field.dart';
+import 'package:sola/common/widgets/index.dart';
 import 'org_manager_controller.dart';
 
 class OrgManagerPage extends GetView<OrgManagerController> {

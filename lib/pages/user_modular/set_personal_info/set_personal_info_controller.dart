@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:sola/common/index.dart';
 
 class SetPersonalInfoController extends GetxController {
     final count = 0.obs;
@@ -24,8 +25,10 @@ class SetPersonalInfoController extends GetxController {
     increment() => count.value++;
 
   void onSaveAndContinue() {
+    Get.offAllNamed(Routers.indexRoute);
   }
 
   void onSkip() {
+    Get.offAllNamed(Routers.indexRoute);
   }
 }

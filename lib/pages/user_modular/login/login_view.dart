@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:sola/widgets/input_column_field.dart';
+import 'package:sola/common/widgets/index.dart';
 import 'login_controller.dart';
 
 class LoginPage extends GetView<LoginController> {

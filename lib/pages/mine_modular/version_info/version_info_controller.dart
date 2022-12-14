@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:sola/widgets/dialog/upgrade_dialog.dart';
+import 'package:sola/common/index.dart';
 
 class VersionInfoController extends GetxController {
   final count = 0.obs;

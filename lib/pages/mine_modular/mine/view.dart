@@ -25,7 +25,7 @@ class MinePage extends GetView<MineController> {
         MineSettingItem(
             title: 'Language', image: '', onTap: ctl.onNavOrganzation),
         MineSettingItem(
-            title: 'Security & Privacy', image: '', onTap: ctl.onNavSecurity),
+            title: 'Settings', image: '', onTap: ctl.onNavSettings),
         MineSettingItem(
             title: 'Change Password',
             image: '',

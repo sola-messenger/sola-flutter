@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:sola/widgets/input_column_field.dart';
+import 'package:sola/common/widgets/index.dart';
 import 'set_personal_info_controller.dart';
 
 class SetPersonalInfoPage extends GetView<SetPersonalInfoController> {

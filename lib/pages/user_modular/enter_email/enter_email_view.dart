@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:sola/widgets/input_column_field.dart';
+import 'package:sola/common/index.dart';
 import 'enter_email_controller.dart';
 
 class EnterEmailPage extends GetView<EnterEmailController> {

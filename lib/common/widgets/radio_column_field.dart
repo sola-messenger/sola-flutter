@@ -7,6 +7,7 @@ class RadioColumnField extends StatelessWidget {
   final List<String> selectList;
   final String selected;
   final ValueChanged<String?> onSelect;
+  final VoidCallback? onShowInfo;
 
   const RadioColumnField({
     super.key,
@@ -14,6 +15,7 @@ class RadioColumnField extends StatelessWidget {
     required this.selectList,
     required this.selected,
     required this.onSelect,
+     this.onShowInfo,
   });
 
   @override
@@ -21,11 +23,17 @@ class RadioColumnField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(title.tr),
+        Row(
+          children: [
+            Text(title.tr),
+            if (onShowInfo != null)
+              IconButton(onPressed: onShowInfo, icon: const Icon(Icons.info_outline)),
+          ],
+        ),
         Wrap(
           children: selectList
               .map((e) => Row(
-                mainAxisSize: MainAxisSize.min,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       Radio(
                           value: e,

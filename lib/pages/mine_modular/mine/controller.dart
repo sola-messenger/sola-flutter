@@ -28,7 +28,6 @@ class MineController extends GetxController {
 
   void onNavQRCode() {
     Get.toNamed(Routers.myQrcodeRoute);
-
   }
 
   void onNavOrganzation() {
@@ -47,11 +46,11 @@ class MineController extends GetxController {
     Get.toNamed(Routers.changePasswordRoute);
   }
 
-  void onNavSecurity() {
+  void onNavSettings() {
+    Get.toNamed(Routers.settingsRoute);
   }
 
-  void onLogout() {
-  }
+  void onLogout() {}
 
   void onNavPersonalInfo() {
     Get.toNamed(Routers.personalInfoRoute);

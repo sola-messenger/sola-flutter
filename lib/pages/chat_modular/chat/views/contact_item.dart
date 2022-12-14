@@ -26,59 +26,62 @@ class ContactItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget child = Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-      child: Row(
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: Colors.red,
-              borderRadius: BorderRadius.circular(4),
+    Widget child = InkWell(
+      onTap: onTap,
+      child: Ink(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        child: Row(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(4),
+              ),
             ),
-          ),
-          const SizedBox(
-            width: 6,
-          ),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            const SizedBox(
+              width: 6,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    name,
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  Text(
+                    lastContent,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(
-                  name,
-                ),
+                Text(time),
                 SizedBox(
                   height: 12,
                 ),
-                Text(
-                  lastContent,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(time),
-              SizedBox(
-                height: 12,
-              ),
-              Visibility(
-                visible: unreadCount > 0,
-                child: Badge(
-                  badgeContent: Text(
-                    '${unreadCount>99?'99+':unreadCount}',
-                    style: TextStyle(color: Colors.white,
-                    fontSize: 8),
+                Visibility(
+                  visible: unreadCount > 0,
+                  child: Badge(
+                    badgeContent: Text(
+                      '${unreadCount>99?'99+':unreadCount}',
+                      style: TextStyle(color: Colors.white,
+                      fontSize: 8),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          )
-        ],
+              ],
+            )
+          ],
+        ),
       ),
     );
     if (isTop) {

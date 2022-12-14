@@ -29,4 +29,18 @@ class ContactsController extends GetxController {
   void onNavGroup() {
     Get.toNamed(Routers.groupRoute);
   }
+
+  void onNavNewContact() {
+    Get.toNamed(Routers.newContactRoute);
+  }
+
+  void onNavGroupNotification() {
+    Get.toNamed(Routers.groupNotificationRoute);
+  }
+
+  void onNavContactDetail() {
+    Get.toNamed(Routers.memberInfoRoute, parameters: {
+      'formType': '0',
+    });
+  }
 }

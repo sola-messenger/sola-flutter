@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:sola/common/routers/index.dart';
 
 class ContactGroupController extends GetxController {
     final count = 0.obs;
@@ -17,8 +18,15 @@ class ContactGroupController extends GetxController {
     increment() => count.value++;
 
   void onCreateGroup() {
+    Get.toNamed(Routers.createGroupRoute);
   }
 
   void onNavSearch() {
+    Get.toNamed(Routers.contactGroupSetRoute);
+
+  }
+
+  void onNavDetail() {
+    Get.toNamed(Routers.contactGroupSetRoute);
   }
 }

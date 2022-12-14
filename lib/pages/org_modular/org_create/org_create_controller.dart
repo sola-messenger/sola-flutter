@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:sola/widgets/price_radio_column_field.dart';
+import 'package:sola/common/index.dart';
+import 'package:sola/common/widgets/index.dart';
 
 class OrgCreateController extends GetxController {
   final allowItem = 'Allow'.obs;
@@ -52,5 +53,6 @@ class OrgCreateController extends GetxController {
   }
 
   void onConfirm() {
+    Get.toNamed(Routers.orgConfirmOrderRoute);
   }
 }

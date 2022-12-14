@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sola/pages/contact_modular/contacts/views/contact_group_item.dart';
+import 'package:sola/pages/contact_modular/contacts/views/contact_member_item.dart';
+import 'package:sola/pages/contact_modular/contacts/views/contact_not_joined_item.dart';
 import '../../contact_modular/contacts/views/contact_content_item.dart';
 import '../../contact_modular/contacts/views/contact_title_item.dart';
 import 'org_detail_controller.dart';
@@ -16,42 +19,70 @@ class OrgDetailPage extends GetView<OrgDetailController> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildOrgTapItem(title: 'Manage Info', img: '',
-              onTap: ctl.onNavManageInfo),
-              _buildOrgTapItem(title: 'Invite Members', img: '',onTap: ctl.onInviteMembers),
-              _buildOrgTapItem(title: 'Exit\nOrganization', img: '',onTap: ctl.onExitOrg),
+              _buildOrgTapItem(
+                  title: 'Manage Info', img: '', onTap: ctl.onNavManageInfo),
+              _buildOrgTapItem(
+                  title: 'Invite Members', img: '', onTap: ctl.onInviteMembers),
+              _buildOrgTapItem(
+                  title: 'Exit\nOrganization', img: '', onTap: ctl.onExitOrg),
             ],
           ),
           const SizedBox(
             height: 12,
           ),
-          const ContactTitleItem(title: 'Frequent Contacts'),
-          const ConatctContentItem(
+          ContactTitleItem(
+            title: 'Administrators',
+            action: InkWell(
+                onTap: () {},
+                child: const Text(
+                  'Add+',
+                  textAlign: TextAlign.center,
+                )),
+          ),
+          const ContactContentItem(
             img: '',
             title: '张七',
             content: 'DCS Card',
           ),
-          const ConatctContentItem(
+          const ContactTitleItem(
+            title: 'Group',
+          ),
+          const ContactGroupItem(
             img: '',
             title: 'AAA',
-            content: 'DCS Card',
+            createdBy: 'Alien Card',
           ),
-          const ConatctContentItem(
+          const ContactGroupItem(
             img: '',
-            title: 'DDD',
-            content: 'DCS Card',
+            title: 'DDG',
+            createdBy: 'zhange',
           ),
-          const ConatctContentItem(
+          const ContactTitleItem(
+            title: 'Members',
+          ),
+          ContactMemberItem(
             img: '',
-            title: 'FFF',
-            content: 'DCS Card',
+            title: 'DDG',
+            onRemove: () {},
+          ),
+          ContactNotJoinedItem(
+            onCopy: (){},
+            inviteCode: 'SDF123',
+          ),
+          ContactNotJoinedItem(
+            onCopy: (){},
+            inviteCode: 'SDF123',
           ),
         ],
       );
 
-  Widget _buildOrgTapItem({required String title, required String img,required VoidCallback onTap}) => InkWell(
-    onTap: onTap,
-    child: Row(
+  Widget _buildOrgTapItem(
+          {required String title,
+          required String img,
+          required VoidCallback onTap}) =>
+      InkWell(
+        onTap: onTap,
+        child: Row(
           children: [
             Container(
               width: 30,
@@ -64,7 +95,7 @@ class OrgDetailPage extends GetView<OrgDetailController> {
             Text(title),
           ],
         ),
-  );
+      );
 
   Container _buildOrgHeader(OrgDetailController ctl) {
     return Container(

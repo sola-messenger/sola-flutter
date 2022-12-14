@@ -15,13 +15,13 @@ class ContactsPage extends GetView<ContactsController> {
       child: ListView(
         children: [
           ContactTapItem(
-            onTap: () {},
+            onTap: ctl.onNavNewContact,
             title: 'New Contact',
             icon: '',
             hasNews: true,
           ),
           ContactTapItem(
-            onTap: () {},
+            onTap: ctl.onNavGroupNotification,
             title: 'Group notification',
             icon: '',
           ),
@@ -31,36 +31,42 @@ class ContactsPage extends GetView<ContactsController> {
             icon: '',
           ),
           const ContactTitleItem(title: 'Frequent Contacts'),
-          const ConatctContentItem(
+          ContactContentItem(
             img: '',
             title: '张七',
             content: 'DCS Card',
+            onTap: ctl.onNavContactDetail,
           ),
-          const ConatctContentItem(
+          ContactContentItem(
             img: '',
             title: 'AAA',
             content: 'DCS Card',
+            onTap: ctl.onNavContactDetail,
           ),
-          const ConatctContentItem(
+          ContactContentItem(
             img: '',
             title: 'DDD',
             content: 'DCS Card',
+            onTap: ctl.onNavContactDetail,
           ),
-          const ConatctContentItem(
+          ContactContentItem(
             img: '',
             title: 'FFF',
             content: 'DCS Card',
+            onTap: ctl.onNavContactDetail,
           ),
           const ContactTitleItem(title: 'A'),
-          const ConatctContentItem(
+          ContactContentItem(
             img: '',
             title: 'AAA',
             content: 'DCS Card',
+            onTap: ctl.onNavContactDetail,
           ),
-           const ConatctContentItem(
+          ContactContentItem(
             img: '',
             title: 'AAB',
             content: 'DCS Card',
+            onTap: ctl.onNavContactDetail,
           ),
         ],
       ),

@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 import 'package:sola/common/routers/index.dart';
 
 class RegisterSuccessController extends GetxController {
+    final isCreateOrg = Get.parameters["isCreateOrg"];
+
     final count = 0.obs;
 
     @override
@@ -18,6 +20,10 @@ class RegisterSuccessController extends GetxController {
     increment() => count.value++;
 
   void onConfirm() {
-    Get.offNamed(Routers.indexRoute);
+    if(isCreateOrg == 'true'){
+      Get.offNamed(Routers.orgOrderDetailRoute);
+    }else{
+      Get.offNamed(Routers.setPersonalRoute);
+    }
   }
 }

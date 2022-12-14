@@ -2,11 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:sola/widgets/input_column_field.dart';
-import 'package:sola/widgets/radio_column_field.dart';
-import '../../../widgets/more_input_column_field.dart';
-import '../../../widgets/preod_radio_column_field.dart';
-import '../../../widgets/price_radio_column_field.dart';
+import 'package:sola/common/widgets/index.dart';
 import 'org_create_controller.dart';
 
 class OrgCreatePage extends GetView<OrgCreateController> {
@@ -21,7 +17,7 @@ class OrgCreatePage extends GetView<OrgCreateController> {
             appBar: AppBar(
               title: Text('Create Organization'.tr),
             ),
-            body: _buildView(context, ctl),
+            body: SafeArea(child: _buildView(context, ctl)),
           );
         });
   }
@@ -35,7 +31,12 @@ class OrgCreatePage extends GetView<OrgCreateController> {
             right: 12,
           ),
           children: [
-            const Text('Please set your organization\'s info'),
+            const SizedBox(
+              height: 12,
+            ),
+            const Center(child:  Text('Please set your organization\'s info',style: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),)),
             const SizedBox(
               height: 64,
             ),

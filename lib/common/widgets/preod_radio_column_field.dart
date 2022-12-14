@@ -41,7 +41,7 @@ class PreodRadioColumnField extends StatelessWidget {
     final item = perodList[index];
     bool isSelect = item==selected;
     return SizedBox(
-      width: Get.mediaQuery.size.width/4 - 15,
+      width: Get.mediaQuery.size.width/4 - 18,
       child: InkWell(
         onTap: () {
           onSelect.call(item);

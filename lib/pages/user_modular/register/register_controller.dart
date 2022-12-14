@@ -5,8 +5,6 @@ import 'package:sola/common/routers/index.dart';
 class RegisterController extends GetxController {
   RxBool isAgreePrivacy = false.obs;
   FormGroup formGroup = FormGroup({
-    'userName':FormControl(validators: [Validators.required]),
-    'password':FormControl(validators: [Validators.required]),
     'inviteCode':FormControl(validators: [Validators.required]),
   });
 
@@ -33,7 +31,7 @@ class RegisterController extends GetxController {
   }
 
   void onRegister() {
-    Get.offNamed(Routers.registerSuccessRoute);
+    Get.offNamed(Routers.registerSetLoginInfoRoute);
   }
 
   void onNavLogin() {

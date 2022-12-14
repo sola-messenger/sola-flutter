@@ -8,7 +8,8 @@ import 'package:get/get.dart';
 import 'package:sola/common/index.dart';
 import 'package:matrix/matrix.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sola/widgets/testing.dart';
+import 'package:sola/common/services/api_service.dart';
+import 'package:sola/common/widgets/testing.dart';
 
 void main() async {
   if (kReleaseMode) {
@@ -24,12 +25,12 @@ void main() async {
     );
     await client.init();
     runApp(MatrixExampleChat(client: client));
-  }else {
+  } else {
     WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
     FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  await initService();
-  initUi();
-  runApp(
+    await initService();
+    initUi();
+    runApp(
       // debug UI
       DevicePreview(
         enabled: !kReleaseMode,
@@ -37,8 +38,7 @@ void main() async {
       ),
     );
   }
-  }
-
+}
 
 void initUi() {
   SystemUiOverlayStyle systemUiOverlayStyle =
@@ -63,6 +63,12 @@ Future<void> initService() async {
     await sv.init();
     return sv;
   });
+
+  await Get.putAsync<ApiService>(() async {
+    final sv = ApiServiceImpl();
+    await sv.init();
+    return sv;
+  });
 }
 
 class MyApp extends StatelessWidget {
@@ -70,7 +76,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 移除splash 
+    // 移除splash
     FlutterNativeSplash.remove();
     return GetMaterialApp(
       title: 'Sola',
@@ -85,7 +91,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       initialRoute: () {
-        return Routers.splashRoute;
+        return Routers.indexRoute;
       }(),
       getPages: Routers.routes,
     );
