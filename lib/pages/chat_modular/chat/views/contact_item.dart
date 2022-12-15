@@ -1,5 +1,8 @@
-import 'package:badges/badges.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:badges/badges.dart';
 
 class ContactItem extends StatelessWidget {
   final String img;

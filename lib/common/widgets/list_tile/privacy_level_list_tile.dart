@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:sola/common/widgets/dialog/privacy_level_dialog.dart';
 
 class PrivacyLevelListTile extends StatelessWidget {

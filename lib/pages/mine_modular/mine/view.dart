@@ -1,7 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:sola/pages/mine_modular/mine/views/mine_setting_item.dart';
 
+// Package imports:
+import 'package:get/get.dart';
+
+// Project imports:
+import 'package:sola/pages/mine_modular/mine/views/mine_setting_item.dart';
 import 'index.dart';
 
 class MinePage extends GetView<MineController> {

@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:sola/pages/chat_modular/chat/views/search_bar.dart';
 import 'package:sola/pages/chat_modular/select_members/views/select_member_item.dart';
 import 'select_members_controller.dart';

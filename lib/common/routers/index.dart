@@ -1,6 +1,9 @@
 library routers;
 
+// Package imports:
 import 'package:get/route_manager.dart';
+
+// Project imports:
 import 'package:sola/pages/chat_modular/chat_detail/chat_detail_view.dart';
 import 'package:sola/pages/chat_modular/chat_set/chat_set_view.dart';
 import 'package:sola/pages/chat_modular/create_group/create_group_controller.dart';
@@ -15,6 +18,7 @@ import 'package:sola/pages/contact_modular/group_notification/group_notification
 import 'package:sola/pages/contact_modular/manager_group/manager_group_view.dart';
 import 'package:sola/pages/contact_modular/member_info/member_info_view.dart';
 import 'package:sola/pages/contact_modular/new_contact/new_contact_view.dart';
+import 'package:sola/pages/index.dart';
 import 'package:sola/pages/index_page/index_page_view.dart';
 import 'package:sola/pages/mine_modular/about_us/about_us_view.dart';
 import 'package:sola/pages/mine_modular/change_password/change_password_view.dart';
@@ -24,21 +28,19 @@ import 'package:sola/pages/mine_modular/settings/settings_view.dart';
 import 'package:sola/pages/mine_modular/version_info/version_info_view.dart';
 import 'package:sola/pages/org_modular/org_confirm_order/org_confirm_order_view.dart';
 import 'package:sola/pages/org_modular/org_create/org_create_view.dart';
+import 'package:sola/pages/org_modular/org_detail/org_detail_view.dart';
 import 'package:sola/pages/org_modular/org_manager/org_manager_view.dart';
 import 'package:sola/pages/org_modular/org_order_detail/org_order_detail_view.dart';
 import 'package:sola/pages/splash/splash_view.dart';
 import 'package:sola/pages/user_modular/enter_email/enter_email_view.dart';
 import 'package:sola/pages/user_modular/forgot_password/forgot_password_view.dart';
-import 'package:sola/pages/index.dart';
 import 'package:sola/pages/user_modular/login/login_view.dart';
-import 'package:sola/pages/org_modular/org_detail/org_detail_view.dart';
 import 'package:sola/pages/user_modular/register/register_view.dart';
 import 'package:sola/pages/user_modular/register_success/register_success_view.dart';
 import 'package:sola/pages/user_modular/reset_password/reset_password_view.dart';
 import 'package:sola/pages/user_modular/set_login_info/set_login_info_view.dart';
 import 'package:sola/pages/user_modular/set_personal_info/set_personal_info_view.dart';
 import 'package:sola/pages/user_modular/verify_email/verify_email_view.dart';
-
 import '../../pages/unknown_page.dart';
 
 // export './xxxx.dart';

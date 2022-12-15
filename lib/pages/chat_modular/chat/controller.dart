@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:sola/common/routers/index.dart';
 import 'package:sola/common/widgets/bottom_sheet/invite_bottom_sheet.dart';
 import 'package:sola/pages/index_page/index_page_controller.dart';

@@ -6,9 +6,13 @@
 
 import 'package:flutter/material.dart'
     hide RefreshIndicator, RefreshIndicatorState;
-import '../../pull_to_refresh.dart';
+
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+
+// Project imports:
+import '../../pull_to_refresh.dart';
 
 /// direction that icon should place to the text
 enum IconPosition { left, right, top, bottom }

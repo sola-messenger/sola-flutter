@@ -1,9 +1,14 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+import 'package:r_dotted_line_border/r_dotted_line_border.dart';
+
+// Project imports:
 import 'package:sola/common/index.dart';
 import 'group_admin_controller.dart';
 import 'views/group_admin_item.dart';
-import 'package:r_dotted_line_border/r_dotted_line_border.dart';
 
 class GroupAdminPage extends GetView<GroupAdminController> {
   const GroupAdminPage({Key? key}) : super(key: key);

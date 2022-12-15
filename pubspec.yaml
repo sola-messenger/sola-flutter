@@ -115,12 +115,12 @@ dependencies:
   device_preview: ^1.1.0
   # 表单
   reactive_forms: ^14.1.0
-  provider:
+  # 状态管理
+  provider: ^6.0.4
   # 图片
   extended_image: ^6.3.4
   # 虚线边框
   r_dotted_line_border: ^0.1.1
-  
 dev_dependencies:
 
   # debug-代码分析工具 https://pub.dev/packages/dart_code_metrics

@@ -1,6 +1,9 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+
+// Package imports:
 import 'package:get/get.dart';
 
 class SearchBar extends StatelessWidget {

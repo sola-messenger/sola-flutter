@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:sola/pages/splash/views/splash_dot_widget.dart';
 import 'splash_controller.dart';
 

@@ -1,5 +1,9 @@
+// Dart imports:
 import 'dart:typed_data';
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
 import '_network_image_x_io.dart'
     if (dart.library.html) '_network_image_x_web.dart' as network_image;
 

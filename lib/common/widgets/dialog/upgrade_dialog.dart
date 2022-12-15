@@ -1,16 +1,26 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
+import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/common/widgets/button/border_button.dart';
+import 'package:sola/common/widgets/button/fill_button.dart';
 
 class UpgradeDialog extends StatelessWidget {
   final VoidCallback onUpgrade;
   final String versionName;
   final String updateInfo;
+  final bool isForce;
 
   const UpgradeDialog(
       {super.key,
       required this.onUpgrade,
       required this.versionName,
-      required this.updateInfo});
+      required this.updateInfo,
+      this.isForce = false});
 
   @override
   Widget build(BuildContext context) {
@@ -23,33 +33,80 @@ class UpgradeDialog extends StatelessWidget {
           ),
           padding: const EdgeInsets.only(
             top: 16,
-            bottom: 16,
-            left: 8,
-            right: 8,
+            bottom: 49,
+            left: 28,
+            right: 28,
           ),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(16),
             border: const Border(),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('New Version'.tr),
-              const SizedBox(
-                height: 16,
+              const Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  'S-C',
+                  style: TextStyle(
+                    color: AppColors.mainBlueColor,
+                    fontSize: 16,
+                  ),
+                ),
               ),
-               Align(
-                alignment: Alignment.centerLeft,
-                child: Text('APP version:$versionName')),
               const SizedBox(
-                height: 16,
+                height: 8,
               ),
-               Text(updateInfo),
+              Text(
+                'New Version'.tr,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 14,
+                  height: 21 / 14,
+                ),
+              ),
               const SizedBox(
-                height: 32,
+                height: 25,
               ),
-              ElevatedButton(onPressed: onUpgrade, child: Text('Update'.tr)),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'APP version:$versionName',
+                    style: const TextStyle(
+                      color: Colors.black,
+                      height: 21 / 14,
+                      fontSize: 14,
+                    ),
+                  )),
+              const SizedBox(
+                height: 15,
+              ),
+              Text(
+                updateInfo,
+                style: const TextStyle(
+                  fontSize: 14,
+                  height: 21 / 14,
+                ),
+              ),
+              const SizedBox(
+                height: 81,
+              ),
+              if (isForce)
+                FillButton(onPressed: onUpgrade, title: 'Update'.tr)
+              else
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    BorderButton(
+                      title: 'Cancel',
+                      onPressed: () {
+                        Get.back();
+                      },
+                    ),
+                    FillButton(onPressed: onUpgrade, title: 'Update'.tr)
+                  ],
+                ),
             ],
           ),
         ),

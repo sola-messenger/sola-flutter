@@ -1,8 +1,12 @@
+// Dart imports:
 import 'dart:async';
 import 'dart:ui' as ui;
+
+// Flutter imports:
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+// Project imports:
 import 'network_image_x.dart';
 
 /// The dart:io implementation of [image_provider.NetworkImage].

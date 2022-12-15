@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:sola/pages/contact_modular/contacts/views/contact_group_item.dart';
 import 'package:sola/pages/contact_modular/contacts/views/contact_member_item.dart';
 import 'package:sola/pages/contact_modular/contacts/views/contact_not_joined_item.dart';

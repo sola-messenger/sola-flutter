@@ -1,3 +1,4 @@
+// Flutter imports:
 import 'package:flutter/foundation.dart';
 
 class AppConstants {
@@ -8,4 +9,8 @@ class AppConstants {
   static int connectTimeout = 5000;
 
   static int receiveTimeout = 50000;
+
+  static const dw = 375.0;
+  static const dh = 812.0;
+
 }

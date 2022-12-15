@@ -1,11 +1,14 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:sola/common/routers/index.dart';
 import 'package:sola/pages/chat_modular/chat/views/contact_item.dart';
 import 'package:sola/pages/chat_modular/chat/views/search_bar.dart';
-
 import 'index.dart';
-
 
 class ChatPage extends GetView<ChatController> {
   const ChatPage({Key? key}) : super(key: key);

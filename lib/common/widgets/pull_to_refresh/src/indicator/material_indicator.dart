@@ -6,6 +6,8 @@
 
 import 'package:flutter/material.dart'
     hide RefreshIndicator, RefreshIndicatorState;
+
+// Project imports:
 import '../internals/indicator_wrap.dart';
 import '../smart_refresher.dart';
 
@@ -105,13 +107,14 @@ class _MaterialClassicHeaderState
 
   Widget _buildIndicator(Color outerColor) {
     return SlideTransition(
+      position: _positionFactor!,
       child: ScaleTransition(
         scale: _scaleFactor,
         child: Align(
           alignment: Alignment.topCenter,
           child: RefreshProgressIndicator(
             semanticsLabel: widget.semanticsLabel ??
-                MaterialLocalizations?.of(context)
+                MaterialLocalizations.of(context)
                     .refreshIndicatorSemanticLabel,
             semanticsValue: widget.semanticsValue,
             value: floating ? null : _valueAni.value,
@@ -120,7 +123,6 @@ class _MaterialClassicHeaderState
           ),
         ),
       ),
-      position: _positionFactor!,
     );
   }
 

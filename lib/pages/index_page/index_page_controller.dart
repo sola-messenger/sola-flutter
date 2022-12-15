@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:sola/common/routers/index.dart';
 import 'package:sola/common/widgets/dialog/confirm_dialog.dart';
 import 'package:sola/pages/index.dart';

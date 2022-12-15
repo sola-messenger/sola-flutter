@@ -1,6 +1,11 @@
-import 'package:badges/badges.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:badges/badges.dart';
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:sola/pages/index_page/views/create_group_item.dart';
 import 'package:sola/pages/index_page/views/manager_group_item.dart';
 import 'index_page_controller.dart';

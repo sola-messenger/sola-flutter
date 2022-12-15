@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:sola/common/widgets/list_tile/my_radio_list_tile.dart';
 import 'settings_controller.dart';
 

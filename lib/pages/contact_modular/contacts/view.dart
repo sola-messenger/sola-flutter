@@ -1,7 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:sola/pages/contact_modular/contacts/views/contact_title_item.dart';
 
+// Package imports:
+import 'package:get/get.dart';
+
+// Project imports:
+import 'package:sola/pages/contact_modular/contacts/views/contact_title_item.dart';
 import 'index.dart';
 import 'views/contact_content_item.dart';
 import 'views/contact_tap_item.dart';

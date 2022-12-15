@@ -1,15 +1,23 @@
-import 'package:device_preview/device_preview.dart';
+// Flutter imports:
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+// Package imports:
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
-import 'package:sola/common/index.dart';
 import 'package:matrix/matrix.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sola/common/services/api_service.dart';
+
+// Project imports:
+import 'package:sola/app_init.dart';
+import 'package:sola/common/index.dart';
 import 'package:sola/common/widgets/testing.dart';
+
+import 'common/app_constants.dart';
+import 'common/widgets/media_query_builder.dart';
 
 void main() async {
   if (kReleaseMode) {
@@ -26,10 +34,7 @@ void main() async {
     await client.init();
     runApp(MatrixExampleChat(client: client));
   } else {
-    WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-    FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-    await initService();
-    initUi();
+    await AppInit.init();
     runApp(
       // debug UI
       DevicePreview(
@@ -40,36 +45,6 @@ void main() async {
   }
 }
 
-void initUi() {
-  SystemUiOverlayStyle systemUiOverlayStyle =
-      const SystemUiOverlayStyle(statusBarColor: Colors.transparent);
-  SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
-}
-
-Future<void> initService() async {
-  await Get.putAsync<LoggerService>(() async {
-    final sv = LoggerServiceImpl();
-    await sv.init();
-    return sv;
-  });
-  await Get.putAsync<CallKeepService>(() async {
-    final sv = CallKeepServiceImpl();
-    await sv.init();
-    return sv;
-  });
-
-  await Get.putAsync<InfoService>(() async {
-    final sv = InfoServiceImpl();
-    await sv.init();
-    return sv;
-  });
-
-  await Get.putAsync<ApiService>(() async {
-    final sv = ApiServiceImpl();
-    await sv.init();
-    return sv;
-  });
-}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -84,6 +59,19 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      builder: (context, widget) {
+        // 设置屏幕适配
+        return screenAdapterBuilder(
+          builder: (context) {
+            return MediaQuery(
+              // 设置文字大小不随系统设置改变
+              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+              child: widget!,
+            );
+          },
+          designSize: const Size(AppConstants.dw, AppConstants.dh),
+        );
+      },
       unknownRoute: Routers.unknownPage,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
@@ -91,7 +79,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       initialRoute: () {
-        return Routers.indexRoute;
+        return Routers.registerRoute;
       }(),
       getPages: Routers.routes,
     );

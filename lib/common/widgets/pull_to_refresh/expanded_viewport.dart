@@ -1,7 +1,10 @@
+// Dart imports:
+import 'dart:math' as math;
+
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:math' as math;
 
 class ExpandedViewport extends Viewport {
   ExpandedViewport({

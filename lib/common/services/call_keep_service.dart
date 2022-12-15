@@ -1,9 +1,13 @@
+// Dart imports:
 import 'dart:async';
 
+// Package imports:
 import 'package:callkeep/callkeep.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:matrix/matrix.dart';
+
+// Project imports:
 import 'package:sola/common/services/info_service.dart';
 import 'package:sola/common/services/logger_service.dart';
 import 'package:sola/entity/call_keeper_entity.dart';
@@ -162,7 +166,7 @@ class CallKeepServiceImpl extends CallKeepService {
   void answer(String callId) async {
     final keeper = calls[callId]!;
     if (!keeper.connected) {
-      await _callkeep?.answerIncomingCall(callId!);
+      await _callkeep?.answerIncomingCall(callId);
       keeper.connected = true;
     }
   }

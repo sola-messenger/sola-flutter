@@ -4,9 +4,12 @@
  * Time:  2019-08-29 09:41
  */
 
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'classic_indicator.dart';
+
+// Project imports:
 import '../smart_refresher.dart';
+import 'classic_indicator.dart';
 
 enum TwoLevelDisplayAlignment { fromTop, fromCenter, fromBottom }
 

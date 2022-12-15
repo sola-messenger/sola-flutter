@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:sola/common/routers/index.dart';
 
 class RegisterSuccessController extends GetxController {

@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
 import 'package:sola/pages/chat_modular/chat_detail/views/image_clip.dart';
 import 'package:sola/pages/chat_modular/chat_detail/views/text_clip.dart';
 import 'package:sola/pages/chat_modular/chat_detail/views/time_clip.dart';

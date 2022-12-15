@@ -1,6 +1,8 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
+// Package imports:
+import 'package:get/get.dart';
 
 class PreodRadioColumnField extends StatelessWidget {
   final String title;

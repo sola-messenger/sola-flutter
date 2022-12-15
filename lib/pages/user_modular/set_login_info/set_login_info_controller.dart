@@ -1,5 +1,8 @@
+// Package imports:
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+// Project imports:
 import 'package:sola/common/index.dart';
 
 class SetLoginInfoController extends GetxController {

@@ -1,6 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+// Project imports:
 import 'package:sola/common/widgets/pull_to_refresh/expanded_viewport.dart';
 import 'package:sola/pages/chat_modular/chat_detail/views/chat_message_item.dart';
 import '../../../common/widgets/index.dart';

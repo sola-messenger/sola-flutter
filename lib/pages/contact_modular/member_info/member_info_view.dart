@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:sola/common/index.dart';
 import 'package:sola/common/widgets/list_tile/click_list_tile.dart';
 import 'package:sola/common/widgets/list_tile/privacy_level_list_tile.dart';

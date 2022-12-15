@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:sola/common/index.dart';
 import 'package:sola/pages/org_modular/org_detail/org_detail_controller.dart';
 import 'package:sola/pages/org_modular/org_order_detail/views/org_order_detail_tap_item.dart';

@@ -1,9 +1,11 @@
 
 
 
+// Package imports:
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+
 abstract class InfoService extends GetxService{
 
   Future<void> init();

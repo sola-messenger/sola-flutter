@@ -1,12 +1,15 @@
 // 日志打印
+
+// Dart imports:
 import 'dart:convert';
 
+// Package imports:
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:sola/common/index.dart';
-
 import '../../app_constants.dart';
-
 
 class NftLogInterceptor extends Interceptor {
   late DateTime _time;

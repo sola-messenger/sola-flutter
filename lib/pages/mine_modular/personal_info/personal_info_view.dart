@@ -1,5 +1,10 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
+
+// Project imports:
 import 'package:sola/pages/mine_modular/personal_info/views/personal_info_item.dart';
 import 'personal_info_controller.dart';
 

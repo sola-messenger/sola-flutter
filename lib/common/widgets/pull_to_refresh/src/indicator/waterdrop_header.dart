@@ -4,12 +4,18 @@
  * Time: 2019/5/5 下午2:37
  */
 
+// Dart imports:
 import 'dart:async';
+
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
+
+// Project imports:
+import '../../pull_to_refresh.dart';
+
 import 'package:flutter/material.dart'
     hide RefreshIndicatorState, RefreshIndicator;
-import 'package:flutter/foundation.dart';
-import '../../pull_to_refresh.dart';
-import 'package:flutter/cupertino.dart';
 
 /// QQ ios refresh  header effect
 class WaterDropHeader extends RefreshIndicator {

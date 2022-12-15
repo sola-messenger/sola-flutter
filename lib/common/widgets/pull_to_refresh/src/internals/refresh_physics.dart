@@ -5,11 +5,16 @@
  */
 // ignore_for_file: INVALID_USE_OF_PROTECTED_MEMBER
 // ignore_for_file: INVALID_USE_OF_VISIBLE_FOR_TESTING_MEMBER
+
+// Dart imports:
+import 'dart:math' as math;
+
+// Flutter imports:
 import 'package:flutter/physics.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:math' as math;
 
+// Project imports:
 import '../smart_refresher.dart';
 import 'slivers.dart';
 

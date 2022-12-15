@@ -1,6 +1,11 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+// Project imports:
 import 'package:sola/pages/user_modular/verify_email/verify_email_controller.dart';
 
 class VerifyEmailPage extends GetView<VerifyEmailController> {

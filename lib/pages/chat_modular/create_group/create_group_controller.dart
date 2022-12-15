@@ -1,5 +1,8 @@
+// Package imports:
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+// Project imports:
 import 'package:sola/common/routers/index.dart';
 import 'package:sola/common/widgets/dialog/privacy_level_dialog.dart';
 
