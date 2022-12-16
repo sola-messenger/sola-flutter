@@ -34,7 +34,7 @@ class BorderButton extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
-          color: Colors.black,
+          color: AppColors.textBlackColor,
           fontSize: textFontSize,
           height: height,
           fontWeight: FontWeight.w500,

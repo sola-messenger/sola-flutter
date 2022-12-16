@@ -174,7 +174,19 @@ flutter:
   assets:
     # assets-generator-begin
     # assets/icon/*
+    - assets/icon/checkbox_input.png
+    - assets/icon/checkbox_uninput.png
+    - assets/icon/delete_icon.png
+    - assets/icon/email_icon.png
     - assets/icon/icon.png
+    - assets/icon/s_blue_icon.png
+    - assets/icon/s_icon.png
+    - assets/icon/sola_icon.png
+    - assets/icon/splash_icon1.png
+    - assets/icon/splash_icon2.png
+    - assets/icon/splash_icon3.png
+    - assets/icon/success_blue_icon.png
+    - assets/icon/success_white_icon.png
     # assets/to/*
     - assets/to/icon.png
     # assets-generator-end

@@ -29,6 +29,8 @@ class InputColumnField extends StatelessWidget {
           title.tr,
           style: const TextStyle(
             color: Colors.blueAccent,
+            fontSize: 14,
+            height: 21 / 14,
           ),
         ),
         ReactiveTextField(
@@ -36,8 +38,11 @@ class InputColumnField extends StatelessWidget {
             formControlName: formKey,
             obscureText: obscureText,
             decoration: InputDecoration(
-              hintText: hint.tr,
-            )),
+                hintText: hint.tr,
+                hintStyle: const TextStyle(
+                  fontSize: 12,
+                  color: Color(0x35343466),
+                ))),
         const SizedBox(
           height: 8,
         ),

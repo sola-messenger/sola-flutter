@@ -1,16 +1,19 @@
 // Package imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
 import 'package:sola/common/routers/index.dart';
+import 'package:sola/common/utils/dialog_utils.dart';
 import 'package:sola/common/widgets/dialog/contact_service_dialog.dart';
 import 'package:sola/common/widgets/dialog/please_contact_dialog.dart';
 
 class RegisterController extends GetxController {
   RxBool isAgreePrivacy = false.obs;
   FormGroup formGroup = FormGroup({
-    'inviteCode':FormControl(validators: [Validators.required]),
+    'inviteCode': FormControl(validators: [Validators.required]),
   });
 
   @override
@@ -24,16 +27,14 @@ class RegisterController extends GetxController {
   @override
   void onClose() {}
 
-  void onChangePrivacyCheckBox(bool? value) {
-     isAgreePrivacy.call(value);
-     isAgreePrivacy.refresh();
+  void onChangePrivacyCheckBox() {
+    isAgreePrivacy.call(!isAgreePrivacy.value);
+    isAgreePrivacy.refresh();
   }
 
-  void onNavTermsPage() {
-  }
+  void onNavTermsPage() {}
 
-  void onNavPrivacy() {
-  }
+  void onNavPrivacy() {}
 
   void onRegister() {
     Get.offNamed(Routers.registerSetLoginInfoRoute);
@@ -44,14 +45,14 @@ class RegisterController extends GetxController {
   }
 
   void onShowService() {
-    Get.dialog(const ContactServiceDialog());
+    formGroup.unfocus();
+    DialogUtils.showDialog(child: const ContactServiceDialog());
   }
 
-  void onCreateOrg() {
-  }
+  void onCreateOrg() {}
 
   void onJoinOrganization() {
-    Get.dialog(const PleaseContactDialog());
-
+    formGroup.unfocus();
+    DialogUtils.showDialog(child: const PleaseContactDialog());
   }
 }

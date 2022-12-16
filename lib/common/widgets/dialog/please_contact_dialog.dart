@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/common/widgets/icon/s_blue_icon_widget.dart';
 
 class PleaseContactDialog extends StatelessWidget {
   const PleaseContactDialog({Key? key}) : super(key: key);
@@ -51,6 +52,7 @@ class PleaseContactDialog extends StatelessWidget {
                             color: AppColors.mainBlueColor,
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.white, width: 4)),
+                        child: const SBlueIconWidget(),
                       ),
                     ),
                   ],

@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 // Project imports:
 import 'package:sola/common/routers/index.dart';
+import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/pages/chat_modular/chat/views/contact_item.dart';
 import 'package:sola/pages/chat_modular/chat/views/search_bar.dart';
 import 'index.dart';
@@ -74,7 +75,6 @@ class ChatPage extends GetView<ChatController> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ChatController>(
@@ -84,6 +84,8 @@ class ChatPage extends GetView<ChatController> {
         return Scaffold(
           appBar: AppBar(
             title: _buildUserInfo(ctl),
+            backgroundColor: AppColors.mainBlueColor,
+            centerTitle: false,
             actions: [
               PopupMenuButton(
                 onSelected: (value) {
@@ -101,7 +103,7 @@ class ChatPage extends GetView<ChatController> {
                     default:
                   }
                 },
-                icon: Icon(Icons.add),
+                icon: const Icon(Icons.menu),
                 itemBuilder: (BuildContext context) {
                   return [
                     PopupMenuItem(value: 1, child: Text('Scan QRCode')),
@@ -128,7 +130,10 @@ class ChatPage extends GetView<ChatController> {
         Container(
           width: 40,
           height: 40,
-          color: Colors.red,
+          decoration: const BoxDecoration(
+            shape: BoxShape.circle,
+            color: Colors.red,
+          ),
         ),
         const SizedBox(
           width: 8,
@@ -136,7 +141,12 @@ class ChatPage extends GetView<ChatController> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('Eric Fang'),
+            const Text(
+              'Eric Fang',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
             InkWell(
               onTap: ctl.onChangeOrg,
               child: Row(
@@ -145,6 +155,7 @@ class ChatPage extends GetView<ChatController> {
                     'DCS Card',
                     style: TextStyle(
                       fontSize: 12,
+                      color: Colors.white,
                     ),
                   ),
                   Icon(Icons.arrow_drop_down),

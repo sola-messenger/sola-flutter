@@ -14,6 +14,7 @@ import 'package:path_provider/path_provider.dart';
 // Project imports:
 import 'package:sola/app_init.dart';
 import 'package:sola/common/index.dart';
+import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/common/widgets/testing.dart';
 
 import 'common/app_constants.dart';
@@ -45,7 +46,6 @@ void main() async {
   }
 }
 
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -57,8 +57,21 @@ class MyApp extends StatelessWidget {
       title: 'Sola',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          primarySwatch: Colors.blue,
+          appBarTheme: const AppBarTheme(
+            elevation: 0.0,
+            systemOverlayStyle: SystemUiOverlayStyle(
+              statusBarIconBrightness: Brightness.dark,
+              systemNavigationBarIconBrightness: Brightness.dark,
+            ),
+            centerTitle: true,
+            titleTextStyle: TextStyle(
+              fontSize: 12,
+              color: AppColors.textBlackColor,
+              fontWeight: FontWeight.w500,
+            ),
+            color: Color(0xFFEAEAEA),
+          )),
       builder: (context, widget) {
         // 设置屏幕适配
         return screenAdapterBuilder(
@@ -79,7 +92,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       initialRoute: () {
-        return Routers.registerRoute;
+        return Routers.splashRoute;
       }(),
       getPages: Routers.routes,
     );

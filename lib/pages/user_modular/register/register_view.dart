@@ -9,10 +9,13 @@ import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/common/widgets/button/border_button.dart';
 import 'package:sola/common/widgets/button/button_size_enum.dart';
 import 'package:sola/common/widgets/button/fill_button.dart';
+import 'package:sola/common/widgets/icon/s_icon_widget.dart';
 import 'package:sola/common/widgets/ignore_box_decoration.dart';
 
 // Project imports:
 import 'package:sola/common/widgets/index.dart';
+import 'package:sola/common/widgets/sola_check_box.dart';
+import 'package:sola/r.dart';
 import 'register_controller.dart';
 
 class RegisterPage extends GetView<RegisterController> {
@@ -37,15 +40,31 @@ class RegisterPage extends GetView<RegisterController> {
                 ),
               ),
               alignment: Alignment.center,
-              child: const Text(
-                'Welcome To SOLA',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 28,
-                  fontWeight: FontWeight.w900,
-                  fontStyle: FontStyle.italic,
-                  height: 42 / 28,
-                ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SIconWidget(),
+                  const SizedBox(
+                    height: 19,
+                  ),
+                  Image.asset(
+                    R.assetsIconSolaIcon,
+                    height: 18,
+                  ),
+                  const SizedBox(
+                    height: 19,
+                  ),
+                  const Text(
+                    'Welcome To SOLA',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 28,
+                      fontWeight: FontWeight.w900,
+                      fontStyle: FontStyle.italic,
+                      height: 42 / 28,
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(
@@ -146,10 +165,17 @@ class RegisterPage extends GetView<RegisterController> {
       );
 
   Widget _buildPrivacyCheck(RegisterController ctl) => Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Obx(() => Checkbox(
-              value: ctl.isAgreePrivacy.isTrue,
-              onChanged: ctl.onChangePrivacyCheckBox)),
+          Obx(
+            () => SolaCheckBox(
+              isSelect: ctl.isAgreePrivacy.isTrue,
+              onChange: ctl.onChangePrivacyCheckBox,
+            ),
+          ),
+          const SizedBox(
+            width: 10,
+          ),
           Expanded(
               child: RichText(
             text: TextSpan(
@@ -176,8 +202,9 @@ class RegisterPage extends GetView<RegisterController> {
                       )),
                 ],
                 style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
+                  color: AppColors.textBlackColor,
+                  fontSize: 12,
+                  height: 15 / 12,
                 )),
           )),
         ],

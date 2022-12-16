@@ -1,6 +1,10 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/common/widgets/icon/s_blue_icon_widget.dart';
+import 'package:sola/common/widgets/ignore_box_decoration.dart';
 
 class ContactServiceDialog extends StatelessWidget {
   const ContactServiceDialog({Key? key}) : super(key: key);
@@ -25,19 +29,27 @@ class ContactServiceDialog extends StatelessWidget {
             margin: const EdgeInsets.symmetric(
               horizontal: 45,
             ),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 18,
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Stack(
                   children: [
                     Container(
                       height: 64,
-                      decoration: const BoxDecoration(
-                          color: AppColors.mainBlueColor,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(11),
-                            topRight: Radius.circular(11),
-                          )),
+                      decoration: const IgnoreBoxDecoration(
+                        color: AppColors.mainBlueColor,
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(11),
+                          topRight: Radius.circular(11),
+                        ),
+                        ignorePadding: EdgeInsets.symmetric(
+                          horizontal: 18,
+                        ),
+                      ),
                     ),
                     Center(
                       child: Container(
@@ -49,7 +61,9 @@ class ContactServiceDialog extends StatelessWidget {
                         decoration: BoxDecoration(
                             color: AppColors.mainBlueColor,
                             shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 4)),
+                            border:
+                                Border.all(color: Colors.white, width: 4)),
+                        child: const SBlueIconWidget(),
                       ),
                     ),
                   ],
