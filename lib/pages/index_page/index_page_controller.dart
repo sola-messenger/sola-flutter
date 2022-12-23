@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:sola/common/routers/index.dart';
 import 'package:sola/common/widgets/dialog/confirm_dialog.dart';
 import 'package:sola/pages/index.dart';
+import 'package:sola/r.dart';
 
 class IndexPageController extends GetxController {
 
@@ -16,17 +17,17 @@ class IndexPageController extends GetxController {
   final count = 0.obs;
   List<Map> bottomItems = [
     {
-      'icon': Icons.chat,
+      'icon': R.assetsIconChatsSelectIcon,
       'title': 'Chat',
       'page': const ChatPage(),
     },
     {
-      'icon': Icons.person_pin_circle,
+      'icon': R.assetsIconContactsUnselectIcon,
       'title': 'Contacts',
       'page': const ContactsPage(),
     },
     {
-      'icon': Icons.person,
+      'icon': R.assetsIconProfileUnselectIcon,
       'title': 'Profile',
       'page': const MinePage(),
     },

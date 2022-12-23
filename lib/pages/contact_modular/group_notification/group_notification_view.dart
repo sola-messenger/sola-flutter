@@ -26,29 +26,16 @@ class GroupNotificationPage extends GetView<GroupNotificationController> {
         });
   }
 
-  Widget _buildView() => Container(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 4,
-          vertical: 4,
-        ),
-        alignment: Alignment.topCenter,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.grey,
-          ),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: ListView(
-          children: [
-            NewContactItem(
-                image: 'image',
-                name: 'Jack Shen',
-                desc: 'Apply to join the \'Work Discussion\'',
-                status: 'Accept',
-                onTap: () {
-                  Get.toNamed(Routers.contactInfoRoute);
-                }),
-          ],
-        ),
-      );
+  Widget _buildView() => ListView(
+    children: [
+      NewContactItem(
+          image: 'image',
+          name: 'Jack Shen',
+          desc: 'Apply to join the \'Work Discussion\'',
+          status: 'Accept',
+          onTap: () {
+            Get.toNamed(Routers.contactInfoRoute);
+          }),
+    ],
+  );
 }

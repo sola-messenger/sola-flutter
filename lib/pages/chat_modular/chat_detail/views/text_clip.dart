@@ -1,15 +1,20 @@
-
-
-
 // Flutter imports:
 import 'package:flutter/material.dart';
+
+import 'chat_message_item.dart';
 
 class TextClip extends StatelessWidget {
   final String avatar;
   final String content;
   final bool isOwen;
   final VoidCallback onTapAvatar;
-  const TextClip({super.key, required this.avatar, required this.content, required this.isOwen, required this.onTapAvatar});
+
+  const TextClip(
+      {super.key,
+      required this.avatar,
+      required this.content,
+      required this.isOwen,
+      required this.onTapAvatar});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +27,9 @@ class TextClip extends StatelessWidget {
         child: Ink(
           width: 40,
           height: 40,
-          decoration: BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.circular(8)
+          decoration: const BoxDecoration(
+            color: Colors.black,
+            shape: BoxShape.circle,
           ),
         ),
       ),
@@ -33,26 +38,35 @@ class TextClip extends StatelessWidget {
       ),
       Container(
         decoration: BoxDecoration(
-          color: isOwen?Colors.blue: Colors.white,
-          borderRadius: BorderRadius.circular(6),
+          color: isOwen ? const Color(0xFFCDE8F6) : Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: const Radius.circular(16),
+            topRight: const Radius.circular(16),
+            bottomLeft: isOwen ? const Radius.circular(16) : const Radius.circular(0),
+            bottomRight: isOwen ? const Radius.circular(0) : const Radius.circular(16),
+          ),
         ),
         constraints: const BoxConstraints(
           maxWidth: 250,
         ),
-        padding: const EdgeInsets.only(
-          left: 4,
-          right: 4,
-          top: 10,
-          bottom: 10,
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 12,
         ),
-        child: Text(content,style: const TextStyle(
-          color: Colors.black,
-          fontSize: 14,
-        ),),
-      )
+        child: Text(
+          content,
+          style: const TextStyle(
+            color: Color(0xFF151515),
+            fontSize: 16,
+            height: 24 / 16,
+          ),
+        ),
+      ),
+      if(isOwen)
+        MessageStateInherited.of(context).buildIcon(),
     ];
 
-    if(isOwen){
+    if (isOwen) {
       // 右边
       children = children.reversed.toList();
     }
@@ -63,9 +77,14 @@ class TextClip extends StatelessWidget {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: isOwen?MainAxisAlignment.end: MainAxisAlignment.start,
-        children: children,
+        mainAxisAlignment:
+            isOwen ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: [
+          MessageStateInherited.of(context).buildSelectIcon(),
+          ...children,
+        ],
       ),
     );
   }
 }
+

@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:sola/common/index.dart';
 import 'package:sola/pages/contact_modular/contacts/views/contact_content_item.dart';
 import 'package:sola/pages/contact_modular/contacts/views/contact_tap_item.dart';
+import 'package:sola/r.dart';
 import '../contacts/views/contact_title_item.dart';
 import 'contact_group_controller.dart';
 
@@ -18,6 +19,7 @@ class ContactGroupPage extends GetView<ContactGroupController> {
   Widget build(BuildContext context) {
     return GetBuilder(
         init: ContactGroupController(),
+        id: 'contact group',
         builder: (ctl) {
           return Scaffold(
             appBar: AppBar(
@@ -38,7 +40,7 @@ class ContactGroupPage extends GetView<ContactGroupController> {
   Widget _buildView(ContactGroupController ctl) => ListView(
         children: [
           ContactTapItem(
-              icon: 'icon', title: 'Create Group', onTap: ctl.onCreateGroup),
+              icon: R.assetsIconAddContactsIcon, title: 'Create Group', onTap: ctl.onCreateGroup),
           const ContactTitleItem(title: 'I\'ve create Group'),
           ContactContentItem(
             img: '',

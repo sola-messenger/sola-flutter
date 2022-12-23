@@ -16,12 +16,20 @@ class ContactTitleItem extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget child = Container(
       padding: const EdgeInsets.only(top: 8, bottom: 8),
-      color: Colors.grey.withOpacity(0.5),
+      decoration: BoxDecoration(
+        color: const Color(0xFFEAEAEA),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 15,
+      ),
       alignment: Alignment.center,
       child: Text(
         title,
         style: const TextStyle(
-          color: Colors.grey,
+          color: Colors.black,
+          fontSize: 14,
+          height: 22/14,
         ),
       ),
     );

@@ -9,9 +9,9 @@ class SolaCheckBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       onTap: onChange,
-      child: Ink.image(
+      child: Image(
         image: AssetImage(
             isSelect ? R.assetsIconCheckboxInput : R.assetsIconCheckboxUninput),
         width: 15,

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:badges/badges.dart';
 import 'package:get/get.dart';
+import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/common/style/app_text_styles.dart';
+import 'package:sola/common/widgets/page_view_listener_widget.dart';
 
 // Project imports:
 import 'package:sola/pages/index_page/views/create_group_item.dart';
@@ -103,50 +106,73 @@ class IndexPagePage extends GetView<IndexPageController> {
           border: Border(
               top: BorderSide(
             width: 0.5,
-            color: Colors.grey,
+            color: Color(0xFFEAEAEA),
           )),
         ),
         padding: EdgeInsets.only(
-          top: 8,
           bottom: Get.mediaQuery.padding.bottom,
         ),
-        child: Row(
-          children: List.generate(ctl.bottomItems.length, (index) {
-            return Expanded(
-                child: InkWell(
-              onTap: () {
-                ctl.pageController.jumpToPage(index);
-              },
-              child: Ink(
-                color: Colors.white,
-                child: Column(
-                  children: [
-                    Badge(
-                        badgeContent: const Text(
-                          '99+',
-                          style: TextStyle(
-                            fontSize: 8,
-                            color: Colors.white,
-                          ),
+        child: PageViewListenerWidget(
+            controller: ctl.pageController,
+            builder: (int currentIndex) => Row(
+                  children: List.generate(ctl.bottomItems.length, (index) {
+                    return Expanded(
+                        child: InkWell(
+                      onTap: () {
+                        ctl.pageController.jumpToPage(index);
+                      },
+                      child: Ink(
+                        padding: const EdgeInsets.only(
+                          top: 16,
+                          bottom: 10,
                         ),
-                        shape: BadgeShape.square,
-                        showBadge: index == 0,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 4,
-                          vertical: 2,
+                        color: Colors.white,
+                        child: Column(
+                          children: [
+                            Badge(
+                                badgeContent: const Text(
+                                  '99+',
+                                  style: TextStyle(
+                                    fontSize: 8,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                elevation: 0,
+                                shape: BadgeShape.square,
+                                showBadge: index == 0,
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 4,
+                                  vertical: 2,
+                                ),
+                                borderRadius: BorderRadius.circular(16),
+                                child: Image.asset(
+                                  ctl.bottomItems[index]['icon'],
+                                  width: 20,
+                                  height: 20,
+                                  color: currentIndex == index
+                                      ? AppColors.mainBlueColor
+                                      : AppColors.greyColor,
+                                )),
+                            const SizedBox(
+                              height: 4.5,
+                            ),
+                            Text(
+                              '${ctl.bottomItems[index]['title']}',
+                              style: AppTextStyles.blue_10.copyWith(
+                                fontWeight: currentIndex == index
+                                    ? FontWeight.w600
+                                    : FontWeight.w500,
+                                color: currentIndex == index
+                                    ? AppColors.mainBlueColor
+                                    : AppColors.greyColor,
+                              ),
+                            ),
+                          ],
                         ),
-                        borderRadius: BorderRadius.circular(16),
-                        child: Icon(ctl.bottomItems[index]['icon'])),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    Text('${ctl.bottomItems[index]['title']}'),
-                  ],
-                ),
-              ),
-            ));
-          }),
-        ),
+                      ),
+                    ));
+                  }),
+                )),
       );
 
   Widget _buildItems(IndexPageController ctl, BuildContext context, int index) {

@@ -17,6 +17,7 @@ class AddContactPage extends GetView<AddContactController> {
   Widget build(BuildContext context) {
     return GetBuilder(
         init: AddContactController(),
+        id: 'add contact',
         builder: (ctl) {
           return Scaffold(
             appBar: AppBar(

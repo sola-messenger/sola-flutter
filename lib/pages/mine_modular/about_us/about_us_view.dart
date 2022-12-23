@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({Key? key}) : super(key: key);
+
   Widget _buildView() => ListView(
         padding: const EdgeInsets.symmetric(
           horizontal: 16,
@@ -21,8 +22,8 @@ class AboutUsPage extends StatelessWidget {
           ),
           Container(
             decoration: BoxDecoration(
-              color: Colors.pink,
-              borderRadius: BorderRadius.circular(16),
+              color: const Color(0xFFD8EAFF),
+              borderRadius: BorderRadius.circular(11),
             ),
             padding: const EdgeInsets.symmetric(
               horizontal: 4,

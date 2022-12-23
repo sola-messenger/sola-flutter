@@ -12,6 +12,7 @@ class BorderButton extends StatelessWidget {
   final ButtonSizeEnum buttonSizeEnum;
   final double textFontSize;
   final double height;
+  final Color textColor;
 
   const BorderButton({
     Key? key,
@@ -19,7 +20,7 @@ class BorderButton extends StatelessWidget {
     this.onPressed,
     this.buttonSizeEnum = ButtonSizeEnum.min,
     this.textFontSize = 14,
-    this.height = 21 / 14,
+    this.height = 21 / 14,  this.textColor = AppColors.textBlackColor,
   }) : super(key: key);
 
   @override
@@ -34,7 +35,7 @@ class BorderButton extends StatelessWidget {
       child: Text(
         title,
         style: TextStyle(
-          color: AppColors.textBlackColor,
+          color: textColor,
           fontSize: textFontSize,
           height: height,
           fontWeight: FontWeight.w500,

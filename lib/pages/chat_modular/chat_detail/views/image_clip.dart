@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 
 // Project imports:
 import 'package:sola/common/widgets/index.dart';
+import 'package:sola/pages/chat_modular/chat_detail/views/chat_message_item.dart';
+import 'package:sola/r.dart';
 
 class ImageClip extends StatelessWidget {
   final String avatar;
@@ -18,11 +20,12 @@ class ImageClip extends StatelessWidget {
       {super.key,
       required this.avatar,
       required this.content,
-      required this.isOwen, required this.onTapAvatar});
+      required this.isOwen,
+      required this.onTapAvatar});
 
   @override
   Widget build(BuildContext context) {
-   List<Widget> children = [
+    List<Widget> children = [
       const SizedBox(
         width: 6,
       ),
@@ -31,9 +34,9 @@ class ImageClip extends StatelessWidget {
         child: Ink(
           width: 40,
           height: 40,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             color: Colors.black,
-            borderRadius: BorderRadius.circular(8)
+            shape: BoxShape.circle,
           ),
         ),
       ),
@@ -48,17 +51,52 @@ class ImageClip extends StatelessWidget {
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
         child: GestureDetector(
           onTap: () {
-            Get.dialog(Material(
-              type: MaterialType.transparency,
-              child: Center(
-                child: Hero(
-                  tag: content,
-                  child: ExtendedImage(
-                    image: NetworkImageX(content, scale: 1.0),
+            Get.dialog(
+                Material(
+                  type: MaterialType.transparency,
+                  child: Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Container(
+                          width: Get.mediaQuery.size.width,
+                          height: Get.mediaQuery.size.height,
+                          color: Colors.white,
+                        ),
+                      ),
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                          child: Hero(
+                            tag: content,
+                            child: ExtendedImage(
+                              image: NetworkImageX(content, scale: 1.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                          top: 47,
+                          right: 18,
+                          child: Image.asset(
+                            R.assetsIconForwardIcon2,
+                            width: 18,
+                            height: 18,
+                          )),
+                      Positioned(
+                          bottom: 39,
+                          right: 18,
+                          child: Image.asset(
+                            R.assetsIconDownloadIcon,
+                            width: 18,
+                            height: 18,
+                          )),
+                    ],
                   ),
                 ),
-              ),
-            ));
+                useSafeArea: false);
           },
           child: Hero(
             tag: content,
@@ -67,10 +105,11 @@ class ImageClip extends StatelessWidget {
             ),
           ),
         ),
-      )
+      ),
+      if (isOwen) MessageStateInherited.of(context).buildIcon(),
     ];
 
-    if(isOwen){
+    if (isOwen) {
       // 右边
       children = children.reversed.toList();
     }
@@ -81,8 +120,14 @@ class ImageClip extends StatelessWidget {
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: isOwen?MainAxisAlignment.end: MainAxisAlignment.start,
-        children: children,
+        mainAxisAlignment:
+            isOwen ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: [
+          Align(
+              alignment: Alignment.centerLeft,
+              child: MessageStateInherited.of(context).buildSelectIcon()),
+          ...children,
+        ],
       ),
     );
   }

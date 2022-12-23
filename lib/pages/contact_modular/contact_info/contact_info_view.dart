@@ -19,6 +19,7 @@ class ContactInfoPage extends GetView<ContactInfoController> {
   Widget build(BuildContext context) {
     return GetBuilder(
         init: ContactInfoController(),
+        id: 'contact info',
         builder: (ctl) {
           return Scaffold(
             appBar: AppBar(

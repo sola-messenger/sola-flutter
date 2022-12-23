@@ -26,29 +26,32 @@ class ContactTapItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         child: Ink(
           padding: const EdgeInsets.only(
-            left: 8,
-            right: 8,
-            top: 8,
-            bottom: 8,
+            left: 12,
+            right: 12,
+            top: 7,
+            bottom: 7,
           ),
           decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.grey,
-              width: 0.5,
-            ),
-            borderRadius: BorderRadius.circular(16),
+            color: const Color(0xFFEAEAEA),
+            borderRadius: BorderRadius.circular(7),
           ),
           child: Row(
             children: [
-              Container(
-                width: 30,
-                height: 30,
-                color: Colors.black,
+              Image.asset(
+                icon,
+                width: 16,
+                height: 18,
               ),
               const SizedBox(
-                width: 8,
+                width: 7,
               ),
-              Text(title.tr),
+              Text(
+                title.tr,
+                style: const TextStyle(
+                  fontSize: 14,
+                  height: 22 / 14,
+                ),
+              ),
               const SizedBox(
                 width: 8,
               ),

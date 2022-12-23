@@ -2,12 +2,15 @@ library routers;
 
 // Package imports:
 import 'package:get/route_manager.dart';
+import 'package:sola/pages/all_images/all_images_view.dart';
+import 'package:sola/pages/chat_modular/call_page/call_page_view.dart';
 
 // Project imports:
 import 'package:sola/pages/chat_modular/chat_detail/chat_detail_view.dart';
 import 'package:sola/pages/chat_modular/chat_set/chat_set_view.dart';
 import 'package:sola/pages/chat_modular/create_group/create_group_controller.dart';
 import 'package:sola/pages/chat_modular/create_group/create_group_view.dart';
+import 'package:sola/pages/chat_modular/forward_to/forward_to_view.dart';
 import 'package:sola/pages/chat_modular/select_members/select_members_view.dart';
 import 'package:sola/pages/contact_modular/add_contact/add_contact_view.dart';
 import 'package:sola/pages/contact_modular/contact_group/contact_group_view.dart';
@@ -85,6 +88,9 @@ class Routers {
   static String chatSetRoute = '/chatSet';
   static String settingsRoute = '/settings';
   static String addContactRoute = '/addContact';
+  static String forwardToRoute = '/forwardTo';
+  static String allImageRoute = '/allImage';
+  static String callPageRoute = '/call';
 
   static final unknownPage =
       GetPage(name: unknownRoute, page: () => const UnknownPage());
@@ -128,5 +134,9 @@ class Routers {
     GetPage(name: chatSetRoute, page: () => const ChatSetPage()),
     GetPage(name: settingsRoute, page: () => const SettingsPage()),
     GetPage(name: addContactRoute, page: () => const AddContactPage()),
+    GetPage(name: forwardToRoute, page: () => const ForwardToPage()),
+    GetPage(name: allImageRoute, page: () => const AllImagesPage()),
+    GetPage(name: callPageRoute, page: () => const CallPagePage()),
+
   ];
 }

@@ -16,6 +16,7 @@ class ContactGroupSetPage extends GetView<ContactGroupSetController> {
   Widget build(BuildContext context) {
     return GetBuilder(
         init: ContactGroupSetController(),
+        id: 'contact group set',
         builder: (ctl) {
           return Scaffold(
             appBar: AppBar(

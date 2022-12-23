@@ -9,7 +9,7 @@ import 'package:sola/common/widgets/button/button_size_enum.dart';
 import 'package:sola/common/widgets/button/fill_button.dart';
 
 // Project imports:
-import 'package:sola/common/widgets/input_column_field.dart';
+import 'package:sola/common/widgets/input/input_column_field.dart';
 import 'set_login_info_controller.dart';
 
 class SetLoginInfoPage extends GetView<SetLoginInfoController> {
@@ -50,6 +50,9 @@ class SetLoginInfoPage extends GetView<SetLoginInfoController> {
               height: 7,
             ),
             Text('XXXXs Organization'.tr),
+            const Divider(
+              color: Colors.grey,
+            ),
             const SizedBox(
               height: 16,
             ),

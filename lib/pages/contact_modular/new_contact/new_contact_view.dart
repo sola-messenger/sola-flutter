@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 // Project imports:
 import 'package:sola/common/routers/index.dart';
 import 'package:sola/pages/contact_modular/new_contact/views/new_contact_item.dart';
+import 'package:sola/r.dart';
 import 'new_contact_controller.dart';
 
 class NewContactPage extends GetView<NewContactController> {
@@ -22,13 +23,13 @@ class NewContactPage extends GetView<NewContactController> {
               title: Text('New Contacts'.tr),
               actions: [
                 TextButton(
-                    onPressed: ctl.onAddContacts,
-                    child: const Text(
-                      'Add Contacts',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    )),
+                  onPressed: ctl.onAddContacts,
+                  child: Image.asset(
+                    R.assetsIconAddIcon,
+                    width: 14,
+                    height: 14,
+                  ),
+                ),
               ],
             ),
             body: SafeArea(child: _buildViews()),
@@ -36,29 +37,25 @@ class NewContactPage extends GetView<NewContactController> {
         });
   }
 
-  Widget _buildViews() => Container(
-        margin: const EdgeInsets.symmetric(
-          horizontal: 4,
-          vertical: 4,
+  Widget _buildViews() => ListView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 17,
+          vertical: 18,
         ),
-        alignment: Alignment.topCenter,
-        decoration: BoxDecoration(
-          border: Border.all(
-            color: Colors.grey,
-          ),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: ListView(
-          children: [
-            NewContactItem(
-                image: 'image',
-                name: 'Jack Shen',
-                desc: 'Apply to as your contact',
-                status: 'Accept',
-                onTap: () {
-                  Get.toNamed(Routers.contactInfoRoute);
-                }),
-          ],
-        ),
+        children: [
+          NewContactItem(
+              image: 'image',
+              name: 'Jack Shen',
+              desc: 'Apply to as your contact',
+              status: 'Accept',
+              onTap: () {
+                Get.toNamed(Routers.contactInfoRoute);
+              }),
+          const NewContactItem(
+              image: 'image',
+              name: 'Jack Shen',
+              desc: 'Apply to as your contact',
+              status: 'Expired'),
+        ],
       );
 }

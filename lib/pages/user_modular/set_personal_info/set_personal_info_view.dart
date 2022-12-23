@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/common/widgets/button/fill_button.dart';
 
 // Project imports:
 import 'package:sola/common/widgets/index.dart';
+import 'package:sola/r.dart';
 import 'set_personal_info_controller.dart';
 
 class SetPersonalInfoPage extends GetView<SetPersonalInfoController> {
@@ -32,41 +35,81 @@ class SetPersonalInfoPage extends GetView<SetPersonalInfoController> {
         padding: EdgeInsets.only(
           left: 16,
           right: 16,
-          top: Get.mediaQuery.padding.top + 120,
+          top: Get.mediaQuery.padding.top + 24,
         ),
         children: [
-          Center(child: Text('Set your avatar'.tr)),
-          const SizedBox(
-            height: 16,
-          ),
-          const Center(
-            child: SizedBox(
-              width: 120,
-              height: 120,
-              child: Placeholder(),
+          Text(
+            'Set your avatar'.tr,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(
-            height: 16,
+            height: 20,
           ),
-          Center(child: Text('Set your display name'.tr)),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              width: 85,
+              height: 80,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                color: AppColors.mainBlueColor,
+              )),
+              alignment: Alignment.center,
+              child: Stack(
+                children: [
+                  Center(
+                    child: Image.asset(
+                      R.assetsIconAddIcon,
+                      width: 27,
+                      height: 27,
+                    ),
+                  ),
+                  Positioned(
+                      right: 7,
+                      bottom: 7,
+                      child: Image.asset(
+                        R.assetsIconCameraIcon,
+                        width: 20,
+                        height: 20,
+                      )),
+                ],
+              ),
+            ),
+          ),
           const SizedBox(
-            height: 16,
+            height: 45,
           ),
           const InputColumnField(
-              title: 'Display Name',
+              title: 'Set your display name',
               formKey: 'displayName',
+              textColor: AppColors.textBlackColor,
               hint: 'Please set your display name'),
           const SizedBox(
             height: 32,
           ),
-          ElevatedButton(
-              onPressed: ctl.onSaveAndContinue,
-              child: Text('Save and Continue'.tr)),
-          const SizedBox(
-            height: 16,
+          Center(
+            child: FillButton(
+                onPressed: ctl.onSaveAndContinue,
+                title: 'Save and Continue'.tr),
           ),
-          TextButton(onPressed: ctl.onSkip, child: Text('Skip This Step'.tr)),
+          const SizedBox(
+            height: 25,
+          ),
+          Center(
+            child: GestureDetector(
+              onTap: ctl.onSkip,
+              child: Text(
+                'Skip for now'.tr,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: AppColors.mainBlueColor,
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

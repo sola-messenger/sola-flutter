@@ -16,6 +16,7 @@ class SelectMembersPage extends GetView<SelectMembersController> {
   Widget build(BuildContext context) {
     return GetBuilder(
         init: SelectMembersController(),
+        id: 'select member',
         builder: (ctl) {
           return Scaffold(
             appBar: AppBar(

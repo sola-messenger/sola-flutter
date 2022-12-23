@@ -37,11 +37,12 @@ void main() async {
   } else {
     await AppInit.init();
     runApp(
-      // debug UI
-      DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => const MyApp(),
-      ),
+      const MyApp(),
+      // // debug UI
+      // DevicePreview(
+      //   enabled: !kDebugMode,
+      //   builder: (context) => const MyApp(),
+      // ),
     );
   }
 }
@@ -65,10 +66,13 @@ class MyApp extends StatelessWidget {
               systemNavigationBarIconBrightness: Brightness.dark,
             ),
             centerTitle: true,
+            iconTheme: IconThemeData(
+              color: Colors.black,
+            ),
             titleTextStyle: TextStyle(
-              fontSize: 12,
+              fontSize: 14,
               color: AppColors.textBlackColor,
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w600,
             ),
             color: Color(0xFFEAEAEA),
           )),
@@ -92,7 +96,7 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       initialRoute: () {
-        return Routers.splashRoute;
+        return Routers.indexRoute;
       }(),
       getPages: Routers.routes,
     );

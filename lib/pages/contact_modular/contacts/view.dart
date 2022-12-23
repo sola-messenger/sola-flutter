@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 // Project imports:
 import 'package:sola/pages/contact_modular/contacts/views/contact_title_item.dart';
+import 'package:sola/r.dart';
 import 'index.dart';
 import 'views/contact_content_item.dart';
 import 'views/contact_tap_item.dart';
@@ -21,18 +22,23 @@ class ContactsPage extends GetView<ContactsController> {
           ContactTapItem(
             onTap: ctl.onNavNewContact,
             title: 'New Contact',
-            icon: '',
+            icon: R.assetsIconAddContactsIcon,
             hasNews: true,
-          ),
-          ContactTapItem(
-            onTap: ctl.onNavGroupNotification,
-            title: 'Group notification',
-            icon: '',
           ),
           ContactTapItem(
             onTap: ctl.onNavGroup,
             title: 'Group',
-            icon: '',
+            icon: R.assetsIconCreateGroupIcon,
+          ),
+          ContactTapItem(
+            onTap: ctl.onNavGroupNotification,
+            title: 'Group notification',
+            icon: R.assetsIconGroupNotification,
+          ),
+          ContactTapItem(
+            onTap: ctl.onNavGroupNotification,
+            title: 'Organization Notification',
+            icon: R.assetsIconOrgNotification,
           ),
           const ContactTitleItem(title: 'Frequent Contacts'),
           ContactContentItem(
@@ -84,7 +90,20 @@ class ContactsPage extends GetView<ContactsController> {
       id: "contacts",
       builder: (ctl) {
         return Scaffold(
-          appBar: AppBar(title: const Text("contacts")),
+          appBar: AppBar(
+            title: const Text("Contacts"),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: Image.asset(
+                  R.assetsIconSearchIcon,
+                  width: 14,
+                  height: 14,
+                  color: Colors.black,
+                ),
+              )
+            ],
+          ),
           body: _buildView(ctl),
         );
       },
