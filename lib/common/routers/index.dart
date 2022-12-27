@@ -21,6 +21,7 @@ import 'package:sola/pages/contact_modular/group_notification/group_notification
 import 'package:sola/pages/contact_modular/manager_group/manager_group_view.dart';
 import 'package:sola/pages/contact_modular/member_info/member_info_view.dart';
 import 'package:sola/pages/contact_modular/new_contact/new_contact_view.dart';
+import 'package:sola/pages/crop_image/crop_image_view.dart';
 import 'package:sola/pages/index.dart';
 import 'package:sola/pages/index_page/index_page_view.dart';
 import 'package:sola/pages/mine_modular/about_us/about_us_view.dart';
@@ -34,6 +35,7 @@ import 'package:sola/pages/org_modular/org_create/org_create_view.dart';
 import 'package:sola/pages/org_modular/org_detail/org_detail_view.dart';
 import 'package:sola/pages/org_modular/org_manager/org_manager_view.dart';
 import 'package:sola/pages/org_modular/org_order_detail/org_order_detail_view.dart';
+import 'package:sola/pages/org_modular/org_set_info/org_set_info_view.dart';
 import 'package:sola/pages/splash/splash_view.dart';
 import 'package:sola/pages/user_modular/enter_email/enter_email_view.dart';
 import 'package:sola/pages/user_modular/forgot_password/forgot_password_view.dart';
@@ -91,6 +93,8 @@ class Routers {
   static String forwardToRoute = '/forwardTo';
   static String allImageRoute = '/allImage';
   static String callPageRoute = '/call';
+  static String orgSetInfoRoute = '/orgSetInfo';
+  static String cropImageRoute = '/cropImage';
 
   static final unknownPage =
       GetPage(name: unknownRoute, page: () => const UnknownPage());
@@ -137,6 +141,9 @@ class Routers {
     GetPage(name: forwardToRoute, page: () => const ForwardToPage()),
     GetPage(name: allImageRoute, page: () => const AllImagesPage()),
     GetPage(name: callPageRoute, page: () => const CallPagePage()),
+    GetPage(name: orgSetInfoRoute, page: () => const OrgSetInfoPage()),
+    GetPage(name: cropImageRoute, page: () => const CropImagePage()),
+
 
   ];
 }

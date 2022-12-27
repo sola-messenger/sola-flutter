@@ -14,6 +14,14 @@ class AppTextStyles {
     fontSize: 14,
     height: 21/14,
   );
+
+  static const TextStyle black_bold_14 =  TextStyle(
+    color: AppColors.textBlackColor,
+    fontSize: 14,
+    height: 21/14,
+    fontWeight: FontWeight.w600,
+  );
+
   static const TextStyle black_10 =  TextStyle(
     color: AppColors.textBlackColor,
     fontSize: 10,

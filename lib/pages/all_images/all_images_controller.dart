@@ -4,9 +4,12 @@ import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:sola/common/index.dart';
 import 'package:sola/r.dart';
 
 class AllImagesController extends GetxController {
+  bool isSingleSelect = Get.parameters['model'] == 'single';
+
   RxList<AssetEntity> imageList = <AssetEntity>[].obs;
   RxInt page = 0.obs;
   RxInt pageSize = 100.obs;
@@ -14,6 +17,8 @@ class AllImagesController extends GetxController {
   RxBool isShowError = false.obs;
   RxList<AssetPathEntity> groupList = <AssetPathEntity>[].obs;
   RxInt groupIndex = 0.obs;
+
+  RxList<AssetEntity> currentSelectList = <AssetEntity>[].obs;
 
   @override
   void onInit() {
@@ -44,11 +49,38 @@ class AllImagesController extends GetxController {
     }
   }
 
-  void onCancel() {}
+  void onCancel() {
+    Get.back();
+  }
 
   void onSend() {}
 
-  void onSelectAll() {}
+  void onSelectAll() {
+    if (currentSelectList.length == imageList.length) {
+      currentSelectList.clear();
+    } else {
+      currentSelectList.addAll(imageList.value);
+    }
+    currentSelectList.refresh();
+  }
+
+  void onSelectOne(AssetEntity image) async{
+    if (isSingleSelect) {
+      currentSelectList.clear();
+      final file = await image.originFile;
+
+      Get.toNamed(Routers.cropImageRoute, parameters: {
+        'imagePath': file!.path,
+      });
+    } else {
+      if (currentSelectList.where((p0) => p0.id == image.id).isNotEmpty) {
+        currentSelectList.removeWhere((element) => element.id == image.id);
+      } else {
+        currentSelectList.add(image);
+      }
+      currentSelectList.refresh();
+    }
+  }
 
   void onShowAllGallery() {
     Get.dialog(

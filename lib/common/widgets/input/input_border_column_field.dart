@@ -117,7 +117,7 @@ class InputBorderColumnField extends StatelessWidget {
       children: [
         Text(
           title.tr,
-          style: AppTextStyles.black_14,
+          style: AppTextStyles.black_bold_14,
         ),
         const SizedBox(
           height: 10,

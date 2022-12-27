@@ -11,7 +11,7 @@ import 'package:sola/common/widgets/index.dart';
 import 'org_create_controller.dart';
 
 class OrgCreatePage extends GetView<OrgCreateController> {
-    const OrgCreatePage({Key? key}) : super(key: key);
+  const OrgCreatePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +39,13 @@ class OrgCreatePage extends GetView<OrgCreateController> {
             const SizedBox(
               height: 12,
             ),
-            const Center(child:  Text('Please set your organization\'s info',style: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),)),
+            const Center(
+                child: Text(
+              'Please set your organization\'s info',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            )),
             const SizedBox(
               height: 64,
             ),
@@ -117,10 +121,11 @@ class OrgCreatePage extends GetView<OrgCreateController> {
               height: 16,
             ),
             _buildPrivacyCheck(ctl),
-             const SizedBox(
+            const SizedBox(
               height: 16,
             ),
-            ElevatedButton(onPressed: ctl.onConfirm, child: const Text('Confirm')),
+            ElevatedButton(
+                onPressed: ctl.onConfirm, child: const Text('Confirm')),
           ],
         ),
       );

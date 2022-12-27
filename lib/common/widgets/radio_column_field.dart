@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import 'sola_radio_box.dart';
+
 class RadioColumnField extends StatelessWidget {
   final String title;
   final List<String> selectList;
@@ -18,7 +20,7 @@ class RadioColumnField extends StatelessWidget {
     required this.selectList,
     required this.selected,
     required this.onSelect,
-     this.onShowInfo,
+    this.onShowInfo,
   });
 
   @override
@@ -30,19 +32,23 @@ class RadioColumnField extends StatelessWidget {
           children: [
             Text(title.tr),
             if (onShowInfo != null)
-              IconButton(onPressed: onShowInfo, icon: const Icon(Icons.info_outline)),
+              IconButton(
+                  onPressed: onShowInfo, icon: const Icon(Icons.info_outline)),
           ],
         ),
+        const SizedBox(
+          height: 14,
+        ),
         Wrap(
+          spacing: 24,
           children: selectList
               .map((e) => Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Radio(
-                          value: e,
-                          groupValue: selected,
-                          onChanged: (c) {
-                            onSelect.call(c);
+                      SolaRadioBox(
+                          isSelect: e == selected,
+                          onChange: () {
+                            onSelect.call(e);
                           }),
                       const SizedBox(
                         width: 4,

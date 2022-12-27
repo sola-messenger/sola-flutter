@@ -39,7 +39,7 @@ class NewContactPage extends GetView<NewContactController> {
 
   Widget _buildViews() => ListView(
         padding: const EdgeInsets.symmetric(
-          horizontal: 17,
+          horizontal: 13,
           vertical: 18,
         ),
         children: [

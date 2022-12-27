@@ -40,7 +40,7 @@ class AddContactPage extends GetView<AddContactController> {
             height: 12,
           ),
           ClickListTile(
-            title: 'My User ID',
+            title: 'My ID',
             content: '@shenweisub:thetranches.com',
             onTap: () {},
           ),

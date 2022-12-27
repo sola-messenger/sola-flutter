@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:get/get.dart';
+import 'package:sola/common/style/app_colors.dart';
 
 class ContactNotJoinedItem extends StatelessWidget {
   final String inviteCode;
@@ -18,44 +19,40 @@ class ContactNotJoinedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Ink(
       padding: const EdgeInsets.symmetric(
-        horizontal: 8,
-        vertical: 16,
+        horizontal: 15,
+        vertical: 9,
       ),
       child: Row(
         children: [
           const Text(
             'Not joined',
             style: TextStyle(
-              color: Colors.black,
+              color: AppColors.textBlackColor,
+              fontSize: 12,
+              height: 18 / 12,
+              fontWeight: FontWeight.w500,
             ),
           ),
           const SizedBox(
-            width: 6,
+            width: 86,
           ),
-          Expanded(
-            child: Align(
-              alignment: Alignment.centerRight,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  const Text(
-                    'Invite Code',
-                    style: TextStyle(
-                      color: Colors.grey,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 6,
-                  ),
-                  Text(
-                    inviteCode,
-                    style: const TextStyle(color: Colors.black),
-                  )
-                ],
+          Text(
+            inviteCode,
+            style: const TextStyle(color: Colors.black),
+          ),
+          const Spacer(),
+          GestureDetector(
+            onTap: onCopy,
+            child: const Text(
+              'Copy',
+              style: TextStyle(
+                fontSize: 10,
+                height: 18 / 10,
+                fontWeight: FontWeight.w500,
+                color: AppColors.mainBlueColor,
               ),
             ),
           ),
-          TextButton(onPressed: onCopy, child: const Text('Copy'))
         ],
       ),
     );

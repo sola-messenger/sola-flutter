@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:get/get.dart';
+import 'package:matrix/matrix.dart';
+import 'package:sola/common/index.dart';
 
 // Project imports:
 import 'package:sola/common/routers/index.dart';
+import 'package:sola/common/services/client_service.dart';
 import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/common/widgets/future/profile_future_widget.dart';
 import 'package:sola/common/widgets/popu/menu_popup.dart';
 import 'package:sola/pages/chat_modular/chat/views/contact_item.dart';
 import 'package:sola/pages/chat_modular/chat/views/search_bar.dart';
@@ -86,7 +90,7 @@ class ChatPage extends GetView<ChatController> {
                   MenuPopupItemEntity(
                       title: 'Create Group'.tr,
                       image: R.assetsIconCreateGroupIcon,
-                      onTap: () {}),
+                      onTap: ctl.onCreateGroup),
                   MenuPopupItemEntity(
                       title: 'Add by QR code'.tr,
                       image: R.assetsIconAddByQrcodeIcon,
@@ -94,7 +98,7 @@ class ChatPage extends GetView<ChatController> {
                   MenuPopupItemEntity(
                       title: 'Add Contacts'.tr,
                       image: R.assetsIconAddContactsIcon,
-                      onTap: () {}),
+                      onTap: ctl.onAdd),
                 ],
                 child: const Icon(Icons.menu),
               ),
@@ -137,53 +141,56 @@ class ChatPage extends GetView<ChatController> {
     );
   }
 
-  Row _buildUserInfo(ChatController ctl) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 54,
-          height: 54,
-          decoration: const BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.red,
-          ),
-        ),
-        const SizedBox(
-          width: 8,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
-            Text(
-              'Eric Fang',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-                height: 22/15,
-              ),
+  Widget _buildUserInfo(ChatController ctl) {
+    return ProfileFutureWidget(
+      buildProfile: (Profile profile) {
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CircleAvatar(
+              radius: 27,
+              foregroundImage: profile.avatarUrl != null &&
+                      profile.avatarUrl.toString().isNotEmpty
+                  ? NetworkImageX(profile.avatarUrl.toString(), scale: 1)
+                  : null,
             ),
-            SizedBox(
-              height: 14,
+            const SizedBox(
+              width: 8,
             ),
-            // InkWell(
-            //   onTap: ctl.onChangeOrg,
-            //   child: Row(
-            //     children: const [
-            //       Text(
-            //         'DCS Card',
-            //         style: TextStyle(
-            //           fontSize: 12,
-            //           color: Colors.white,
-            //         ),
-            //       ),
-            //       Icon(Icons.arrow_drop_down),
-            //     ],
-            //   ),
-            // ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '${profile.displayName}',
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    height: 22 / 15,
+                  ),
+                ),
+                const SizedBox(
+                  height: 14,
+                ),
+                // InkWell(
+                //   onTap: ctl.onChangeOrg,
+                //   child: Row(
+                //     children: const [
+                //       Text(
+                //         'DCS Card',
+                //         style: TextStyle(
+                //           fontSize: 12,
+                //           color: Colors.white,
+                //         ),
+                //       ),
+                //       Icon(Icons.arrow_drop_down),
+                //     ],
+                //   ),
+                // ),
+              ],
+            )
           ],
-        )
-      ],
+        );
+      },
     );
   }
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/common/style/app_text_styles.dart';
+import 'package:sola/common/widgets/dialog/dialog_header_widget.dart';
 import 'package:sola/common/widgets/icon/s_blue_icon_widget.dart';
 
 class PleaseContactDialog extends StatelessWidget {
@@ -24,55 +26,25 @@ class PleaseContactDialog extends StatelessWidget {
                   ),
                 ]),
             margin: const EdgeInsets.symmetric(
-              horizontal: 45,
+              horizontal: 65,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(
-                  children: [
-                    Container(
-                      height: 64,
-                      decoration: const BoxDecoration(
-                          color: AppColors.mainBlueColor,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(11),
-                            topRight: Radius.circular(11),
-                          )),
-                    ),
-                    Center(
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        margin: const EdgeInsets.only(
-                          top: 39,
-                        ),
-                        decoration: BoxDecoration(
-                            color: AppColors.mainBlueColor,
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white, width: 4)),
-                        child: const SBlueIconWidget(),
-                      ),
-                    ),
-                  ],
+              children: const [
+                DialogHeaderWidget(),
+                SizedBox(
+                  height: 44,
                 ),
-                const SizedBox(
-                  height: 34,
-                ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 24.0),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 38.0),
                   child: Text(
-                    'Please contact your organization \nowner or administrator',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 10,
-                      height: 18 / 10,
-                    ),
+                    'Please contact your organization owner or administrator',
+                    style: AppTextStyles.black_14,
                   ),
                 ),
-                const SizedBox(
-                  height: 169,
+                SizedBox(
+                  height: 143,
                 ),
               ],
             ),

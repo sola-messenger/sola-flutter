@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:get/get.dart';
+import 'package:sola/common/style/app_colors.dart';
 
 // Project imports:
 import 'package:sola/pages/contact_modular/contacts/views/contact_group_item.dart';
 import 'package:sola/pages/contact_modular/contacts/views/contact_member_item.dart';
 import 'package:sola/pages/contact_modular/contacts/views/contact_not_joined_item.dart';
+import 'package:sola/pages/contact_modular/contacts/views/contact_owner_item.dart';
+import 'package:sola/r.dart';
 import '../../contact_modular/contacts/views/contact_content_item.dart';
 import '../../contact_modular/contacts/views/contact_title_item.dart';
 import 'org_detail_controller.dart';
@@ -21,33 +24,46 @@ class OrgDetailPage extends GetView<OrgDetailController> {
           const SizedBox(
             height: 12,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildOrgTapItem(
-                  title: 'Manage Info', img: '', onTap: ctl.onNavManageInfo),
-              _buildOrgTapItem(
-                  title: 'Invite Members', img: '', onTap: ctl.onInviteMembers),
-              _buildOrgTapItem(
-                  title: 'Exit\nOrganization', img: '', onTap: ctl.onExitOrg),
-            ],
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildOrgTapItem(
+                    title: 'Organization Info',
+                    img: R.assetsIconOrgInfoIcon,
+                    onTap: ctl.onNavManageInfo),
+                _buildOrgTapItem(
+                    title: 'Exit Organization',
+                    img: R.assetsIconExitOrgIcon,
+                    onTap: ctl.onExitOrg),
+              ],
+            ),
           ),
           const SizedBox(
             height: 12,
           ),
           ContactTitleItem(
             title: 'Administrators',
-            action: InkWell(
+            action: Padding(
+              padding: const EdgeInsets.only(right: 7.0),
+              child: InkWell(
                 onTap: () {},
                 child: const Text(
                   'Add+',
                   textAlign: TextAlign.center,
-                )),
+                  style: TextStyle(
+                    color: AppColors.mainBlueColor,
+                    fontSize: 10,
+                    height: 23 / 10,
+                  ),
+                ),
+              ),
+            ),
           ),
-          const ContactContentItem(
+          const ContactOwnerItem(
             img: '',
             title: '张七',
-            content: 'DCS Card',
           ),
           const ContactTitleItem(
             title: 'Group',
@@ -70,12 +86,24 @@ class OrgDetailPage extends GetView<OrgDetailController> {
             title: 'DDG',
             onRemove: () {},
           ),
+          const Padding(
+            padding: EdgeInsets.only(left: 155.0),
+            child: Text(
+              'Invite Code',
+              style: TextStyle(
+                color: Color(0xfF848484),
+                fontWeight: FontWeight.w500,
+                fontSize: 10,
+                height: 15 / 10,
+              ),
+            ),
+          ),
           ContactNotJoinedItem(
-            onCopy: (){},
+            onCopy: () {},
             inviteCode: 'SDF123',
           ),
           ContactNotJoinedItem(
-            onCopy: (){},
+            onCopy: () {},
             inviteCode: 'SDF123',
           ),
         ],
@@ -89,15 +117,22 @@ class OrgDetailPage extends GetView<OrgDetailController> {
         onTap: onTap,
         child: Row(
           children: [
-            Container(
-              width: 30,
-              height: 30,
-              color: Colors.black,
+            Image.asset(
+              img,
+              width: 20,
+              height: 20,
             ),
             const SizedBox(
               width: 6,
             ),
-            Text(title),
+            Text(
+              title,
+              style: const TextStyle(
+                color: Color(0xCC353434),
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
           ],
         ),
       );
@@ -105,39 +140,99 @@ class OrgDetailPage extends GetView<OrgDetailController> {
   Container _buildOrgHeader(OrgDetailController ctl) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: 6,
+        horizontal: 12,
+        vertical: 5,
       ),
       decoration: const BoxDecoration(
         border: Border(
-          bottom: BorderSide(),
+          bottom: BorderSide(
+            color: Color(0x4A3C3C43),
+            width: 0.33,
+          ),
         ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text('Member upper limit'),
-              SizedBox(
-                height: 8,
+          Expanded(
+            child: InkWell(
+              onTap: () {},
+              borderRadius: BorderRadius.circular(4),
+              child: Ink(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0x1A353434),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Member upper limit',
+                      style: TextStyle(
+                        color: AppColors.textBlackColor,
+                        fontSize: 10,
+                        height: 22 / 10,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Text(
+                      '50',
+                      style: TextStyle(
+                        color: AppColors.mainBlueColor,
+                        fontSize: 10,
+                        height: 23 / 10,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              Text('50'),
-            ],
+            ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              Text('Expiry Date'),
-              SizedBox(
-                height: 8,
+          const SizedBox(
+            width: 5,
+          ),
+          Expanded(
+            child: InkWell(
+              onTap: () {},
+              borderRadius: BorderRadius.circular(4),
+              child: Ink(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0x1A353434),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Expiry Date',
+                      style: TextStyle(
+                        color: AppColors.textBlackColor,
+                        fontSize: 10,
+                        height: 22 / 10,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Text(
+                      '05 Oct 2022',
+                      style: TextStyle(
+                        color: AppColors.mainBlueColor,
+                        fontSize: 10,
+                        height: 23 / 10,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              Text('05 Oct 2020'),
-            ],
+            ),
           ),
-          TextButton(
-              onPressed: ctl.onUpgrade, child: Text('Renewal/upgrade'.tr)),
         ],
       ),
     );
@@ -156,7 +251,7 @@ class OrgDetailPage extends GetView<OrgDetailController> {
                     onPressed: ctl.onSearch, icon: const Icon(Icons.search)),
               ],
             ),
-            body: _buildView(ctl),
+            body: SafeArea(child: _buildView(ctl)),
           );
         });
   }

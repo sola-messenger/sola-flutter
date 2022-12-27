@@ -23,4 +23,7 @@ class PersonalInfoController extends GetxController {
   void onEditEmail() {
     
   }
+
+  void onEditUserId() {
+  }
 }

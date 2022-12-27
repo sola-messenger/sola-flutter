@@ -29,7 +29,8 @@ class ContactTitleItem extends StatelessWidget {
         style: const TextStyle(
           color: Colors.black,
           fontSize: 14,
-          height: 22/14,
+          height: 22 / 14,
+          fontWeight: FontWeight.w600,
         ),
       ),
     );

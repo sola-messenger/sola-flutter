@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/common/widgets/button/border_button.dart';
 import 'package:sola/common/widgets/button/fill_button.dart';
+import 'package:sola/common/widgets/dialog/dialog_header_widget.dart';
 
 class UpgradeDialog extends StatelessWidget {
   final VoidCallback onUpgrade;
@@ -31,12 +32,6 @@ class UpgradeDialog extends StatelessWidget {
           margin: const EdgeInsets.symmetric(
             horizontal: 8,
           ),
-          padding: const EdgeInsets.only(
-            top: 16,
-            bottom: 49,
-            left: 28,
-            right: 28,
-          ),
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
@@ -45,48 +40,37 @@ class UpgradeDialog extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  'S-C',
-                  style: TextStyle(
-                    color: AppColors.mainBlueColor,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
+              DialogHeaderWidget(title: 'New Version'.tr),
               const SizedBox(
-                height: 8,
-              ),
-              Text(
-                'New Version'.tr,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                  height: 21 / 14,
-                ),
-              ),
-              const SizedBox(
-                height: 25,
+                height: 13,
               ),
               Align(
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    'APP version:$versionName',
-                    style: const TextStyle(
-                      color: Colors.black,
-                      height: 21 / 14,
-                      fontSize: 14,
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                        left: 20.0,right: 20),
+                    child: Text(
+                      'APP version:$versionName',
+                      style: const TextStyle(
+                        color: Colors.black,
+                        height: 21 / 14,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   )),
               const SizedBox(
                 height: 15,
               ),
-              Text(
-                updateInfo,
-                style: const TextStyle(
-                  fontSize: 14,
-                  height: 21 / 14,
+              Padding(
+                padding: const EdgeInsets.only(
+                    left: 20.0,right: 20),
+                child: Text(
+                  updateInfo,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    height: 21 / 14,
+                  ),
                 ),
               ),
               const SizedBox(
@@ -95,18 +79,24 @@ class UpgradeDialog extends StatelessWidget {
               if (isForce)
                 FillButton(onPressed: onUpgrade, title: 'Update'.tr)
               else
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    BorderButton(
-                      title: 'Cancel',
-                      onPressed: () {
-                        Get.back();
-                      },
-                    ),
-                    FillButton(onPressed: onUpgrade, title: 'Update'.tr)
-                  ],
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      BorderButton(
+                        title: 'Cancel',
+                        onPressed: () {
+                          Get.back();
+                        },
+                      ),
+                      FillButton(onPressed: onUpgrade, title: 'Update'.tr)
+                    ],
+                  ),
                 ),
+              const SizedBox(
+                height: 28,
+              )
             ],
           ),
         ),

@@ -5,6 +5,9 @@ import 'package:flutter/services.dart';
 // Package imports:
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
+import 'package:matrix/matrix.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:sola/common/services/client_service.dart';
 
 // Project imports:
 import 'common/index.dart';
@@ -44,6 +47,12 @@ class AppInit {
 
     await Get.putAsync<ApiService>(() async {
       final sv = ApiServiceImpl();
+      await sv.init();
+      return sv;
+    });
+
+    await Get.putAsync<ClientService>(() async {
+      final sv = ClientServiceImpl();
       await sv.init();
       return sv;
     });

@@ -49,6 +49,8 @@ class R {
   static final String assetsIconCopyIcon = 'assets/icon/copy_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/create_group_icon.png)
   static final String assetsIconCreateGroupIcon = 'assets/icon/create_group_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/crop_icon.png)
+  static final String assetsIconCropIcon = 'assets/icon/crop_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/delete_blue_icon.png)
   static final String assetsIconDeleteBlueIcon = 'assets/icon/delete_blue_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/delete_chat_icon.png)
@@ -67,8 +69,14 @@ class R {
   static final String assetsIconEmojiIcon = 'assets/icon/emoji_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/empty_place_hold.png)
   static final String assetsIconEmptyPlaceHold = 'assets/icon/empty_place_hold.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/exit_org_icon.png)
+  static final String assetsIconExitOrgIcon = 'assets/icon/exit_org_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/eye_icon.png)
   static final String assetsIconEyeIcon = 'assets/icon/eye_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/flip_icon.png)
+  static final String assetsIconFlipIcon = 'assets/icon/flip_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/flip_icon_2.png)
+  static final String assetsIconFlipIcon2 = 'assets/icon/flip_icon_2.png';
   /// ![](http://127.0.0.1:9527/assets/icon/forward_icon.png)
   static final String assetsIconForwardIcon = 'assets/icon/forward_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/forward_icon_2.png)
@@ -103,6 +111,8 @@ class R {
   static final String assetsIconMyOrgIcon = 'assets/icon/my_org_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/notifaction_icon.png)
   static final String assetsIconNotifactionIcon = 'assets/icon/notifaction_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/org_info_icon.png)
+  static final String assetsIconOrgInfoIcon = 'assets/icon/org_info_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/org_name_icon.png)
   static final String assetsIconOrgNameIcon = 'assets/icon/org_name_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/org_notification.png)
@@ -123,6 +133,8 @@ class R {
   static final String assetsIconRightBlackIcon = 'assets/icon/right_black_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/right_icon.png)
   static final String assetsIconRightIcon = 'assets/icon/right_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/rotate_icon.png)
+  static final String assetsIconRotateIcon = 'assets/icon/rotate_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/s_blue_icon.png)
   static final String assetsIconSBlueIcon = 'assets/icon/s_blue_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/s_icon.png)
@@ -135,6 +147,8 @@ class R {
   static final String assetsIconSecurityIcon = 'assets/icon/security_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/select_icon.png)
   static final String assetsIconSelectIcon = 'assets/icon/select_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/select_swich.png)
+  static final String assetsIconSelectSwich = 'assets/icon/select_swich.png';
   /// ![](http://127.0.0.1:9527/assets/icon/sola_blue_icon.png)
   static final String assetsIconSolaBlueIcon = 'assets/icon/sola_blue_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/sola_icon.png)

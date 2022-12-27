@@ -1,5 +1,6 @@
 // Package imports:
 import 'package:get/get.dart';
+import 'package:matrix/matrix.dart';
 
 // Project imports:
 import 'package:sola/common/routers/index.dart';
@@ -10,7 +11,6 @@ import 'package:sola/common/widgets/dialog/delete_history_dialog.dart';
 import 'package:sola/pages/index_page/index_page_controller.dart';
 
 class ChatController extends GetxController {
-  ChatController();
 
   _initData() {
     update(["chat"]);
@@ -33,17 +33,14 @@ class ChatController extends GetxController {
     Get.find<IndexPageController>().openDrawer();
   }
 
-  void onAdd() {}
+  void onAdd() {
+    Get.toNamed(Routers.addContactRoute);
+  }
 
   void onCreateGroup() {
     Get.toNamed(Routers.createGroupRoute);
   }
 
-  void onInviteFriend() {
-    Get.bottomSheet(InviteBottomSheet(onInviteNow: () {
-      Get.back();
-    }));
-  }
 
   void onDeleteChat() {
     DialogUtils.showDialog(
@@ -56,8 +53,8 @@ class ChatController extends GetxController {
   void onAutoDelete() {
     DialogUtils.showDialog(
         child: AutoDeleteHistoryDialog(
-          onCancel: () {},
-          onConfirm: () {},
-        ));
+      onCancel: () {},
+      onConfirm: () {},
+    ));
   }
 }

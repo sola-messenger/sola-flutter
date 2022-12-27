@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:sola/common/style/app_colors.dart';
 
 // Project imports:
 import 'package:sola/common/widgets/index.dart';
 import 'package:sola/common/widgets/list_tile/my_radio_list_tile.dart';
 import 'package:sola/common/widgets/list_tile/privacy_level_list_tile.dart';
+import 'package:sola/r.dart';
 import 'create_group_controller.dart';
+import 'package:r_dotted_line_border/r_dotted_line_border.dart';
 
 class CreateGroupPage extends GetView<CreateGroupController> {
   const CreateGroupPage({Key? key}) : super(key: key);
@@ -56,10 +59,32 @@ class CreateGroupPage extends GetView<CreateGroupController> {
                       height: 16,
                     ),
                     Center(
-                      child: Container(
-                        height: 40,
-                        width: 60,
-                        color: Colors.black,
+                      child: Stack(
+                        children: [
+                          Container(
+                            height: 86,
+                            width: 80,
+                            decoration: BoxDecoration(
+                              border: RDottedLineBorder.all(
+                                color: AppColors.mainBlueColor,
+                              ),
+                            ),
+                            alignment: Alignment.center,
+                            child: Image.asset(
+                              R.assetsIconAddIcon,
+                              width: 27,
+                              height: 27,
+                            ),
+                          ),
+                          Positioned(
+                              bottom: 7,
+                              right: 7,
+                              child: Image.asset(
+                                R.assetsIconCameraIcon,
+                                width: 20,
+                                height: 20,
+                              )),
+                        ],
                       ),
                     ),
                     const InputColumnField(

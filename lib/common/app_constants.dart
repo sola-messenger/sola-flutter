@@ -13,4 +13,9 @@ class AppConstants {
   static const dw = 375.0;
   static const dh = 812.0;
 
+  static const clientName = 'Sola Chat';
+  static const databaseName = 'matrix_sola_chat';
+
+  static const homeService = 'matrix.sub1.thetranches.com';
 }
+

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 
 // Project imports:
 import 'package:sola/common/routers/index.dart';
+import 'package:sola/common/services/client_service.dart';
 
 class MineController extends GetxController {
   MineController();
@@ -53,9 +54,15 @@ class MineController extends GetxController {
     Get.toNamed(Routers.settingsRoute);
   }
 
-  void onLogout() {}
+  void onLogout() async {
+    final client = Get.find<ClientService>().client;
+    client.logout();
+    Get.offAll(Routers.splashRoute);
+  }
 
   void onNavPersonalInfo() {
     Get.toNamed(Routers.personalInfoRoute);
   }
+
+  void onScanQrCode() {}
 }

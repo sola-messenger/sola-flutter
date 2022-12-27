@@ -14,6 +14,7 @@ import 'package:path_provider/path_provider.dart';
 // Project imports:
 import 'package:sola/app_init.dart';
 import 'package:sola/common/index.dart';
+import 'package:sola/common/services/client_service.dart';
 import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/common/widgets/testing.dart';
 
@@ -21,30 +22,21 @@ import 'common/app_constants.dart';
 import 'common/widgets/media_query_builder.dart';
 
 void main() async {
-  if (kReleaseMode) {
-    WidgetsFlutterBinding.ensureInitialized();
-    final client = Client(
-      'Sola Chat',
-      databaseBuilder: (_) async {
-        final dir = await getApplicationSupportDirectory();
-        final db = HiveCollectionsDatabase('matrix_sola_chat', dir.path);
-        await db.open();
-        return db;
-      },
-    );
-    await client.init();
-    runApp(MatrixExampleChat(client: client));
-  } else {
-    await AppInit.init();
-    runApp(
-      const MyApp(),
-      // // debug UI
-      // DevicePreview(
-      //   enabled: !kDebugMode,
-      //   builder: (context) => const MyApp(),
-      // ),
-    );
-  }
+  await AppInit.init();
+  runApp(
+    const MyApp(),
+    // // debug UI
+    // DevicePreview(
+    //   enabled: !kDebugMode,
+    //   builder: (context) => const MyApp(),
+    // ),
+  );
+  // if (kReleaseMode) {
+
+  //   runApp(MatrixExampleChat(client: client));
+  // } else {
+  //
+  // }
 }
 
 class MyApp extends StatelessWidget {
@@ -96,7 +88,10 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
       ],
       initialRoute: () {
-        return Routers.indexRoute;
+        if (Get.find<ClientService>().client.isLogged()) {
+          return Routers.indexRoute;
+        }
+        return Routers.splashRoute;
       }(),
       getPages: Routers.routes,
     );

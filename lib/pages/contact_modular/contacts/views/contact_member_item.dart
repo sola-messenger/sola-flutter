@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:get/get.dart';
+import 'package:sola/common/style/app_colors.dart';
 
 class ContactMemberItem extends StatelessWidget {
   final String title;
@@ -24,17 +25,17 @@ class ContactMemberItem extends StatelessWidget {
       onTap: onTap,
       child: Ink(
         padding: const EdgeInsets.symmetric(
-          horizontal: 8,
+          horizontal: 15,
           vertical: 16,
         ),
         child: Row(
           children: [
             Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
+              width: 45,
+              height: 45,
+              decoration: const BoxDecoration(
                 color: Colors.black,
-                borderRadius: BorderRadius.circular(8),
+                shape: BoxShape.circle,
               ),
             ),
             const SizedBox(
@@ -48,7 +49,39 @@ class ContactMemberItem extends StatelessWidget {
                 ),
               ),
             ),
-            TextButton(onPressed: onRemove, child: const Text('Remove'))
+            GestureDetector(
+              onTap: () {},
+              child: const Padding(
+                padding: EdgeInsets.only(
+                  right: 8.0,
+                  left: 8.0,
+                ),
+                child: Text(
+                  'Remove',
+                  style: TextStyle(
+                    color: AppColors.mainDarkRedColor,
+                    fontSize: 12,
+                    height: 18 / 12,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              width: 14,
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: Text(
+                'Reset'.tr,
+                style: const TextStyle(
+                  color: Color(0x66353434),
+                  fontSize: 11,
+                  height: 18 / 12,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            )
           ],
         ),
       ),

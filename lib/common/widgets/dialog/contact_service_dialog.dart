@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/common/widgets/dialog/dialog_header_widget.dart';
 import 'package:sola/common/widgets/icon/s_blue_icon_widget.dart';
 import 'package:sola/common/widgets/ignore_box_decoration.dart';
 
@@ -27,80 +28,60 @@ class ContactServiceDialog extends StatelessWidget {
                   ),
                 ]),
             margin: const EdgeInsets.symmetric(
-              horizontal: 45,
-            ),
-            padding: const EdgeInsets.symmetric(
-              horizontal: 18,
+              horizontal: 64,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Stack(
-                  children: [
-                    Container(
-                      height: 64,
-                      decoration: const IgnoreBoxDecoration(
-                        color: AppColors.mainBlueColor,
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(11),
-                          topRight: Radius.circular(11),
-                        ),
-                        ignorePadding: EdgeInsets.symmetric(
-                          horizontal: 18,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        margin: const EdgeInsets.only(
-                          top: 39,
-                        ),
-                        decoration: BoxDecoration(
-                            color: AppColors.mainBlueColor,
-                            shape: BoxShape.circle,
-                            border:
-                                Border.all(color: Colors.white, width: 4)),
-                        child: const SBlueIconWidget(),
-                      ),
-                    ),
-                  ],
-                ),
+                const DialogHeaderWidget(),
                 const SizedBox(
                   height: 21,
                 ),
-                Text(
-                  'Contact Us:'.tr,
-                  style: const TextStyle(
-                    color: AppColors.mainBlueColor,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
-                    height: 18 / 12,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 34.0),
+                  child: Text(
+                    'Contact Us:'.tr,
+                    style: const TextStyle(
+                      color: AppColors.mainBlueColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      height: 18 / 16,
+                    ),
                   ),
                 ),
                 const SizedBox(
                   height: 6,
                 ),
-                const Text(
-                  'Phone : +65 65710128 (Office Hour)',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 10,
-                    height: 18 / 10,
-                  ),
-                ),
-                const Text(
-                  'Email : sola@xxx.com',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 10,
-                    height: 18 / 10,
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 34.0),
+                  child: Text(
+                    'Phone : +65 65710128 (Office Hour)',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      height: 18 / 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
                 const SizedBox(
-                  height: 158,
+                  height: 10,
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 34.0),
+                  child: Text(
+                    'Email:\n sola@xxx.com',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 14,
+                      height: 18 / 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 116,
                 ),
               ],
             ),

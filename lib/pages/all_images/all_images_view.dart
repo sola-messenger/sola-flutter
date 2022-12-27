@@ -42,7 +42,8 @@ class AllImagesPage extends GetView<AllImagesController> {
                 )
               ],
             ),
-            bottomNavigationBar: _buildBottomBar(ctl),
+            bottomNavigationBar:
+                ctl.isSingleSelect == false ? _buildBottomBar(ctl) : null,
             body: SafeArea(
               child: _buildViews(ctl),
             ),
@@ -122,19 +123,32 @@ class AllImagesPage extends GetView<AllImagesController> {
         future: image.file,
         builder: (BuildContext context, AsyncSnapshot<File?> snapshot) {
           return snapshot.hasData
-              ? Stack(
-                  children: [
-                    Positioned.fill(
-                      child: ExtendedImage.file(
-                        snapshot.data!,
-                        fit: BoxFit.cover,
+              ? InkWell(
+                  onTap: () {
+                    ctl.onSelectOne(image);
+                  },
+                  child: Stack(
+                    children: [
+                      Positioned.fill(
+                        child: ExtendedImage.file(
+                          snapshot.data!,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                    Positioned(
+                      Positioned(
                         top: 5,
                         right: 3,
-                        child: SolaRadioBox(isSelect: false, onChange: () {})),
-                  ],
+                        child: Visibility(
+                          visible: ctl.isSingleSelect == false,
+                          child: Obx(() => SolaRadioBox(
+                              isSelect: ctl.currentSelectList
+                                  .where((p0) => p0.id == image.id)
+                                  .isNotEmpty,
+                              onChange: () {})),
+                        ),
+                      ),
+                    ],
+                  ),
                 )
               : Container();
         },

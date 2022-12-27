@@ -123,6 +123,8 @@ dependencies:
   r_dotted_line_border: ^0.1.1
   # 获取图片资源
   photo_manager: ^2.5.2
+  # 裁剪图片
+  crop_image: ^1.0.3
 dev_dependencies:
 
   # debug-代码分析工具 https://pub.dev/packages/dart_code_metrics
@@ -201,6 +203,7 @@ flutter:
     - assets/icon/contacts_unselect_icon.png
     - assets/icon/copy_icon.png
     - assets/icon/create_group_icon.png
+    - assets/icon/crop_icon.png
     - assets/icon/delete_blue_icon.png
     - assets/icon/delete_chat_icon.png
     - assets/icon/delete_icon.png
@@ -210,7 +213,10 @@ flutter:
     - assets/icon/email_icon.png
     - assets/icon/emoji_icon.png
     - assets/icon/empty_place_hold.png
+    - assets/icon/exit_org_icon.png
     - assets/icon/eye_icon.png
+    - assets/icon/flip_icon.png
+    - assets/icon/flip_icon_2.png
     - assets/icon/forward_icon.png
     - assets/icon/forward_icon_2.png
     - assets/icon/grey_close_icon.png
@@ -228,6 +234,7 @@ flutter:
     - assets/icon/mute_icon.png
     - assets/icon/my_org_icon.png
     - assets/icon/notifaction_icon.png
+    - assets/icon/org_info_icon.png
     - assets/icon/org_name_icon.png
     - assets/icon/org_notification.png
     - assets/icon/password_icon.png
@@ -238,12 +245,14 @@ flutter:
     - assets/icon/reply_icon.png
     - assets/icon/right_black_icon.png
     - assets/icon/right_icon.png
+    - assets/icon/rotate_icon.png
     - assets/icon/s_blue_icon.png
     - assets/icon/s_icon.png
     - assets/icon/scan_qrcode_icon.png
     - assets/icon/search_icon.png
     - assets/icon/security_icon.png
     - assets/icon/select_icon.png
+    - assets/icon/select_swich.png
     - assets/icon/sola_blue_icon.png
     - assets/icon/sola_icon.png
     - assets/icon/splash_icon1.png

@@ -4,9 +4,9 @@ import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/r.dart';
 
 class DialogHeaderWidget extends StatelessWidget {
-  final String title;
+  final String? title;
 
-  const DialogHeaderWidget({Key? key, required this.title}) : super(key: key);
+  const DialogHeaderWidget({Key? key, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +20,8 @@ class DialogHeaderWidget extends StatelessWidget {
                 topLeft: Radius.circular(11),
                 topRight: Radius.circular(11),
               )),
-          padding: const EdgeInsets.only(
-            top: 26,
+          padding: EdgeInsets.only(
+            top: title != null ? 26 : 38,
           ),
           alignment: Alignment.topCenter,
           child: Column(
@@ -34,14 +34,15 @@ class DialogHeaderWidget extends StatelessWidget {
               const SizedBox(
                 height: 18,
               ),
-              Text(
-                title,
-                style: const TextStyle(
-                  color: AppColors.textBlackColor,
-                  fontSize: 14,
-                  height: 18 / 14,
-                ),
-              )
+              if (title != null)
+                Text(
+                  title!,
+                  style: const TextStyle(
+                    color: AppColors.textBlackColor,
+                    fontSize: 14,
+                    height: 18 / 14,
+                  ),
+                )
             ],
           ),
         ),

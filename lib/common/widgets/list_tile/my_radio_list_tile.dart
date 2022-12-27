@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:get/get.dart';
+import 'package:sola/common/style/app_text_styles.dart';
+import 'package:sola/r.dart';
 
 class MyRadioListTile extends StatelessWidget {
   final VoidCallback? onTap;
@@ -21,18 +23,19 @@ class MyRadioListTile extends StatelessWidget {
       child: Ink(
         padding: const EdgeInsets.symmetric(
           horizontal: 16,
-          vertical: 4,
+          vertical: 8,
         ),
         child: Row(
           children: [
             Text(
               title.tr,
-              style: const TextStyle(
-                fontSize: 16,
-              ),
+              style: AppTextStyles.black_bold_14
             ),
-            Spacer(),
-            CupertinoSwitch(value: isSelect, onChanged: (_) {})
+            const Spacer(),
+            SizedBox(
+                width: 22,
+                height: 14,
+                child: Image.asset(R.assetsIconSelectSwich))
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:sola/common/style/app_text_styles.dart';
 
 class ClickListTile extends StatelessWidget {
   final VoidCallback? onTap;
@@ -14,19 +15,27 @@ class ClickListTile extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Ink(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 4,
+        padding: const EdgeInsets.only(
+          left: 13,
+          right: 13,
+          bottom: 9,
+          top: 20
+        ),
+        decoration: const BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              color: Color(0xFFCDD1D0),
+              width: 1,
+            )
+          )
         ),
         child: Row(
           children: [
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 16,
-              ),
+              style: AppTextStyles.black_bold_14,
             ),
-            SizedBox(
+            const SizedBox(
               width: 8,
             ),
             Expanded(
@@ -41,7 +50,7 @@ class ClickListTile extends StatelessWidget {
                 ),
               ),
             ),
-            if (onTap != null) Icon(Icons.chevron_right_sharp),
+            if (onTap != null) const Icon(Icons.chevron_right_sharp),
           ],
         ),
       ),

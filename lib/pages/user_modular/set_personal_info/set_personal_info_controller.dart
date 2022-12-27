@@ -6,26 +6,24 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:sola/common/index.dart';
 
 class SetPersonalInfoController extends GetxController {
-    final count = 0.obs;
+  final count = 0.obs;
 
   FormGroup fromGroup = FormGroup({
-    'displayName': FormControl(
-      validators: [Validators.required]
-    ),
+    'displayName': FormControl(validators: [Validators.required]),
   });
 
-    @override
-    void onInit() {
+  @override
+  void onInit() {
     super.onInit();
-    }
+  }
 
-    @override
-    void onReady() {}
+  @override
+  void onReady() {}
 
-    @override
-    void onClose() {}
+  @override
+  void onClose() {}
 
-    increment() => count.value++;
+  increment() => count.value++;
 
   void onSaveAndContinue() {
     Get.offAllNamed(Routers.indexRoute);
@@ -33,5 +31,11 @@ class SetPersonalInfoController extends GetxController {
 
   void onSkip() {
     Get.offAllNamed(Routers.indexRoute);
+  }
+
+  void onSelectAvatar() {
+    Get.toNamed(Routers.allImageRoute,parameters: {
+      'model':'single',
+    });
   }
 }

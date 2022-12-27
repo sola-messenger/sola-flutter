@@ -23,9 +23,9 @@ class SettingsPage extends GetView<SettingsController> {
 
   Widget _buildView() => ListView(
         children: const [
-          MyRadioListTile(title: 'Private Chats', isSelect: false),
-          MyRadioListTile(title: 'Group Chats', isSelect: false),
-          MyRadioListTile(title: 'Voice Call', isSelect: false),
+          MyRadioListTile(title: 'Mute Notification', isSelect: false),
+          MyRadioListTile(title: 'Friends Permission', isSelect: false),
+          MyRadioListTile(title: 'Auto Delete Chat', isSelect: false),
         ],
       );
 }

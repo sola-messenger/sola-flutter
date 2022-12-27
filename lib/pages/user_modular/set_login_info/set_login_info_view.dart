@@ -5,11 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/common/style/app_text_styles.dart';
 import 'package:sola/common/widgets/button/button_size_enum.dart';
 import 'package:sola/common/widgets/button/fill_button.dart';
 
 // Project imports:
 import 'package:sola/common/widgets/input/input_column_field.dart';
+import 'package:sola/common/widgets/input/privacy_check_widget.dart';
 import 'set_login_info_controller.dart';
 
 class SetLoginInfoPage extends GetView<SetLoginInfoController> {
@@ -42,9 +44,7 @@ class SetLoginInfoPage extends GetView<SetLoginInfoController> {
             ),
             Text(
               'Join Organization'.tr,
-              style: const TextStyle(
-                color: AppColors.mainBlueColor,
-              ),
+              style: AppTextStyles.black_bold_14,
             ),
             const SizedBox(
               height: 7,
@@ -57,13 +57,17 @@ class SetLoginInfoPage extends GetView<SetLoginInfoController> {
               height: 16,
             ),
             const InputColumnField(
-                title: 'Email / Username',
-                formKey: 'userName',
-                hint: 'Please set your username'),
+              title: 'Email / Username',
+              formKey: 'userName',
+              hint: 'Please set your username',
+              textColor: Colors.black,
+            ),
             const InputColumnField(
               title: 'Password',
               formKey: 'password',
               hint: 'Set your password',
+              obscureText: true,
+              textColor: Colors.black,
             ),
             const SizedBox(
               height: 111,

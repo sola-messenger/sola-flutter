@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:get/get.dart';
+import 'package:matrix/matrix.dart';
+import 'package:sola/common/index.dart';
 import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/common/widgets/future/profile_future_widget.dart';
 
 // Project imports:
 import 'package:sola/pages/mine_modular/mine/views/mine_setting_item.dart';
@@ -21,6 +24,51 @@ class MinePage extends GetView<MineController> {
         // _buildUserHeader(context, ctl),
         const SizedBox(
           height: 16,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 12,
+          ),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(7),
+            onTap: ctl.onScanQrCode,
+            child: Ink(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 8,
+              ),
+              decoration: BoxDecoration(
+                color: const Color(0x1A353434),
+                borderRadius: BorderRadius.circular(7),
+              ),
+              child: Row(
+                children: [
+                  Image.asset(
+                    R.assetsIconAddByQrcodeIcon,
+                    width: 20,
+                    height: 20,
+                  ),
+                  const SizedBox(
+                    width: 17,
+                  ),
+                  const Expanded(
+                    child: Text(
+                      'Scan QR code',
+                      style: TextStyle(
+                        color: Color(0x66353434),
+                      ),
+                    ),
+                  ),
+                  Image.asset(
+                    R.assetsIconRightBlackIcon,
+                    width: 8,
+                    height: 14,
+                    color: Colors.black,
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
         // MineSettingItem(title: 'QR Code', image: '', onTap: ctl.onNavQRCode),
         const SizedBox(
@@ -111,28 +159,32 @@ class MinePage extends GetView<MineController> {
             centerTitle: false,
             title: InkWell(
               onTap: ctl.onNavPersonalInfo,
-              child: Row(
-                children: [
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: const BoxDecoration(
-                      color: AppColors.mainBlueColor,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 6,
-                  ),
-                  const Text(
-                    'Eric Fang',
-                    style: TextStyle(
-                      color: AppColors.mainBlueColor,
-                      fontSize: 15,
-                      height: 22 / 15,
-                    ),
-                  )
-                ],
+              child: ProfileFutureWidget(
+                buildProfile: (Profile profile) {
+                  return Row(
+                    children: [
+                      CircleAvatar(
+                        radius: 25,
+                        foregroundImage: profile.avatarUrl != null &&
+                                profile.avatarUrl.toString().isNotEmpty
+                            ? NetworkImageX(profile.avatarUrl.toString(),
+                                scale: 1)
+                            : null,
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Text(
+                        '${profile.displayName}',
+                        style: const TextStyle(
+                          color: AppColors.mainBlueColor,
+                          fontSize: 15,
+                          height: 22 / 15,
+                        ),
+                      )
+                    ],
+                  );
+                },
               ),
             ),
             actions: [

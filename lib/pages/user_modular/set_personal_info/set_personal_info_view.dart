@@ -33,8 +33,8 @@ class SetPersonalInfoPage extends GetView<SetPersonalInfoController> {
       formGroup: ctl.fromGroup,
       child: ListView(
         padding: EdgeInsets.only(
-          left: 16,
-          right: 16,
+          left: 37,
+          right: 14,
           top: Get.mediaQuery.padding.top + 24,
         ),
         children: [
@@ -50,32 +50,34 @@ class SetPersonalInfoPage extends GetView<SetPersonalInfoController> {
           ),
           Align(
             alignment: Alignment.centerLeft,
-            child: Container(
-              width: 85,
-              height: 80,
-              decoration: BoxDecoration(
-                  border: Border.all(
-                color: AppColors.mainBlueColor,
-              )),
-              alignment: Alignment.center,
-              child: Stack(
-                children: [
-                  Center(
-                    child: Image.asset(
-                      R.assetsIconAddIcon,
-                      width: 27,
-                      height: 27,
-                    ),
-                  ),
-                  Positioned(
-                      right: 7,
-                      bottom: 7,
+            child: InkWell(
+              onTap: ctl.onSelectAvatar,
+              child: Ink(
+                width: 85,
+                height: 80,
+                decoration: BoxDecoration(
+                    border: Border.all(
+                  color: AppColors.mainBlueColor,
+                )),
+                child: Stack(
+                  children: [
+                    Center(
                       child: Image.asset(
-                        R.assetsIconCameraIcon,
-                        width: 20,
-                        height: 20,
-                      )),
-                ],
+                        R.assetsIconAddIcon,
+                        width: 27,
+                        height: 27,
+                      ),
+                    ),
+                    Positioned(
+                        right: 7,
+                        bottom: 7,
+                        child: Image.asset(
+                          R.assetsIconCameraIcon,
+                          width: 20,
+                          height: 20,
+                        )),
+                  ],
+                ),
               ),
             ),
           ),

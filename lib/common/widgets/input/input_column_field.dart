@@ -13,7 +13,6 @@ class InputColumnField extends StatelessWidget {
   final TextInputType? keyboardType;
   final Widget? icon;
   final Color? textColor;
-
   const InputColumnField(
       {super.key,
       required this.title,
@@ -34,6 +33,7 @@ class InputColumnField extends StatelessWidget {
             color: textColor??Colors.blueAccent,
             fontSize: 14,
             height: 21 / 14,
+            fontWeight: FontWeight.w600,
           ),
         ),
         ReactiveTextField(
