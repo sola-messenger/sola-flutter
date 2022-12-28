@@ -38,10 +38,6 @@ class NewContactPage extends GetView<NewContactController> {
   }
 
   Widget _buildViews() => ListView(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 13,
-          vertical: 18,
-        ),
         children: [
           NewContactItem(
               image: 'image',

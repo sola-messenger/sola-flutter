@@ -36,7 +36,7 @@ class MemberEditWidgetItem extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: AppTextStyles.blue_14,
+                    style: AppTextStyles.black_bold_14,
                   ),
                   const SizedBox(
                     height: 2,

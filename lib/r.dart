@@ -41,6 +41,8 @@ class R {
   static final String assetsIconCloseEyeIcon = 'assets/icon/close_eye_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/collection_icon.png)
   static final String assetsIconCollectionIcon = 'assets/icon/collection_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/communication_blue_icon.png)
+  static final String assetsIconCommunicationBlueIcon = 'assets/icon/communication_blue_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/communication_icon.png)
   static final String assetsIconCommunicationIcon = 'assets/icon/communication_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/contacts_unselect_icon.png)
@@ -127,6 +129,8 @@ class R {
   static final String assetsIconRadioSelectIcon = 'assets/icon/radio_select_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/radio_unselect_icon.png)
   static final String assetsIconRadioUnselectIcon = 'assets/icon/radio_unselect_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/remove_icon.png)
+  static final String assetsIconRemoveIcon = 'assets/icon/remove_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/reply_icon.png)
   static final String assetsIconReplyIcon = 'assets/icon/reply_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/right_black_icon.png)

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/common/widgets/button/fill_button.dart';
 
 // Project imports:
 import 'package:sola/common/widgets/index.dart';
@@ -42,10 +43,6 @@ class CreateGroupPage extends GetView<CreateGroupController> {
                 vertical: 4,
               ),
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey,
-                  width: 0.5,
-                ),
                 borderRadius: BorderRadius.circular(8),
               ),
               padding: const EdgeInsets.symmetric(
@@ -88,16 +85,20 @@ class CreateGroupPage extends GetView<CreateGroupController> {
                       ),
                     ),
                     const InputColumnField(
-                        title: 'Group Name',
-                        formKey: 'groupName',
-                        hint: 'Please set your group name'),
+                      title: 'Group Name',
+                      formKey: 'groupName',
+                      hint: 'Please set your group name',
+                      textColor: AppColors.textBlackColor,
+                    ),
                     const SizedBox(
                       height: 12,
                     ),
                     const InputColumnField(
-                        title: 'Description (Optional)',
-                        formKey: 'desc',
-                        hint: 'Please enter  description of group'),
+                      title: 'Description (Optional)',
+                      formKey: 'desc',
+                      hint: 'Please enter  description of group',
+                      textColor: AppColors.textBlackColor,
+                    ),
                     Obx(() => PrivacyLevelListTile(
                           isPrivate: ctl.privacyLevel.value,
                           onChangePrivate: ctl.onSelectPrivacyLevel,
@@ -117,12 +118,15 @@ class CreateGroupPage extends GetView<CreateGroupController> {
                         title: 'Allow members to add friends',
                         isSelect: ctl.allowAddFriend.value,
                         onTap: ctl.onChangeAllowAddFriends)),
+                    const SizedBox(
+                      height: 83,
+                    ),
                     ReactiveFormConsumer(builder: (BuildContext context,
                         FormGroup formGroup, Widget? child) {
                       return Center(
-                        child: ElevatedButton(
+                        child: FillButton(
                             onPressed: formGroup.valid ? ctl.onFinish : null,
-                            child: Text('Finish'.tr)),
+                            title: 'Finish'),
                       );
                     }),
                   ]),

@@ -3,6 +3,9 @@ import 'dart:math' as math;
 
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/common/style/app_text_styles.dart';
+import 'package:sola/r.dart';
 
 class GroupAdminListTile extends StatelessWidget {
   final VoidCallback? onTap;
@@ -10,10 +13,7 @@ class GroupAdminListTile extends StatelessWidget {
   final List<String> avatars;
 
   const GroupAdminListTile(
-      {Key? key,
-      this.onTap,
-      required this.title,
-      required this.avatars})
+      {Key? key, this.onTap, required this.title, required this.avatars})
       : super(key: key);
 
   @override
@@ -29,9 +29,7 @@ class GroupAdminListTile extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 16,
-              ),
+              style: AppTextStyles.black_bold_14,
             ),
             Expanded(
                 child: Align(
@@ -41,8 +39,8 @@ class GroupAdminListTile extends StatelessWidget {
                 children: List.generate(
                   math.min(avatars.length, 2),
                   (index) => Container(
-                    width: 30,
-                    height: 30,
+                    width: 15,
+                    height: 15,
                     decoration: const BoxDecoration(
                       color: Colors.blue,
                       shape: BoxShape.circle,
@@ -55,11 +53,11 @@ class GroupAdminListTile extends StatelessWidget {
               ),
             )),
             const SizedBox(
-              width: 8,
+              width: 5.5,
             ),
             Container(
-              width: 30,
-              height: 30,
+              width: 15,
+              height: 15,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(
@@ -69,11 +67,10 @@ class GroupAdminListTile extends StatelessWidget {
                 horizontal: 3,
               ),
               alignment: Alignment.center,
-              child: const Text(
-                '+',
-                style: TextStyle(
-                  color: Colors.blue,
-                ),
+              child: Image.asset(
+                R.assetsIconAddIcon,
+                width: 6,
+                height: 6,
               ),
             ),
             const SizedBox(
@@ -82,11 +79,17 @@ class GroupAdminListTile extends StatelessWidget {
             Text(
               'Total ${avatars.length}',
               style: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+                color: AppColors.mainBlueColor,
+                fontWeight: FontWeight.w400,
+                fontSize: 14,
+                height: 17 / 14,
               ),
             ),
-            if (onTap != null) const Icon(Icons.chevron_right_sharp),
+            if (onTap != null)
+              const Icon(
+                Icons.chevron_right_sharp,
+                color: AppColors.mainBlueColor,
+              ),
           ],
         ),
       ),

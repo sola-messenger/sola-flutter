@@ -16,4 +16,8 @@ class GroupAdminController extends GetxController {
     void onClose() {}
 
     increment() => count.value++;
+
+  void onAdd() {
+
+  }
 }

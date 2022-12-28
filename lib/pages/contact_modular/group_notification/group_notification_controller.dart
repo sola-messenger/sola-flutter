@@ -16,4 +16,7 @@ class GroupNotificationController extends GetxController {
     void onClose() {}
 
     increment() => count.value++;
+
+  void onAdd() {
+  }
 }

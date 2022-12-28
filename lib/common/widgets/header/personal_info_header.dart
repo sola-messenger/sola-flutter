@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:sola/common/style/app_colors.dart';
 
 class PersonalInfoHeader extends StatelessWidget {
   final String image;
@@ -14,17 +15,20 @@ class PersonalInfoHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(
-        left: 4.0,
+        left: 13.0,
         right: 4.0,
-        top: 23,
         bottom: 16,
+        top: 11,
       ),
       child: Row(
         children: [
           Container(
-            width: 40,
-            height: 40,
-            color: Colors.red,
+            width: 45,
+            height: 45,
+            decoration: const BoxDecoration(
+              color: Colors.black,
+              shape: BoxShape.circle,
+            ),
           ),
           const SizedBox(
             width: 16,
@@ -37,7 +41,9 @@ class PersonalInfoHeader extends StatelessWidget {
                   name,
                   style: const TextStyle(
                     color: Colors.black,
-                    fontSize: 16,
+                    fontSize: 15,
+                    height: 22 / 15,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 const SizedBox(
@@ -46,8 +52,9 @@ class PersonalInfoHeader extends StatelessWidget {
                 Text(
                   desc,
                   style: const TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12,
+                    color: AppColors.greyColor,
+                    fontSize: 10,
+                    height: 15 / 10,
                   ),
                 ),
               ],

@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
+import 'package:sola/common/style/app_colors.dart';
 
 class GroupAdminItem extends StatelessWidget {
   final VoidCallback onTap;
@@ -18,24 +19,26 @@ class GroupAdminItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       child: Row(
         children: [
           Container(
-            width: 40,
+            width: 44,
             height: 40,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.black,
-              borderRadius: BorderRadius.circular(8),
+              shape: BoxShape.circle,
             ),
           ),
           const SizedBox(
-            width: 16,
+            width: 11,
           ),
           Text(
             name,
             style: const TextStyle(
               color: Colors.black,
+              fontSize: 14,
+              height: 22 / 14,
             ),
           ),
           const Spacer(),
@@ -44,7 +47,9 @@ class GroupAdminItem extends StatelessWidget {
               child: const Text(
                 'Delete',
                 style: TextStyle(
-                  color: Colors.red,
+                  color: AppColors.mainDarkRedColor,
+                  fontSize: 12,
+                  height: 18 / 12,
                 ),
               ))
         ],

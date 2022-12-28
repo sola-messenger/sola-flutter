@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:get/get.dart';
+import 'package:sola/common/style/app_text_styles.dart';
+import 'package:sola/common/utils/dialog_utils.dart';
 
 // Project imports:
 import 'package:sola/common/widgets/dialog/privacy_level_dialog.dart';
+import 'package:sola/common/widgets/sola_radio_box.dart';
+import 'package:sola/r.dart';
 
 class PrivacyLevelListTile extends StatelessWidget {
   final bool isPrivate;
@@ -28,91 +32,74 @@ class PrivacyLevelListTile extends StatelessWidget {
             children: [
               const Text(
                 'Privacy Level',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                ),
+                style: AppTextStyles.black_bold_14,
               ),
               const SizedBox(
-                width: 8,
+                width: 4,
               ),
               InkWell(
                 onTap: () {
-                  Get.dialog(PrivacyLevelDialog(onConfirm: () {}));
+                  DialogUtils.showDialog(
+                      child: PrivacyLevelDialog(onConfirm: () {}));
                 },
-                child: const Icon(Icons.info),
+                child: Image.asset(
+                  R.assetsIconWarningIcon,
+                  width: 14,
+                  height: 12,
+                ),
               ),
             ],
           ),
           const SizedBox(
-            height: 8,
+            height: 15,
           ),
           Row(
             children: [
-              Expanded(
-                  child: InkWell(
+              InkWell(
                 onTap: () {
                   onChangePrivate.call(true);
                 },
-                borderRadius: BorderRadius.circular(8),
-                child: Ink(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: isPrivate == true ? Colors.blue : Colors.white,
-                    border: Border.all(
-                      color: Colors.blue,
+                child: Row(
+                  children: [
+                    SolaRadioBox(isSelect: isPrivate == true, onChange: () {}),
+                    const SizedBox(
+                      width: 5,
                     ),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'High',
-                        style: TextStyle(
-                          color: isPrivate == true ? Colors.white : Colors.blue,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    const Text(
+                      'standard',
+                      style: TextStyle(
+                        fontSize: 14,
+                        height: 21 / 14,
+                        fontWeight: FontWeight.w400,
                       ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
-              )),
-              const SizedBox(
-                width: 16,
               ),
-              Expanded(
-                  child: InkWell(
+              const SizedBox(
+                width: 56,
+              ),
+              InkWell(
                 onTap: () {
                   onChangePrivate.call(false);
                 },
-                borderRadius: BorderRadius.circular(8),
-                child: Ink(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: isPrivate == false ? Colors.blue : Colors.white,
-                    border: Border.all(
-                      color: Colors.blue,
+                child: Row(
+                  children: [
+                    SolaRadioBox(isSelect: isPrivate == false, onChange: () {}),
+                    const SizedBox(
+                      width: 5,
                     ),
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Normal',
-                        style: TextStyle(
-                          color:
-                              isPrivate == false ? Colors.white : Colors.blue,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    Text(
+                      'High'.tr,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        height: 21 / 14,
+                        fontWeight: FontWeight.w400,
                       ),
-                    ],
-                  ),
+                    )
+                  ],
                 ),
-              )),
+              ),
             ],
           )
         ],

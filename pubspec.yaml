@@ -199,6 +199,7 @@ flutter:
     - assets/icon/checkbox_uninput.png
     - assets/icon/close_eye_icon.png
     - assets/icon/collection_icon.png
+    - assets/icon/communication_blue_icon.png
     - assets/icon/communication_icon.png
     - assets/icon/contacts_unselect_icon.png
     - assets/icon/copy_icon.png
@@ -242,6 +243,7 @@ flutter:
     - assets/icon/profile_unselect_icon.png
     - assets/icon/radio_select_icon.png
     - assets/icon/radio_unselect_icon.png
+    - assets/icon/remove_icon.png
     - assets/icon/reply_icon.png
     - assets/icon/right_black_icon.png
     - assets/icon/right_icon.png

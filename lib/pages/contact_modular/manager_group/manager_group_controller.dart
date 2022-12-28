@@ -29,18 +29,18 @@ class ManagerGroupController extends GetxController {
     privacyLevel.refresh();
   }
 
-  void onChangeAllowInvite(bool? value) {
-    allowInvite.call(value);
+  void onChangeAllowInvite() {
+    allowInvite.call(!allowInvite.value);
     allowInvite.refresh();
   }
 
-  void onChangeAllowAddFriends(bool? value) {
-    allowAddFriend.call(value);
+  void onChangeAllowAddFriends() {
+    allowAddFriend.call(!allowAddFriend.value);
     allowAddFriend.refresh();
   }
 
-  void onChangeInvitationApproval(bool? value) {
-    invitationApproval.call(value);
+  void onChangeInvitationApproval() {
+    invitationApproval.call(!invitationApproval.value);
     invitationApproval.refresh();
   }
 
@@ -49,5 +49,11 @@ class ManagerGroupController extends GetxController {
 
   void onNavGroupAdmin() {
     Get.toNamed(Routers.groupAdminRoute);
+  }
+
+  void onSelectAvatar() {
+    Get.toNamed(Routers.allImageRoute,parameters: {
+      'model':'single',
+    });
   }
 }

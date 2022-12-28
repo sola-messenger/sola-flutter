@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:sola/common/style/app_colors.dart';
 
 class AppTextStyles {
+  static const TextStyle grey_14 =  TextStyle(
+    color: AppColors.greyColor,
+    fontSize: 14,
+    height: 21/14,
+  );
+
   static const TextStyle grey_10 =  TextStyle(
     color: AppColors.greyColor,
     fontSize: 10,

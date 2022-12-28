@@ -43,6 +43,7 @@ class InputColumnField extends StatelessWidget {
           scrollPadding: const EdgeInsets.symmetric(
             horizontal: 8,
           ),
+          enableSuggestions: true,
           decoration: InputDecoration(
             hintText: hint.tr,
             constraints: const BoxConstraints(
@@ -69,6 +70,9 @@ class InputColumnField extends StatelessWidget {
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 8,
+            ),
+            errorStyle: const TextStyle(
+              fontSize: 0,
             ),
             prefixIcon: icon,
             prefixIconConstraints: icon==null? null:const BoxConstraints(

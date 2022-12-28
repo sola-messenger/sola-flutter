@@ -22,8 +22,8 @@ class NewContactItem extends StatelessWidget {
       onTap: onTap,
       child: Ink(
         padding: const EdgeInsets.symmetric(
-          horizontal: 4,
-          vertical: 4,
+          horizontal: 17,
+          vertical: 6,
         ),
         child: Row(
           children: [

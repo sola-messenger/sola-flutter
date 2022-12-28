@@ -9,6 +9,7 @@ import 'package:sola/common/index.dart';
 import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/common/style/app_text_styles.dart';
 import 'package:sola/common/widgets/button/border_button.dart';
+import 'package:sola/common/widgets/button/button_size_enum.dart';
 import 'package:sola/common/widgets/button/fill_button.dart';
 import 'package:sola/common/widgets/list_tile/click_list_tile.dart';
 import 'package:sola/common/widgets/list_tile/privacy_level_list_tile.dart';
@@ -85,12 +86,22 @@ class MemberInfoPage extends GetView<MemberInfoController> {
               ),
             ),
           ] else ...[
-            ElevatedButton(
+            Center(
+              child: FillButton(
                 onPressed: ctl.onAddAsContact,
-                child: Text('Add as Contact'.tr)),
-            ElevatedButton(
-                onPressed: ctl.onRemoveFromGroup,
-                child: Text('Remove from group'.tr)),
+                title: '    Add as Contact    ',
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Center(
+              child: BorderButton(
+                onPressed: ctl.onDeleteChat,
+                title: 'Remove from group',
+                textColor: AppColors.mainDarkRedColor,
+              ),
+            ),
           ]
         ],
       );

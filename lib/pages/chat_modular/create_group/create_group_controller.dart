@@ -4,6 +4,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
 import 'package:sola/common/routers/index.dart';
+import 'package:sola/common/utils/dialog_utils.dart';
 import 'package:sola/common/widgets/dialog/privacy_level_dialog.dart';
 
 class CreateGroupController extends GetxController {
@@ -54,6 +55,7 @@ class CreateGroupController extends GetxController {
   }
 
   void onShowPrivacyLevelInfo() {
-    Get.dialog(PrivacyLevelDialog(onConfirm: () {}));
+    DialogUtils.showDialog(
+        child: PrivacyLevelDialog(onConfirm: () {}));
   }
 }

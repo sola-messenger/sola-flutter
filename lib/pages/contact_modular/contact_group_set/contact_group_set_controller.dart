@@ -24,7 +24,7 @@ class ContactGroupSetController extends GetxController {
 
   void onLeaveGroup() {}
 
-  void onNavMemberInfo() {
+  void onNavMemberInfo(String memberId) {
     Get.toNamed(Routers.memberInfoRoute,parameters: {
       'formType':'1',
     });
@@ -32,5 +32,14 @@ class ContactGroupSetController extends GetxController {
 
   void onNavManageGroup() {
     Get.toNamed(Routers.manageGroupRoute);
+  }
+
+  void onViewMoreMembers() {
+  }
+
+  void onAddMember() {
+  }
+
+  void onRemoveMember() {
   }
 }

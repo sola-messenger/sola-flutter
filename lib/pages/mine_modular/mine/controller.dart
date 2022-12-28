@@ -57,7 +57,7 @@ class MineController extends GetxController {
   void onLogout() async {
     final client = Get.find<ClientService>().client;
     client.logout();
-    Get.offAll(Routers.splashRoute);
+    Get.offAllNamed(Routers.splashRoute);
   }
 
   void onNavPersonalInfo() {

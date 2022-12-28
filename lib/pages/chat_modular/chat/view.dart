@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:get/get.dart';
 import 'package:matrix/matrix.dart';
+import 'package:sola/common/extension/date_time_extension.dart';
+import 'package:sola/common/extension/stream_extension.dart';
 import 'package:sola/common/index.dart';
+import 'package:sola/common/matrix_locals.dart';
 
 // Project imports:
 import 'package:sola/common/routers/index.dart';
@@ -22,48 +25,80 @@ class ChatPage extends GetView<ChatController> {
 
   // 主视图
   Widget _buildView(ChatController ctl) {
-    return ListView(
-      children: [
-        const SearchBar(),
-        ...List.generate(
-            10,
-            (index) => ContactItem(
-                  img: 'img',
-                  name: 'Jack',
-                  orgName: 'DCC DEV',
-                  lastContent: 'Come here, to have a meeting',
-                  time: '19-11',
-                  unreadCount: 1,
-                  isTop: true,
-                  isSytemContact: false,
-                  onTap: () {
-                    Get.toNamed(Routers.chatDetailRoute);
-                  },
-                  isMute: true,
-                  isOnline: true,
-                  menuItems: [
-                    MenuPopupItemEntity(
-                        image: R.assetsIconPinIcon, title: 'Pin', onTap: () {}),
-                    MenuPopupItemEntity(
-                        image: R.assetsIconMuteIcon,
-                        title: 'Mute notification',
-                        onTap: () {}),
-                    MenuPopupItemEntity(
-                        image: R.assetsIconMakeAsReadIcon,
-                        title: 'Make as read',
-                        onTap: () {}),
-                    MenuPopupItemEntity(
-                        image: R.assetsIconAutoDeleteIcon,
-                        title: 'Auto delete',
-                        onTap: ctl.onAutoDelete),
-                    MenuPopupItemEntity(
-                        image: R.assetsIconDeleteChatIcon,
-                        title: 'Delete chat',
-                        onTap: ctl.onDeleteChat),
-                  ],
-                )),
-      ],
-    );
+    return StreamBuilder(
+        stream: Get.find<ClientService>()
+            .client
+            .onSync
+            .stream
+            .where((event) => event.hasRoomUpdate)
+            .rateLimit(const Duration(seconds: 1)),
+        builder: (context, _) {
+          final List<Room> rooms = Get.find<ClientService>().client.rooms;
+          return ListView(
+            children: [
+              const SearchBar(),
+              ...List.generate(
+                  rooms.length,
+                  (index) => ContactItem(
+                        img: rooms[index].avatar?.toString(),
+                        name: rooms[index].displayname.toString(),
+                        orgName: 'DCC DEV',
+                        lastContent: rooms[index].membership ==
+                                Membership.invite
+                            ? 'You are invite to this chat'
+                            : rooms[index].lastEvent?.calcLocalizedBodyFallback(
+                                      MatrixLocals(),
+                                      hideReply: true,
+                                      hideEdit: true,
+                                      plaintextBody: true,
+                                      removeMarkdown: true,
+                                      withSenderNamePrefix: !rooms[index]
+                                              .isDirectChat ||
+                                          rooms[index].directChatMatrixID !=
+                                              rooms[index].lastEvent?.senderId,
+                                    ) ??
+                                'Come here, to have a meeting',
+                        time: rooms[index]
+                            .timeCreated
+                            .localizedTimeShort(context),
+                        unreadCount: rooms[index].isUnread ||
+                                rooms[index].membership == Membership.invite
+                            ? rooms[index].notificationCount
+                            : 0,
+                        isTop: rooms[index].isFavourite,
+                        isSytemContact: false,
+                        onTap: () {
+                          Get.toNamed(Routers.chatDetailRoute);
+                        },
+                        isMute:
+                            rooms[index].pushRuleState != PushRuleState.notify,
+                        isOnline: rooms[index].isArchived,
+                        menuItems: [
+                          MenuPopupItemEntity(
+                              image: R.assetsIconPinIcon,
+                              title: 'Pin',
+                              onTap: () {}),
+                          MenuPopupItemEntity(
+                              image: R.assetsIconMuteIcon,
+                              title: 'Mute notification',
+                              onTap: () {}),
+                          MenuPopupItemEntity(
+                              image: R.assetsIconMakeAsReadIcon,
+                              title: 'Make as read',
+                              onTap: () {}),
+                          MenuPopupItemEntity(
+                              image: R.assetsIconAutoDeleteIcon,
+                              title: 'Auto delete',
+                              onTap: ctl.onAutoDelete),
+                          MenuPopupItemEntity(
+                              image: R.assetsIconDeleteChatIcon,
+                              title: 'Delete chat',
+                              onTap: ctl.onDeleteChat),
+                        ],
+                      )),
+            ],
+          );
+        });
   }
 
   @override

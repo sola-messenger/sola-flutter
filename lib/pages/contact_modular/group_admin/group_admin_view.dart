@@ -7,6 +7,8 @@ import 'package:r_dotted_line_border/r_dotted_line_border.dart';
 
 // Project imports:
 import 'package:sola/common/index.dart';
+import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/r.dart';
 import 'group_admin_controller.dart';
 import 'views/group_admin_item.dart';
 
@@ -21,6 +23,16 @@ class GroupAdminPage extends GetView<GroupAdminController> {
           return Scaffold(
             appBar: AppBar(
               title: const Text('Group Admin'),
+              actions: [
+                IconButton(
+                    onPressed: ctl.onAdd,
+                    icon: Image.asset(
+                      R.assetsIconAddIcon,
+                      width: 14,
+                      height: 14,
+                      color: AppColors.textBlackColor,
+                    ))
+              ],
             ),
             body: SafeArea(child: _buildView()),
           );
@@ -28,9 +40,8 @@ class GroupAdminPage extends GetView<GroupAdminController> {
   }
 
   Widget _buildView() => Padding(
-    padding: const EdgeInsets.only(
-        top: 8.0),
-    child: FormGroupWidget(addDivider: false, children: [
+        padding: const EdgeInsets.only(top: 8.0),
+        child: ListView(children: [
           GroupAdminItem(
             name: 'Jack Shen',
             onTap: () {},
@@ -43,30 +54,6 @@ class GroupAdminPage extends GetView<GroupAdminController> {
             onDelete: () {},
             image: '',
           ),
-          const Center(
-            child: SizedBox(
-              height: 43,
-            ),
-          ),
-          Center(
-            child: Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: RDottedLineBorder.all(
-                  color: Colors.grey,
-                ),
-              ),
-              alignment: Alignment.center,
-              child: const Text(
-                '+',
-                style: TextStyle(
-                  color: Colors.grey,
-                ),
-              ),
-            ),
-          )
         ]),
-  );
+      );
 }

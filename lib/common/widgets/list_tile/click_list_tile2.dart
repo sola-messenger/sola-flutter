@@ -1,22 +1,21 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/common/style/app_text_styles.dart';
 
-class ClickListTile extends StatelessWidget {
+class ClickListTile2 extends StatelessWidget {
   final VoidCallback? onTap;
   final String title;
   final String? content;
   final bool isShowLine;
-  final TextStyle? contentStyle;
 
-  const ClickListTile(
+  const ClickListTile2(
       {Key? key,
       this.onTap,
       required this.title,
       this.content,
-      this.isShowLine = true,
-      this.contentStyle})
+      this.isShowLine = true})
       : super(key: key);
 
   @override
@@ -51,17 +50,19 @@ class ClickListTile extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: Text(
                   content ?? '',
-                  style: contentStyle ??
-                      const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        height: 22/14,
-                      ),
+                  style: const TextStyle(
+                    color: AppColors.mainBlueColor,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                  ),
                 ),
               ),
             ),
-            if (onTap != null) const Icon(Icons.chevron_right_sharp),
+            if (onTap != null)
+              const Icon(
+                Icons.chevron_right_sharp,
+                color: AppColors.mainBlueColor,
+              ),
           ],
         ),
       ),

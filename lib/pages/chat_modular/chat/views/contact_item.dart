@@ -12,7 +12,7 @@ import 'package:sola/r.dart';
 
 
 class ContactItem extends StatelessWidget {
-  final String img;
+  final String? img;
   final String name;
   final String orgName;
   final String lastContent;
@@ -27,7 +27,7 @@ class ContactItem extends StatelessWidget {
 
   const ContactItem(
       {super.key,
-      required this.img,
+       this.img,
       required this.name,
       required this.orgName,
       required this.lastContent,
@@ -135,6 +135,10 @@ class ContactItem extends StatelessWidget {
                 ),
                 Visibility(
                   visible: unreadCount > 0,
+                  replacement: const SizedBox(
+                    width: 19,
+                    height: 19,
+                  ),
                   child: Badge(
                     elevation: 0.0,
                     badgeContent: Text(
