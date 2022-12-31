@@ -53,7 +53,9 @@ class AllImagesController extends GetxController {
     Get.back();
   }
 
-  void onSend() {}
+  void onSend() {
+    Get.back(result: currentSelectList.value);
+  }
 
   void onSelectAll() {
     if (currentSelectList.length == imageList.length) {

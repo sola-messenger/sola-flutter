@@ -33,44 +33,49 @@ class ContactInfoPage extends GetView<ContactInfoController> {
         });
   }
 
-  Widget _buildView(ContactInfoController ctl) => ListView(
-        children: [
-          const PersonalInfoHeader(
-            image: '',
-            name: 'Jack Shen',
-            desc: '@shenwei:sub1:thetranches.com',
-          ),
-          const SolaDivider(),
-          const ClickListTile(
-            title: 'Organization',
-            content: 'DCC DEV',
-            contentStyle: TextStyle(
-              fontSize: 10,
-              fontWeight: FontWeight.w400,
-              height: 22 / 10,
-            ),
-            isShowLine: false,
-          ),
-          const SizedBox(
-            height: 13,
-          ),
-          const SolaDivider(),
-          const SizedBox(
-            height: 8,
-          ),
-          PrivacyLevelListTile(isPrivate: false, onChangePrivate: (value) {}),
-          const SizedBox(
-            height: 76,
-          ),
-          Center(
-            child: FillButton(
-                onPressed: ctl.onAddAsContact,
-                buttonSizeEnum: ButtonSizeEnum.large,
-                title: 'Add as Contact'),
-          ),
-          const SizedBox(
-            height: 32,
-          ),
-        ],
+  Widget _buildView(ContactInfoController ctl) => Obx(
+        () => ctl.profile.value == null
+            ? Container()
+            : ListView(
+                children: [
+                  PersonalInfoHeader(
+                    image: ctl.profile.value!.avatarUrl,
+                    name: '${ctl.profile.value!.displayName}',
+                    desc: ctl.profile.value!.userId,
+                  ),
+                  const SolaDivider(),
+                  const ClickListTile(
+                    title: 'Organization',
+                    content: 'DCC DEV',
+                    contentStyle: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w400,
+                      height: 22 / 10,
+                    ),
+                    isShowLine: false,
+                  ),
+                  const SizedBox(
+                    height: 13,
+                  ),
+                  const SolaDivider(),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  PrivacyLevelListTile(
+                      isPrivate: ctl.privacyLevel.value, onChangePrivate: ctl.onChangePrivacyLevel),
+                  const SizedBox(
+                    height: 76,
+                  ),
+                  Center(
+                    child: FillButton(
+                        onPressed: ctl.onAddAsContact,
+                        buttonSizeEnum: ButtonSizeEnum.large,
+                        title: 'Add as Contact'),
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  ),
+                ],
+              ),
       );
 }

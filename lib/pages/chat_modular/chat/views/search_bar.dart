@@ -8,6 +8,8 @@ import 'package:get/get.dart';
 import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/r.dart';
 
+import '../../../../common/routers/index.dart';
+
 class SearchBar extends StatelessWidget {
   final String? title;
 
@@ -15,40 +17,47 @@ class SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(
+    return Padding(
+      padding: const EdgeInsets.only(
         left: 15,
         right: 15,
         top: 6,
         bottom: 4,
       ),
-      padding: const EdgeInsets.only(
-        left: 9,
-        right: 8,
-        top: 6,
-        bottom: 5,
-      ),
-      decoration: BoxDecoration(
-        color: const Color(0xFFEAEAEA),
-        borderRadius: BorderRadius.circular(7.0),
-      ),
-      child: Row(
-        children: [
-          Image.asset(
-            R.assetsIconSearchIcon,
-            width: 15,
-            height: 15,
+      child: InkWell(
+        onTap: () {
+          Get.toNamed(Routers.searchRoute);
+        },
+        child: Ink(
+          padding: const EdgeInsets.only(
+            left: 9,
+            right: 8,
+            top: 6,
+            bottom: 5,
           ),
-          const SizedBox(
-            width: 8,
+          decoration: BoxDecoration(
+            color: const Color(0xFFEAEAEA),
+            borderRadius: BorderRadius.circular(7.0),
           ),
-          Text(
-            title ?? 'Search'.tr,
-            style: const TextStyle(
-              color: AppColors.greyColor,
-            ),
-          )
-        ],
+          child: Row(
+            children: [
+              Image.asset(
+                R.assetsIconSearchIcon,
+                width: 15,
+                height: 15,
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              Text(
+                title ?? 'Search'.tr,
+                style: const TextStyle(
+                  color: AppColors.greyColor,
+                ),
+              )
+            ],
+          ),
+        ),
       ),
     );
   }

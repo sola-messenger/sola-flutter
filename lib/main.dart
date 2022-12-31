@@ -20,6 +20,7 @@ import 'package:sola/common/widgets/testing.dart';
 
 import 'common/app_constants.dart';
 import 'common/widgets/media_query_builder.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 void main() async {
   await AppInit.init();
@@ -83,6 +84,7 @@ class MyApp extends StatelessWidget {
       },
       unknownRoute: Routers.unknownPage,
       localizationsDelegates: const [
+        L10n.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

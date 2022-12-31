@@ -13,6 +13,7 @@ import 'package:sola/common/widgets/button/button_size_enum.dart';
 import 'package:sola/common/widgets/button/fill_button.dart';
 import 'package:sola/common/widgets/list_tile/click_list_tile.dart';
 import 'package:sola/common/widgets/list_tile/privacy_level_list_tile.dart';
+import '../../chat_modular/chat_detail/views/avatar.dart';
 import 'member_info_controller.dart';
 import 'views/border_click_list_tile.dart';
 import 'views/member_edit_widget_item.dart';
@@ -36,7 +37,7 @@ class MemberInfoPage extends GetView<MemberInfoController> {
 
   Widget _buildView(MemberInfoController ctl) => ListView(
         children: [
-          _buildHeader(),
+          _buildHeader(ctl.room!.displayname, ctl.room!.id, ctl.room!.avatar),
           Container(
             height: 0.33,
             color: const Color(0xFF3C3C43).withOpacity(0.29),
@@ -106,7 +107,8 @@ class MemberInfoPage extends GetView<MemberInfoController> {
         ],
       );
 
-  Widget _buildHeader() => Padding(
+  Widget _buildHeader(String displayName, String userId, Uri? avatar) =>
+      Padding(
         padding: const EdgeInsets.only(
           left: 13.0,
           right: 13.0,
@@ -115,13 +117,10 @@ class MemberInfoPage extends GetView<MemberInfoController> {
         ),
         child: Row(
           children: [
-            Container(
-              width: 45,
-              height: 45,
-              decoration: const BoxDecoration(
-                color: AppColors.mainBlueColor,
-                shape: BoxShape.circle,
-              ),
+            Avatar(
+              size: 45,
+              mxContent: avatar,
+              name: displayName,
             ),
             const SizedBox(
               width: 16,
@@ -129,16 +128,16 @@ class MemberInfoPage extends GetView<MemberInfoController> {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
-                    'Jack Shen',
+                    displayName,
                     style: AppTextStyles.black_15,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 4,
                   ),
                   Text(
-                    '@shenwei:sub1:thetranches.com',
+                    userId,
                     style: AppTextStyles.grey_10,
                   ),
                 ],

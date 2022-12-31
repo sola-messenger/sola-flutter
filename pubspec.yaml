@@ -91,7 +91,7 @@ dependencies:
   # 通知发送 https://pub.dev/packages/unifiedpush
   unifiedpush: ^4.0.3
   # 图片解析全类型 https://pub.dev/packages/universal_image
-  universal_image: ^0.1.6
+#  universal_image: ^0.1.6
   # 大图变小占位图的显示 https://pub.dev/packages/flutter_blurhash hash LEHV6nWB2yk8pyo0adR*.7kCMdnj
   flutter_blurhash: ^0.7.0
   # 表情控件 https://pub.dev/packages/emoji_picker_flutter
@@ -103,13 +103,13 @@ dependencies:
   # 加密 https://pub.dev/packages/encrypt
   encrypt: ^5.0.1
   # 键盘快捷按键 https://pub.dev/packages/keyboard_shortcuts 
-  keyboard_shortcuts: ^0.1.4
+#  keyboard_shortcuts: ^0.1.4
   # 网络框架 https://pub.dev/packages/dio
   dio: ^4.0.6
   # 日志打印 https://pub.dev/packages/logger
   logger: ^1.1.0
   # dev-闪屏 https://pub.dev/packages/flutter_native_splash
-  flutter_native_splash: ^2.2.15
+  flutter_native_splash: ^2.2.16
   # ------ dev ------
   # debug-不同机器显示样式式 https://pub.dev/packages/device_preview
   device_preview: ^1.1.0
@@ -125,6 +125,13 @@ dependencies:
   photo_manager: ^2.5.2
   # 裁剪图片
   crop_image: ^1.0.3
+  # 加载dialog
+  future_loading_dialog: ^0.2.4
+  flutter_matrix_html:
+    path: ./plugins/flutter_matrix_html/
+  flutter_map: ^3.1.0
+  # 存储
+  get_storage: ^2.0.3
 dev_dependencies:
 
   # debug-代码分析工具 https://pub.dev/packages/dart_code_metrics
@@ -173,7 +180,8 @@ flutter_icons:
 flutter:
 
   uses-material-design: true
-
+  # 添加这个属性
+  generate: true
   # To add assets to your application, add an assets section, like this:
   assets:
     # assets-generator-begin
@@ -207,6 +215,7 @@ flutter:
     - assets/icon/crop_icon.png
     - assets/icon/delete_blue_icon.png
     - assets/icon/delete_chat_icon.png
+    - assets/icon/delete_grey_icon.png
     - assets/icon/delete_icon.png
     - assets/icon/done_icon.png
     - assets/icon/download_icon.png
@@ -241,6 +250,7 @@ flutter:
     - assets/icon/password_icon.png
     - assets/icon/pin_icon.png
     - assets/icon/profile_unselect_icon.png
+    - assets/icon/qr_icon.png
     - assets/icon/radio_select_icon.png
     - assets/icon/radio_unselect_icon.png
     - assets/icon/remove_icon.png

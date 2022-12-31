@@ -11,7 +11,6 @@ import 'package:sola/common/widgets/dialog/delete_history_dialog.dart';
 import 'package:sola/pages/index_page/index_page_controller.dart';
 
 class ChatController extends GetxController {
-
   _initData() {
     update(["chat"]);
   }
@@ -41,7 +40,6 @@ class ChatController extends GetxController {
     Get.toNamed(Routers.createGroupRoute);
   }
 
-
   void onDeleteChat() {
     DialogUtils.showDialog(
         child: DeleteHistoryDialog(
@@ -56,5 +54,17 @@ class ChatController extends GetxController {
       onCancel: () {},
       onConfirm: () {},
     ));
+  }
+
+  void onNavToRoom(String id) {
+    Get.toNamed(Routers.chatDetailRoute, parameters: {
+      'roomId': id,
+    });
+  }
+
+  void onNavToPersonInfo(Room room) {
+    Get.toNamed(Routers.memberInfoRoute, parameters: {
+      'roomId': room.id,
+    });
   }
 }

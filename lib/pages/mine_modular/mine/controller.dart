@@ -64,5 +64,7 @@ class MineController extends GetxController {
     Get.toNamed(Routers.personalInfoRoute);
   }
 
-  void onScanQrCode() {}
+  void onScanQrCode() {
+    Get.toNamed(Routers.scanQrCodeRoute);
+  }
 }

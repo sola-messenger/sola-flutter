@@ -10,6 +10,7 @@ import 'package:sola/common/widgets/button/fill_icon_button.dart';
 
 // Project imports:
 import 'package:sola/common/widgets/list_tile/my_radio_list_tile.dart';
+import 'package:sola/pages/chat_modular/chat_detail/views/avatar.dart';
 import 'package:sola/r.dart';
 import 'chat_set_controller.dart';
 
@@ -48,14 +49,11 @@ class ChatSetPage extends GetView<ChatSetController> {
             child: Row(
               children: [
                 InkWell(
-                  onTap:ctl.onNavPersonalInfo,
-                  child: Ink(
-                    width: 45,
-                    height: 45,
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
-                      shape: BoxShape.circle,
-                    ),
+                  onTap: ctl.onNavPersonalInfo,
+                  child: Avatar(
+                    mxContent: ctl.room!.avatar,
+                    name: ctl.room!.displayname,
+                    size: 45,
                   ),
                 ),
                 const SizedBox(
@@ -108,7 +106,7 @@ class ChatSetPage extends GetView<ChatSetController> {
                   width: 12,
                 ),
                 BorderIconButton(
-                  onPressed: (){},
+                  onPressed: () {},
                   image: R.assetsIconCollectionIcon,
                   title: 'High',
                 ),

@@ -1,307 +1,308 @@
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:matrix/matrix.dart';
 
 /// This is a temporary helper class until there is a proper solution to this with the new system
 class MatrixLocals extends MatrixLocalizations {
+  final L10n l10n;
 
-  MatrixLocals();
+  MatrixLocals(this.l10n);
 
   @override
   String acceptedTheInvitation(String targetName) {
-    return 'acceptedTheInvitation(targetName)';
+    return l10n.acceptedTheInvitation(targetName);
   }
 
   @override
   String activatedEndToEndEncryption(String senderName) {
-    return 'activatedEndToEndEncryption(senderName)';
+    return l10n.activatedEndToEndEncryption(senderName);
   }
 
   @override
   String answeredTheCall(String senderName) {
-    return 'answeredTheCall(senderName)';
+    return l10n.answeredTheCall(senderName);
   }
 
   @override
-  String get anyoneCanJoin => 'anyoneCanJoin';
+  String get anyoneCanJoin => l10n.anyoneCanJoin;
 
   @override
   String bannedUser(String senderName, String targetName) {
-    return 'bannedUser(senderName, targetName)';
+    return l10n.bannedUser(senderName, targetName);
   }
 
   @override
   String changedTheChatAvatar(String senderName) {
-    return 'changedTheChatAvatar(senderName)';
+    return l10n.changedTheChatAvatar(senderName);
   }
 
   @override
   String changedTheChatDescriptionTo(String senderName, String content) {
-    return 'changedTheChatDescriptionTo(senderName, content)';
+    return l10n.changedTheChatDescriptionTo(senderName, content);
   }
 
   @override
   String changedTheChatNameTo(String senderName, String content) {
-    return 'changedTheChatNameTo(senderName, content)';
+    return l10n.changedTheChatNameTo(senderName, content);
   }
 
   @override
   String changedTheChatPermissions(String senderName) {
-    return 'changedTheChatPermissions(senderName)';
+    return l10n.changedTheChatPermissions(senderName);
   }
 
   @override
   String changedTheDisplaynameTo(String targetName, String newDisplayname) {
-    return 'changedTheDisplaynameTo(targetName, newDisplayname)';
+    return l10n.changedTheDisplaynameTo(targetName, newDisplayname);
   }
 
   @override
   String changedTheGuestAccessRules(String senderName) {
-    return 'changedTheGuestAccessRules(senderName)';
+    return l10n.changedTheGuestAccessRules(senderName);
   }
 
   @override
   String changedTheGuestAccessRulesTo(
       String senderName, String localizedString) {
-    return 'changedTheGuestAccessRulesTo(senderName, localizedString)';
+    return l10n.changedTheGuestAccessRulesTo(senderName, localizedString);
   }
 
   @override
   String changedTheHistoryVisibility(String senderName) {
-    return 'changedTheHistoryVisibility(senderName)';
+    return l10n.changedTheHistoryVisibility(senderName);
   }
 
   @override
   String changedTheHistoryVisibilityTo(
       String senderName, String localizedString) {
-    return 'changedTheHistoryVisibilityTo(senderName, localizedString)';
+    return l10n.changedTheHistoryVisibilityTo(senderName, localizedString);
   }
 
   @override
   String changedTheJoinRules(String senderName) {
-    return 'changedTheJoinRules(senderName)';
+    return l10n.changedTheJoinRules(senderName);
   }
 
   @override
   String changedTheJoinRulesTo(String senderName, String localizedString) {
-    return 'changedTheJoinRulesTo(senderName, localizedString)';
+    return l10n.changedTheJoinRulesTo(senderName, localizedString);
   }
 
   @override
   String changedTheProfileAvatar(String targetName) {
-    return 'changedTheProfileAvatar(targetName)';
+    return l10n.changedTheProfileAvatar(targetName);
   }
 
   @override
   String changedTheRoomAliases(String senderName) {
-    return 'changedTheRoomAliases(senderName)';
+    return l10n.changedTheRoomAliases(senderName);
   }
 
   @override
   String changedTheRoomInvitationLink(String senderName) {
-    return 'changedTheRoomInvitationLink(senderName)';
+    return l10n.changedTheRoomInvitationLink(senderName);
   }
 
   @override
-  String get channelCorruptedDecryptError => 'channelCorruptedDecryptError';
+  String get channelCorruptedDecryptError => l10n.channelCorruptedDecryptError;
 
   @override
   String couldNotDecryptMessage(String errorText) {
-    return 'couldNotDecryptMessage(errorText)';
+    return l10n.couldNotDecryptMessage(errorText);
   }
 
   @override
   String createdTheChat(String senderName) {
-    return 'createdTheChat(senderName)';
+    return l10n.createdTheChat(senderName);
   }
 
   @override
-  String get emptyChat => 'emptyChat';
+  String get emptyChat => l10n.emptyChat;
 
   @override
-  String get encryptionNotEnabled => 'encryptionNotEnabled';
+  String get encryptionNotEnabled => l10n.encryptionNotEnabled;
 
   @override
   String endedTheCall(String senderName) {
-    return 'endedTheCall(senderName)';
+    return l10n.endedTheCall(senderName);
   }
 
   @override
-  String get fromJoining => 'fromJoining';
+  String get fromJoining => l10n.fromJoining;
 
   @override
-  String get fromTheInvitation => 'fromTheInvitation';
+  String get fromTheInvitation => l10n.fromTheInvitation;
 
   @override
   String groupWith(String displayname) {
-    return 'groupWith(displayname)';
+    return l10n.groupWith(displayname);
   }
 
   @override
-  String get guestsAreForbidden => 'guestsAreForbidden';
+  String get guestsAreForbidden => l10n.guestsAreForbidden;
 
   @override
-  String get guestsCanJoin => 'guestsCanJoin';
+  String get guestsCanJoin => l10n.guestsCanJoin;
 
   @override
   String hasWithdrawnTheInvitationFor(String senderName, String targetName) {
-    return 'hasWithdrawnTheInvitationFor(senderName, targetName)';
+    return l10n.hasWithdrawnTheInvitationFor(senderName, targetName);
   }
 
   @override
   String invitedUser(String senderName, String targetName) {
-    return 'invitedUser(senderName, targetName)';
+    return l10n.invitedUser(senderName, targetName);
   }
 
   @override
-  String get invitedUsersOnly => 'invitedUsersOnly';
+  String get invitedUsersOnly => l10n.invitedUsersOnly;
 
   @override
   String joinedTheChat(String targetName) {
-    return 'joinedTheChat(targetName)';
+    return l10n.joinedTheChat(targetName);
   }
 
   @override
   String kicked(String senderName, String targetName) {
-    return 'kicked(senderName, targetName)';
+    return l10n.kicked(senderName, targetName);
   }
 
   @override
   String kickedAndBanned(String senderName, String targetName) {
-    return 'kickedAndBanned(senderName, targetName)';
+    return l10n.kickedAndBanned(senderName, targetName);
   }
 
   @override
-  String get needPantalaimonWarning => 'needPantalaimonWarning';
+  String get needPantalaimonWarning => l10n.needPantalaimonWarning;
 
   @override
-  String get noPermission => 'noKeyForThisMessage';
+  String get noPermission => l10n.noKeyForThisMessage;
 
   @override
   String redactedAnEvent(String senderName) {
-    return 'redactedAnEvent(senderName)';
+    return l10n.redactedAnEvent(senderName);
   }
 
   @override
   String rejectedTheInvitation(String targetName) {
-    return 'rejectedTheInvitation(targetName)';
+    return l10n.rejectedTheInvitation(targetName);
   }
 
   @override
   String removedBy(String calcDisplayname) {
-    return 'removedBy(calcDisplayname)';
+    return l10n.removedBy(calcDisplayname);
   }
 
   @override
-  String get roomHasBeenUpgraded => 'roomHasBeenUpgraded';
+  String get roomHasBeenUpgraded => l10n.roomHasBeenUpgraded;
 
   @override
   String sentAFile(String senderName) {
-    return 'sentAFile(senderName)';
+    return l10n.sentAFile(senderName);
   }
 
   @override
   String sentAPicture(String senderName) {
-    return 'sentAPicture(senderName)';
+    return l10n.sentAPicture(senderName);
   }
 
   @override
   String sentASticker(String senderName) {
-    return 'sentASticker(senderName)';
+    return l10n.sentASticker(senderName);
   }
 
   @override
   String sentAVideo(String senderName) {
-    return 'sentAVideo(senderName)';
+    return l10n.sentAVideo(senderName);
   }
 
   @override
   String sentAnAudio(String senderName) {
-    return 'sentAnAudio(senderName)';
+    return l10n.sentAnAudio(senderName);
   }
 
   @override
   String sentCallInformations(String senderName) {
-    return 'sentCallInformations(senderName)';
+    return l10n.sentCallInformations(senderName);
   }
 
   @override
   String sharedTheLocation(String senderName) {
-    return 'sharedTheLocation(senderName)';
+    return l10n.sharedTheLocation(senderName);
   }
 
   @override
   String startedACall(String senderName) {
-    return 'startedACall(senderName)';
+    return l10n.startedACall(senderName);
   }
 
   @override
   String unbannedUser(String senderName, String targetName) {
-    return 'unbannedUser(senderName, targetName)';
+    return l10n.unbannedUser(senderName, targetName);
   }
 
   @override
-  String get unknownEncryptionAlgorithm => 'unknownEncryptionAlgorithm';
+  String get unknownEncryptionAlgorithm => l10n.unknownEncryptionAlgorithm;
 
   @override
   String unknownEvent(String typeKey) {
-    return 'unknownEvent(typeKey)';
+    return l10n.unknownEvent(typeKey);
   }
 
   @override
   String userLeftTheChat(String targetName) {
-    return 'userLeftTheChat(targetName)';
+    return l10n.userLeftTheChat(targetName);
   }
 
   @override
-  String get visibleForAllParticipants => 'visibleForAllParticipants';
+  String get visibleForAllParticipants => l10n.visibleForAllParticipants;
 
   @override
-  String get visibleForEveryone => 'visibleForEveryone';
+  String get visibleForEveryone => l10n.visibleForEveryone;
 
   @override
-  String get you => 'you';
+  String get you => l10n.you;
 
   @override
   String sentReaction(String senderName, String reactionKey) =>
-      'reactedWith(senderName, reactionKey)';
+      l10n.reactedWith(senderName, reactionKey);
 
   @override
   // TODO: implement youAcceptedTheInvitation
-  String get youAcceptedTheInvitation => 'youAcceptedTheInvitation';
+  String get youAcceptedTheInvitation => l10n.youAcceptedTheInvitation;
 
   @override
-  String youBannedUser(String targetName) => 'youBannedUser(targetName)';
+  String youBannedUser(String targetName) => l10n.youBannedUser(targetName);
 
   @override
   String youHaveWithdrawnTheInvitationFor(String targetName) =>
-      'youHaveWithdrawnTheInvitationFor(targetName)';
+      l10n.youHaveWithdrawnTheInvitationFor(targetName);
 
   @override
-  String youInvitedBy(String senderName) => 'youInvitedBy(senderName)';
+  String youInvitedBy(String senderName) => l10n.youInvitedBy(senderName);
 
   @override
-  String youInvitedUser(String targetName) => 'youInvitedUser(targetName)';
+  String youInvitedUser(String targetName) => l10n.youInvitedUser(targetName);
 
   @override
   // TODO: implement youJoinedTheChat
-  String get youJoinedTheChat => 'youJoinedTheChat';
+  String get youJoinedTheChat => l10n.youJoinedTheChat;
 
   @override
-  String youKicked(String targetName) => 'youKicked(targetName)';
+  String youKicked(String targetName) => l10n.youKicked(targetName);
 
   @override
   String youKickedAndBanned(String targetName) =>
-      'youKickedAndBanned(targetName)';
+      l10n.youKickedAndBanned(targetName);
 
   @override
   // TODO: implement youRejectedTheInvitation
-  String get youRejectedTheInvitation => 'youRejectedTheInvitation';
+  String get youRejectedTheInvitation => l10n.youRejectedTheInvitation;
 
   @override
-  String youUnbannedUser(String targetName) => 'youUnbannedUser(targetName)';
+  String youUnbannedUser(String targetName) => l10n.youUnbannedUser(targetName);
 
   @override
   String wasDirectChatDisplayName(String oldDisplayName) {
-    return '';
-    
+    return 'wasDirectChatDisplayName($oldDisplayName)';
   }
 }

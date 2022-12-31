@@ -5,15 +5,15 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sola/common/app_constants.dart';
 
 abstract class ClientService extends GetxService {
+  Map<String, dynamic>? shareContent;
+
   Future<void> init();
 
   Client get client;
-
 }
 
 class ClientServiceImpl extends ClientService {
   late Client _client;
-  late Profile _userProfile;
 
   @override
   Client get client => _client;
@@ -33,5 +33,4 @@ class ClientServiceImpl extends ClientService {
     await db.open();
     return db;
   }
-
 }

@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:badges/badges.dart';
 import 'package:get/get.dart';
+import 'package:matrix/matrix.dart';
+import 'package:sola/common/services/client_service.dart';
 import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/common/style/app_text_styles.dart';
+import 'package:sola/common/widgets/future/room_update_widget.dart';
 import 'package:sola/common/widgets/page_view_listener_widget.dart';
 
 // Project imports:
@@ -129,30 +132,7 @@ class IndexPagePage extends GetView<IndexPageController> {
                         color: Colors.white,
                         child: Column(
                           children: [
-                            Badge(
-                                badgeContent: const Text(
-                                  '99+',
-                                  style: TextStyle(
-                                    fontSize: 8,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                elevation: 0,
-                                shape: BadgeShape.square,
-                                showBadge: index == 0,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 4,
-                                  vertical: 2,
-                                ),
-                                borderRadius: BorderRadius.circular(16),
-                                child: Image.asset(
-                                  ctl.bottomItems[index]['icon'],
-                                  width: 20,
-                                  height: 20,
-                                  color: currentIndex == index
-                                      ? AppColors.mainBlueColor
-                                      : AppColors.greyColor,
-                                )),
+                            _buildBadge(index, ctl, currentIndex),
                             const SizedBox(
                               height: 4.5,
                             ),
@@ -174,6 +154,40 @@ class IndexPagePage extends GetView<IndexPageController> {
                   }),
                 )),
       );
+
+  Widget _buildBadge(int index, IndexPageController ctl, int currentIndex) {
+    return RoomUpdateWidget(builder: (ctx) {
+      final unreadCount = Get.find<ClientService>()
+          .client
+          .rooms
+          .where((r) => (r.isUnread || r.membership == Membership.invite))
+          .length;
+      return Badge(
+          badgeContent: Text(
+            '${unreadCount > 99 ? '99+' : unreadCount}',
+            style: const TextStyle(
+              fontSize: 8,
+              color: Colors.white,
+            ),
+          ),
+          elevation: 0,
+          shape: BadgeShape.square,
+          showBadge: index == 0 && unreadCount != 0,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 4,
+            vertical: 2,
+          ),
+          borderRadius: BorderRadius.circular(16),
+          child: Image.asset(
+            ctl.bottomItems[index]['icon'],
+            width: 20,
+            height: 20,
+            color: currentIndex == index
+                ? AppColors.mainBlueColor
+                : AppColors.greyColor,
+          ));
+    });
+  }
 
   Widget _buildItems(IndexPageController ctl, BuildContext context, int index) {
     return ctl.bottomItems[index]['page'] as Widget;

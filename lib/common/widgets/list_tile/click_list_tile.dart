@@ -9,6 +9,7 @@ class ClickListTile extends StatelessWidget {
   final String? content;
   final bool isShowLine;
   final TextStyle? contentStyle;
+  final Widget? contentWidget;
 
   const ClickListTile(
       {Key? key,
@@ -16,7 +17,8 @@ class ClickListTile extends StatelessWidget {
       required this.title,
       this.content,
       this.isShowLine = true,
-      this.contentStyle})
+      this.contentStyle,
+      this.contentWidget})
       : super(key: key);
 
   @override
@@ -49,19 +51,21 @@ class ClickListTile extends StatelessWidget {
             Expanded(
               child: Align(
                 alignment: Alignment.centerRight,
-                child: Text(
-                  content ?? '',
-                  style: contentStyle ??
-                      const TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                        height: 22/14,
-                      ),
-                ),
+                child: contentWidget ??
+                    Text(
+                      content ?? '',
+                      style: contentStyle ??
+                          const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            height: 22 / 14,
+                          ),
+                    ),
               ),
             ),
-            if (onTap != null) const Icon(Icons.chevron_right_sharp),
+            if (onTap != null && contentWidget == null)
+              const Icon(Icons.chevron_right_sharp),
           ],
         ),
       ),

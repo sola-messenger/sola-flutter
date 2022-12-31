@@ -1,9 +1,10 @@
 // Flutter imports:
 import 'package:flutter/material.dart';
 import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/pages/chat_modular/chat_detail/views/avatar.dart';
 
 class PersonalInfoHeader extends StatelessWidget {
-  final String image;
+  final Uri? image;
   final String name;
   final String desc;
 
@@ -22,13 +23,10 @@ class PersonalInfoHeader extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Container(
-            width: 45,
-            height: 45,
-            decoration: const BoxDecoration(
-              color: Colors.black,
-              shape: BoxShape.circle,
-            ),
+          Avatar(
+            size: 45,
+            mxContent: image,
+            name: name,
           ),
           const SizedBox(
             width: 16,

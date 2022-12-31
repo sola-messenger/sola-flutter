@@ -1,19 +1,23 @@
 // Package imports:
 import 'package:get/get.dart';
+import 'package:matrix/matrix.dart';
 
 class SelectMembersController extends GetxController {
-    final count = 0.obs;
+  RxList<Profile> members = <Profile>[].obs;
 
-    @override
-    void onInit() {
+  @override
+  void onInit() {
     super.onInit();
-    }
+    // Get.find<ClientService>()
+    //     .client
+    //     .rooms
+    //     .where((element) => element.membership == Membership.join)
+    //     .toList();
+  }
 
-    @override
-    void onReady() {}
+  @override
+  void onReady() {}
 
-    @override
-    void onClose() {}
-
-    increment() => count.value++;
+  @override
+  void onClose() {}
 }

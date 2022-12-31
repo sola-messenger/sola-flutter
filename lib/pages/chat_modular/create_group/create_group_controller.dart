@@ -1,11 +1,14 @@
 // Package imports:
+import 'package:future_loading_dialog/future_loading_dialog.dart';
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
 import 'package:sola/common/routers/index.dart';
+import 'package:sola/common/services/client_service.dart';
 import 'package:sola/common/utils/dialog_utils.dart';
 import 'package:sola/common/widgets/dialog/privacy_level_dialog.dart';
+import 'package:matrix/matrix.dart' as sdk;
 
 class CreateGroupController extends GetxController {
   final fromGroup = FormGroup({
@@ -29,7 +32,6 @@ class CreateGroupController extends GetxController {
   @override
   void onClose() {}
 
-
   void onSelectPrivacyLevel(bool? value) {
     privacyLevel.call(value);
     privacyLevel.refresh();
@@ -50,12 +52,38 @@ class CreateGroupController extends GetxController {
     invitationApproval.refresh();
   }
 
-  void onFinish() {
-    Get.toNamed(Routers.selectMembersRoute);
+  void onFinish() async {
+    final groupName = fromGroup
+        .control('groupName')
+        .value;
+
+    final client = Get
+        .find<ClientService>()
+        .client;
+    final roomID = await showFutureLoadingDialog(
+      context: Get.overlayContext!,
+      future: () async {
+        final roomId = await client.createGroupChat(
+          preset: privacyLevel.value
+              ? sdk.CreateRoomPreset.publicChat
+              : sdk.CreateRoomPreset.privateChat,
+          groupName: groupName,
+        );
+        return roomId;
+      },
+    );
+    if (roomID.error == null) {
+      Get.offNamed(Routers.chatDetailRoute, parameters: {
+        'roomId': roomID.result!,
+      });
+      // VRouter.of(context).toSegments(['rooms', roomID.result!, 'invite']);
+    }
+    // Get.toNamed(Routers.selectMembersRoute, parameters: {
+    //   'action': 'create group',
+    // });
   }
 
   void onShowPrivacyLevelInfo() {
-    DialogUtils.showDialog(
-        child: PrivacyLevelDialog(onConfirm: () {}));
+    DialogUtils.showDialog(child: PrivacyLevelDialog(onConfirm: () {}));
   }
 }

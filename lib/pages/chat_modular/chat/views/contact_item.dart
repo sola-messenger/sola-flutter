@@ -7,12 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:badges/badges.dart';
 import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/common/widgets/popu/menu_popup.dart';
+import 'package:sola/pages/chat_modular/chat_detail/views/avatar.dart';
 import 'package:sola/r.dart';
 
-
-
 class ContactItem extends StatelessWidget {
-  final String? img;
+  final Uri? img;
   final String name;
   final String orgName;
   final String lastContent;
@@ -24,10 +23,11 @@ class ContactItem extends StatelessWidget {
   final bool? isMute;
   final bool? isOnline;
   final List<MenuPopupItemEntity>? menuItems;
+  final VoidCallback onNavDetail;
 
   const ContactItem(
       {super.key,
-       this.img,
+      this.img,
       required this.name,
       required this.orgName,
       required this.lastContent,
@@ -38,7 +38,8 @@ class ContactItem extends StatelessWidget {
       required this.onTap,
       this.isMute,
       this.isOnline,
-      this.menuItems});
+      this.menuItems,
+      required this.onNavDetail});
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +51,11 @@ class ContactItem extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Container(
-                  width: 48,
-                  height: 48,
-                  decoration: const BoxDecoration(
-                    color: AppColors.mainBlueColor,
-                    shape: BoxShape.circle,
-                  ),
+                Avatar(
+                  mxContent: img,
+                  name: name,
+                  onTap: onNavDetail,
+                  size: 48,
                 ),
                 if (isOnline == true)
                   Positioned(
@@ -176,10 +175,8 @@ class ContactItem extends StatelessWidget {
         ],
       );
     }
-    if(menuItems!= null){
-      return MenuPopup(
-          menuItem: menuItems!,
-          child: child);
+    if (menuItems != null) {
+      return MenuPopup(menuItem: menuItems!, child: child);
     }
     return child;
   }

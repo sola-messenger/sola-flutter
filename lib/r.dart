@@ -57,6 +57,8 @@ class R {
   static final String assetsIconDeleteBlueIcon = 'assets/icon/delete_blue_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/delete_chat_icon.png)
   static final String assetsIconDeleteChatIcon = 'assets/icon/delete_chat_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/delete_grey_icon.png)
+  static final String assetsIconDeleteGreyIcon = 'assets/icon/delete_grey_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/delete_icon.png)
   static final String assetsIconDeleteIcon = 'assets/icon/delete_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/done_icon.png)
@@ -125,6 +127,8 @@ class R {
   static final String assetsIconPinIcon = 'assets/icon/pin_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/profile_unselect_icon.png)
   static final String assetsIconProfileUnselectIcon = 'assets/icon/profile_unselect_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/qr_icon.png)
+  static final String assetsIconQrIcon = 'assets/icon/qr_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/radio_select_icon.png)
   static final String assetsIconRadioSelectIcon = 'assets/icon/radio_select_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/radio_unselect_icon.png)

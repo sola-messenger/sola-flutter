@@ -36,6 +36,8 @@ import 'package:sola/pages/org_modular/org_detail/org_detail_view.dart';
 import 'package:sola/pages/org_modular/org_manager/org_manager_view.dart';
 import 'package:sola/pages/org_modular/org_order_detail/org_order_detail_view.dart';
 import 'package:sola/pages/org_modular/org_set_info/org_set_info_view.dart';
+import 'package:sola/pages/scan_qr/scan_qr_view.dart';
+import 'package:sola/pages/search/search_view.dart';
 import 'package:sola/pages/splash/splash_view.dart';
 import 'package:sola/pages/user_modular/enter_email/enter_email_view.dart';
 import 'package:sola/pages/user_modular/forgot_password/forgot_password_view.dart';
@@ -95,6 +97,8 @@ class Routers {
   static String callPageRoute = '/call';
   static String orgSetInfoRoute = '/orgSetInfo';
   static String cropImageRoute = '/cropImage';
+  static String scanQrCodeRoute = '/scanQrCode';
+  static String searchRoute = '/search';
 
   static final unknownPage =
       GetPage(name: unknownRoute, page: () => const UnknownPage());
@@ -143,6 +147,8 @@ class Routers {
     GetPage(name: callPageRoute, page: () => const CallPagePage()),
     GetPage(name: orgSetInfoRoute, page: () => const OrgSetInfoPage()),
     GetPage(name: cropImageRoute, page: () => const CropImagePage()),
+    GetPage(name: scanQrCodeRoute, page: () => const ScanQrPage()),
+    GetPage(name: searchRoute, page: () => const SearchPage()),
 
 
   ];

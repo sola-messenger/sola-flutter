@@ -7,6 +7,7 @@ import 'package:matrix/matrix.dart';
 import 'package:sola/common/index.dart';
 import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/common/widgets/future/profile_future_widget.dart';
+import 'package:sola/pages/chat_modular/chat_detail/views/avatar.dart';
 
 // Project imports:
 import 'package:sola/pages/mine_modular/mine/views/mine_setting_item.dart';
@@ -163,13 +164,10 @@ class MinePage extends GetView<MineController> {
                 buildProfile: (Profile profile) {
                   return Row(
                     children: [
-                      CircleAvatar(
-                        radius: 25,
-                        foregroundImage: profile.avatarUrl != null &&
-                                profile.avatarUrl.toString().isNotEmpty
-                            ? NetworkImageX(profile.avatarUrl.toString(),
-                                scale: 1)
-                            : null,
+                      Avatar(
+                        size: 50,
+                        mxContent: profile.avatarUrl,
+                        name: profile.displayName,
                       ),
                       const SizedBox(
                         width: 6,

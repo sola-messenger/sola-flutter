@@ -13,6 +13,7 @@ class CropImagePage extends GetView<CropImageController> {
   Widget build(BuildContext context) {
     return GetBuilder(
         init: CropImageController(),
+        id: 'crop image',
         builder: (ctl) {
           return Scaffold(
             appBar: AppBar(
@@ -48,13 +49,18 @@ class CropImagePage extends GetView<CropImageController> {
               alignment: Alignment.center,
               color: const Color(0xCC353434),
               child: SafeArea(
-                child: CropImage(
-                  image: Image.file(
-                    File(ctl.imagePath!),
-                    fit: BoxFit.fitWidth,
+                child: Obx(
+                  () => CropImage(
+                    controller: ctl.cropController,
+                    image: ctl.cropImage.value != null
+                        ? ctl.cropImage.value!
+                        : Image.file(
+                            File(ctl.imagePath!),
+                            fit: BoxFit.fitWidth,
+                          ),
+                    minimumImageSize: 50,
+                    alwaysShowThirdLines: true,
                   ),
-                  minimumImageSize: 50,
-                  alwaysShowThirdLines: true,
                 ),
               ),
             ),
@@ -89,14 +95,16 @@ class CropImagePage extends GetView<CropImageController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.back();
+                    },
                     icon: Image.asset(
                       R.assetsIconDeleteBlueIcon,
                       width: 13,
                       height: 13,
                     )),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: ctl.onDone,
                     icon: Image.asset(
                       R.assetsIconDoneIcon,
                       width: 17,

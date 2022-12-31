@@ -15,10 +15,13 @@ import 'package:sola/common/services/client_service.dart';
 import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/common/widgets/future/profile_future_widget.dart';
 import 'package:sola/common/widgets/popu/menu_popup.dart';
+import 'package:sola/pages/chat_modular/chat/views/connection_status_header.dart';
 import 'package:sola/pages/chat_modular/chat/views/contact_item.dart';
 import 'package:sola/pages/chat_modular/chat/views/search_bar.dart';
+import 'package:sola/pages/chat_modular/chat_detail/views/avatar.dart';
 import 'package:sola/r.dart';
 import 'index.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class ChatPage extends GetView<ChatController> {
   const ChatPage({Key? key}) : super(key: key);
@@ -36,18 +39,22 @@ class ChatPage extends GetView<ChatController> {
           final List<Room> rooms = Get.find<ClientService>().client.rooms;
           return ListView(
             children: [
+              const ConnectionStatusHeader(),
               const SearchBar(),
               ...List.generate(
                   rooms.length,
                   (index) => ContactItem(
-                        img: rooms[index].avatar?.toString(),
+                        onNavDetail: () {
+                          ctl.onNavToPersonInfo(rooms[index]);
+                        },
+                        img: rooms[index].avatar,
                         name: rooms[index].displayname.toString(),
                         orgName: 'DCC DEV',
                         lastContent: rooms[index].membership ==
                                 Membership.invite
                             ? 'You are invite to this chat'
                             : rooms[index].lastEvent?.calcLocalizedBodyFallback(
-                                      MatrixLocals(),
+                                      MatrixLocals(L10n.of(context)!),
                                       hideReply: true,
                                       hideEdit: true,
                                       plaintextBody: true,
@@ -57,7 +64,7 @@ class ChatPage extends GetView<ChatController> {
                                           rooms[index].directChatMatrixID !=
                                               rooms[index].lastEvent?.senderId,
                                     ) ??
-                                'Come here, to have a meeting',
+                                '',
                         time: rooms[index]
                             .timeCreated
                             .localizedTimeShort(context),
@@ -68,11 +75,11 @@ class ChatPage extends GetView<ChatController> {
                         isTop: rooms[index].isFavourite,
                         isSytemContact: false,
                         onTap: () {
-                          Get.toNamed(Routers.chatDetailRoute);
+                          ctl.onNavToRoom(rooms[index].id);
                         },
                         isMute:
                             rooms[index].pushRuleState != PushRuleState.notify,
-                        isOnline: rooms[index].isArchived,
+                        isOnline: true,
                         menuItems: [
                           MenuPopupItemEntity(
                               image: R.assetsIconPinIcon,
@@ -140,32 +147,6 @@ class ChatPage extends GetView<ChatController> {
               const SizedBox(
                 width: 18,
               ),
-              // PopupMenuButton(
-              //   onSelected: (value) {
-              //     switch (value) {
-              //       case 1:
-              //         break;
-              //       case 2:
-              //         ctl.onCreateGroup();
-              //         break;
-              //       case 3:
-              //         ctl.onInviteFriend();
-              //         break;
-              //       case 4:
-              //         break;
-              //       default:
-              //     }
-              //   },
-              //   icon: ,
-              //   itemBuilder: (BuildContext context) {
-              //     return [
-              //       PopupMenuItem(value: 1, child: Text('Scan QRCode')),
-              //       PopupMenuItem(value: 2, child: Text('Create Group')),
-              //       PopupMenuItem(value: 3, child: Text('Invite Friends')),
-              //       PopupMenuItem(value: 4, child: Text('Add by QRCode')),
-              //     ];
-              //   },
-              // ),
             ],
           ),
           body: SafeArea(
@@ -182,12 +163,11 @@ class ChatPage extends GetView<ChatController> {
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            CircleAvatar(
-              radius: 27,
-              foregroundImage: profile.avatarUrl != null &&
-                      profile.avatarUrl.toString().isNotEmpty
-                  ? NetworkImageX(profile.avatarUrl.toString(), scale: 1)
-                  : null,
+            Avatar(
+              mxContent: profile.avatarUrl,
+              name: profile.displayName,
+              onTap: () {},
+              size: 50,
             ),
             const SizedBox(
               width: 8,

@@ -6,6 +6,7 @@ class CropImageController extends GetxController {
   String? imagePath = Get.parameters['imagePath'];
   final cropController =
       CropController(defaultCrop: const Rect.fromLTRB(0.1, 0.1, 0.9, 0.9));
+  Rx<Image?> cropImage = (null as Image?).obs;
 
   @override
   void onInit() {
@@ -16,21 +17,30 @@ class CropImageController extends GetxController {
   void onReady() {}
 
   @override
-  void onClose() {}
+  void onClose() {
+    cropController.dispose();
+  }
 
   void onCancel() {
+    // Get.back();
+    cropImage.value = null;
+    cropImage.refresh();
+  }
+
+  void onRotate() {}
+
+  void onFlip() {}
+
+  void onFlip2() {}
+
+  void onCrop() async {
+    cropImage.value = await cropController.croppedImage();
+    cropImage.refresh();
+  }
+
+  void onDone() async {
+    final result = await cropController.croppedBitmap();
     Get.back();
-  }
-
-  void onRotate() {
-  }
-
-  void onFlip() {
-  }
-
-  void onFlip2() {
-  }
-
-  void onCrop() {
+    Get.back(result: result);
   }
 }

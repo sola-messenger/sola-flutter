@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:get/get.dart';
 import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/common/widgets/future/profile_future_widget.dart';
+import 'package:sola/pages/chat_modular/chat_detail/views/avatar.dart';
 
 // Project imports:
 import 'package:sola/pages/mine_modular/personal_info/views/personal_info_item.dart';
@@ -19,26 +21,28 @@ class PersonalInfoPage extends GetView<PersonalInfoController> {
             height: 16,
           ),
           Center(
-            child: Stack(
-              children: [
-                Container(
-                  width: 62,
-                  height: 62,
-                  decoration: const BoxDecoration(
-                    color: AppColors.mainRedColor,
-                    shape: BoxShape.circle,
+            child: GestureDetector(
+              onTap: ctl.onChangeAvatar,
+              child: Stack(
+                children: [
+                  ProfileFutureWidget(
+                    buildProfile: (profile) => Avatar(
+                      mxContent: profile.avatarUrl,
+                      size: 62,
+                      name: profile.displayName,
+                    ),
                   ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  child: Image.asset(
-                    R.assetsIconCameraIcon,
-                    width: 20,
-                    height: 20,
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Image.asset(
+                      R.assetsIconCameraIcon,
+                      width: 20,
+                      height: 20,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           const SizedBox(

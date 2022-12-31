@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:get/get.dart';
-import 'package:reactive_forms/reactive_forms.dart';
+import 'package:sola/common/matrix_locals.dart';
 import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/common/widgets/popu/menu_popup.dart';
 
 // Project imports:
 import 'package:sola/common/widgets/pull_to_refresh/expanded_viewport.dart';
-import 'package:sola/pages/chat_modular/chat_detail/views/chat_message_item.dart';
+import 'package:sola/pages/chat_modular/chat_detail/views/tool_bar_picker.dart';
 import 'package:sola/r.dart';
 import '../../../common/widgets/index.dart';
 import 'chat_detail_controller.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
+
+import 'views/chat_emoji_picker.dart';
+import 'views/chat_message.dart';
 
 class ChatDetailPage extends GetView<ChatDetailController> {
   const ChatDetailPage({Key? key}) : super(key: key);
@@ -38,9 +42,9 @@ class ChatDetailPage extends GetView<ChatDetailController> {
                   const SizedBox(
                     width: 6,
                   ),
-                  const Text(
-                    'Jack',
-                    style: TextStyle(
+                  Text(
+                    ctl.room.value?.displayname.toString() ?? 'Not Found',
+                    style: const TextStyle(
                       fontSize: 14,
                       color: AppColors.textBlackColor,
                       height: 22 / 14,
@@ -73,12 +77,18 @@ class ChatDetailPage extends GetView<ChatDetailController> {
                 ),
               ],
             ),
-            body: SafeArea(child: _buildViews(ctl)),
+            body: Obx(() => ctl.room.value == null
+                ? Center(
+                    child: Text(L10n.of(context)!
+                        .youAreNoLongerParticipatingInThisChat),
+                  )
+                : SafeArea(child: _buildViews(context, ctl))),
           );
         });
   }
 
-  Widget _buildViews(ChatDetailController controller) => Column(
+  Widget _buildViews(BuildContext context, ChatDetailController controller) =>
+      Column(
         children: [
           Expanded(
               child: SmartRefresher(
@@ -102,14 +112,19 @@ class ChatDetailPage extends GetView<ChatDetailController> {
                             delegate: SliverChildBuilderDelegate(
                                 (BuildContext context, int index) {
                           return Obx(
-                            () => ChatMessageItem(
-                              nickname: controller.userName.value,
-                              message: controller.groupMessageList[index],
-                              avatar: controller.avatar.value,
-                              onTapAvatar: controller.onNavPersonalDetail,
-                              onResend: () {},
-                              isSelectMode: controller.isSelectState.value,
-                              onSelect: () {},
+                            () => ChatMessage(
+                              event: controller.messageList[index],
+                              timeline: controller.timeline!,
+                              onSelect: controller.onSelectMsg,
+                              scrollToEventId: (String eventId) =>
+                                  controller.scrollToEventId(eventId),
+                              longPressSelect:
+                                  controller.selectedEvents.isEmpty,
+                              onAvatarTab: controller.onNavPersonalDetail,
+                              nextEvent:
+                                  index < controller.timeline!.events.length - 2
+                                      ? controller.timeline!.events[index + 1]
+                                      : null,
                               menus: [
                                 SeeMenuPopupItemEntity(
                                     title: '3 Seen',
@@ -125,7 +140,7 @@ class ChatDetailPage extends GetView<ChatDetailController> {
                                     image: R.assetsIconReplyIcon,
                                     onTap: () {
                                       controller.onReply(
-                                          controller.groupMessageList[index]);
+                                          controller.messageList[index]);
                                     }),
                                 MenuPopupItemEntity(
                                     title: 'Pin',
@@ -160,19 +175,20 @@ class ChatDetailPage extends GetView<ChatDetailController> {
                               // },
                             ),
                           );
-                        }, childCount: controller.groupMessageList.length)),
+                        }, childCount: controller.messageList.length)),
                       ),
                     ],
                   );
                 }),
           )),
-          _buildReplyItem(controller),
+          _buildReplyItem(context, controller),
           _buildInputBar(controller),
-          _buildToolBar(controller),
+          ToolBarPicker(controller),
+          ChatEmojiPicker(controller),
         ],
       );
 
-  Widget _buildReplyItem(ChatDetailController ctl) => Obx(
+  Widget _buildReplyItem(BuildContext context, ChatDetailController ctl) => Obx(
         () => Visibility(
           visible: ctl.replyMsg.value != null,
           child: Container(
@@ -218,7 +234,15 @@ class ChatDetailPage extends GetView<ChatDetailController> {
                     vertical: 12,
                   ),
                   child: Text(
-                    ctl.replyMsg.value?.content ?? '',
+                    ctl.replyMsg.value?.calcLocalizedBodyFallback(
+                          MatrixLocals(L10n.of(context)!),
+                          hideReply: true,
+                          hideEdit: true,
+                          plaintextBody: true,
+                          removeMarkdown: true,
+                          withSenderNamePrefix: false,
+                        ) ??
+                        '',
                     style: const TextStyle(
                       color: Color(0xFF151515),
                       fontSize: 16,
@@ -245,71 +269,78 @@ class ChatDetailPage extends GetView<ChatDetailController> {
         ),
       );
 
-  Widget _buildInputBar(ChatDetailController ctl) => ReactiveForm(
-        formGroup: ctl.fromGroup,
-        child: Container(
-          decoration: const BoxDecoration(
-              border: Border(
-                  top: BorderSide(
-            color: Color(0xFFEAEAEA),
-            width: 0.5,
-          ))),
-          padding: const EdgeInsets.only(
-            top: 37,
-          ),
-          margin: EdgeInsets.only(
-            bottom: Get.mediaQuery.padding.bottom,
-          ),
-          child: Row(
-            children: [
-              IconButton(
-                  onPressed: () {},
-                  icon: Image.asset(
-                    R.assetsIconVoiceIcon,
-                    width: 14,
-                    height: 19,
-                  )),
-              Expanded(
-                child: ReactiveTextField(
-                  formControlName: 'input',
-                  decoration: const InputDecoration(
-                    fillColor: Color(0xFFEAEAEA),
-                    filled: true,
-                    constraints: BoxConstraints(
-                      maxHeight: 25,
-                    ),
-                    border: InputBorder.none,
+  Widget _buildInputBar(ChatDetailController ctl) => Container(
+        decoration: const BoxDecoration(
+            border: Border(
+                top: BorderSide(
+          color: Color(0xFFEAEAEA),
+          width: 0.5,
+        ))),
+        padding: const EdgeInsets.only(
+          top: 6,
+        ),
+        margin: EdgeInsets.only(
+          bottom: Get.mediaQuery.padding.bottom,
+        ),
+        child: Row(
+          children: [
+            IconButton(
+                onPressed: () {},
+                icon: Image.asset(
+                  R.assetsIconVoiceIcon,
+                  width: 14,
+                  height: 19,
+                )),
+            Expanded(
+              child: TextField(
+                controller: ctl.inputController,
+                focusNode: ctl.inputFocus,
+                onSubmitted: ctl.onSendMessage,
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.send,
+                maxLines: null,
+                decoration: const InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  isDense: true,
+                  isCollapsed: true,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 8,
                   ),
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                    color: Color(0x33353434),
+                  )),
                 ),
               ),
-              const SizedBox(
-                width: 8,
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            InkWell(
+              onTap: ctl.onChangeEmojiBox,
+              child: Padding(
+                padding: const EdgeInsets.only(
+                    left: 4, right: 4.0, top: 4, bottom: 4),
+                child: Ink.image(
+                  image: AssetImage(R.assetsIconEmojiIcon),
+                  width: 16,
+                  height: 16,
+                ),
               ),
-              GestureDetector(
-                  onTap: () {},
-                  child: Image.asset(
-                    R.assetsIconEmojiIcon,
+            ),
+            InkWell(
+                onTap: ctl.onChangeToolBar,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 4, right: 12.0, top: 4, bottom: 4),
+                  child: Ink.image(
+                    image: AssetImage(R.assetsIconMoreIcon),
                     width: 16,
                     height: 16,
-                  )),
-              const SizedBox(
-                width: 8,
-              ),
-              GestureDetector(
-                  onTap: () {
-                    ctl.isShowToolBar.call(!ctl.isShowToolBar.isTrue);
-                    ctl.isShowToolBar.refresh();
-                  },
-                  child: Image.asset(
-                    R.assetsIconMoreIcon,
-                    width: 16,
-                    height: 16,
-                  )),
-              const SizedBox(
-                width: 12,
-              ),
-            ],
-          ),
+                  ),
+                )),
+          ],
         ),
       );
 
@@ -317,46 +348,4 @@ class ChatDetailPage extends GetView<ChatDetailController> {
         alignment: Alignment.center,
         child: const Text('更多内容'),
       );
-
-  _buildToolBar(ChatDetailController controller) => Obx(() => Visibility(
-      visible: controller.isShowToolBar.value,
-      child: Container(
-        padding: const EdgeInsets.only(
-          top: 40,
-          bottom: 10,
-        ),
-        child: Wrap(
-          runSpacing: 36,
-          children: controller.toolbar
-              .map((e) => InkWell(
-                    onTap: e['onTap'],
-                    child: SizedBox(
-                      width: (Get.mediaQuery.size.width -
-                              Get.mediaQuery.padding.left -
-                              Get.mediaQuery.padding.right) /
-                          3,
-                      child: Column(
-                        children: [
-                          Image.asset(
-                            '${e['image']}',
-                            width: 28,
-                            height: 28,
-                          ),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          Text(
-                            '${e['title']}',
-                            style: const TextStyle(
-                              fontSize: 14,
-                              height: 21 / 14,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ))
-              .toList(),
-        ),
-      )));
 }
