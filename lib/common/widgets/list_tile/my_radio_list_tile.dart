@@ -27,15 +27,14 @@ class MyRadioListTile extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Text(
-              title.tr,
-              style: AppTextStyles.black_bold_14
-            ),
+            Text(title.tr, style: AppTextStyles.black_bold_14),
             const Spacer(),
             SizedBox(
                 width: 22,
                 height: 14,
-                child: Image.asset(R.assetsIconSelectSwich))
+                child: Image.asset(isSelect
+                    ? R.assetsIconSelectSwich
+                    : R.assetsIconUnselectSwitch))
           ],
         ),
       ),

@@ -32,9 +32,17 @@ class RegisterController extends GetxController {
     isAgreePrivacy.refresh();
   }
 
-  void onNavTermsPage() {}
+  void onNavTermsPage() {
+    Get.toNamed(Routers.privacyRoute,parameters: {
+      'type':'Terms And Conditions',
+    });
+  }
 
-  void onNavPrivacy() {}
+  void onNavPrivacy() {
+    Get.toNamed(Routers.privacyRoute,parameters: {
+      'type':'Privacy Policy',
+    });
+  }
 
   void onRegister() {
     Get.offNamed(Routers.registerSetLoginInfoRoute);

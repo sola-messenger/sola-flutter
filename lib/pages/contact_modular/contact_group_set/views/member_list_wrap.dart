@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:matrix/matrix.dart';
 import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/pages/chat_modular/chat_detail/views/avatar.dart';
 import 'package:sola/r.dart';
 
 class MemberListWrap extends StatelessWidget {
-  final List<String> members;
-  final ValueChanged<String> onMemberDetail;
+  final List<User> members;
+  final ValueChanged<User> onMemberDetail;
   final VoidCallback onAdd;
   final VoidCallback onRemove;
 
@@ -27,19 +29,14 @@ class MemberListWrap extends StatelessWidget {
         alignment: WrapAlignment.start,
         children: List.generate(
           members.length,
-          (index) => SizedBox(
-            width: (Get.mediaQuery.size.width - 26 - 15 * 5) / 6,
-            height: (Get.mediaQuery.size.width - 26 - 15 * 5) / 6,
-            child: InkWell(
-              onTap: () {
-                onMemberDetail(members[index]);
-              },
-              child: Ink(
-                decoration: const BoxDecoration(
-                  color: Colors.black,
-                  shape: BoxShape.circle,
-                ),
-              ),
+          (index) => InkWell(
+            onTap: () {
+              onMemberDetail(members[index]);
+            },
+            child: Avatar(
+              size: (Get.mediaQuery.size.width - 26 - 15 * 5) / 6,
+              mxContent: members[index].avatarUrl,
+              name: members[index].displayName,
             ),
           ),
         )..addAll([

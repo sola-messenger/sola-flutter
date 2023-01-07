@@ -47,4 +47,8 @@ class PersonalInfoController extends GetxController {
       );
     }
   }
+
+  void onNavQrCode() {
+    Get.toNamed(Routers.myQrcodeRoute);
+  }
 }

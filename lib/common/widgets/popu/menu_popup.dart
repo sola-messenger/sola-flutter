@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:get/get.dart';
+import 'package:matrix/matrix.dart';
 import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/common/widgets/button/pressed_button.dart';
+import 'package:sola/pages/chat_modular/chat_detail/views/avatar.dart';
 
 enum MenuPopupType {
   chatList,
@@ -15,13 +17,13 @@ enum MenuPopupType {
 }
 
 class SeeMenuPopupItemEntity extends MenuPopupItemEntity {
-  final List<String> avatars;
+  final List<User> users;
 
   SeeMenuPopupItemEntity({
     required super.title,
     required super.image,
     required super.onTap,
-    required this.avatars,
+    required this.users,
   });
 
   @override
@@ -36,19 +38,17 @@ class SeeMenuPopupItemEntity extends MenuPopupItemEntity {
                 alignment: Alignment.centerLeft,
                 child: Stack(
                   children: List.generate(
-                      avatars.length,
-                      (index) => Container(
-                            width: 20,
-                            height: 20,
-                            margin: EdgeInsets.only(
+                      users.length,
+                      (index) => Padding(
+                            padding: EdgeInsets.only(
                               left: index * 14,
                             ),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: AppColors.textBlackColor,
-                                border: Border.all(
-                                  color: AppColors.mainBlueColor,
-                                )),
+                            child: Avatar(
+                              size: 20,
+                              fontSize: 6,
+                              mxContent: users[index].avatarUrl,
+                              name: users[index].displayName,
+                            ),
                           )),
                 ),
               )),

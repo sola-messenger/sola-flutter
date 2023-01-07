@@ -75,7 +75,7 @@ class ChatPage extends GetView<ChatController> {
                         isTop: rooms[index].isFavourite,
                         isSytemContact: false,
                         onTap: () {
-                          ctl.onNavToRoom(rooms[index].id);
+                          ctl.onNavToRoom(rooms[index]);
                         },
                         isMute:
                             rooms[index].pushRuleState != PushRuleState.notify,
@@ -100,7 +100,9 @@ class ChatPage extends GetView<ChatController> {
                           MenuPopupItemEntity(
                               image: R.assetsIconDeleteChatIcon,
                               title: 'Delete chat',
-                              onTap: ctl.onDeleteChat),
+                              onTap: (){
+                                ctl.onDeleteChat(rooms[index]);
+                              }),
                         ],
                       )),
             ],
@@ -128,7 +130,7 @@ class ChatPage extends GetView<ChatController> {
                   MenuPopupItemEntity(
                       title: 'Scan QR code'.tr,
                       image: R.assetsIconScanQrcodeIcon,
-                      onTap: () {}),
+                      onTap: ctl.onScanQrCode),
                   MenuPopupItemEntity(
                       title: 'Create Group'.tr,
                       image: R.assetsIconCreateGroupIcon,

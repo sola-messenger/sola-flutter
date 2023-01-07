@@ -7,6 +7,9 @@ import 'package:sola/common/services/client_service.dart';
 class ChatSetController extends GetxController {
   final roomId = Get.parameters['roomId'];
   Room? room;
+  RxBool isPin = false.obs;
+  RxBool isMute = false.obs;
+  RxBool isPrivacy = false.obs;
 
   @override
   void onInit() {
@@ -28,5 +31,20 @@ class ChatSetController extends GetxController {
 
   void onCreateGroup() {
     Get.toNamed(Routers.createGroupRoute);
+  }
+
+  void onChangePin() {
+    isPin.toggle();
+    isPin.refresh();
+  }
+
+  void onChangeMute() {
+    isMute.toggle();
+    isMute.refresh();
+  }
+
+  void onchangePrivacyLevel(bool value) {
+    isPrivacy.call(value);
+    isPrivacy.refresh();
   }
 }

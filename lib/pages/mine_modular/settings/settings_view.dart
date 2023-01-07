@@ -13,19 +13,37 @@ class SettingsPage extends GetView<SettingsController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'.tr),
-      ),
-      body: SafeArea(child: _buildView()),
-    );
+    return GetBuilder(
+        init: SettingsController(),
+        builder: (ctl) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Settings'.tr),
+            ),
+            body: SafeArea(child: _buildView(ctl)),
+          );
+        });
   }
 
-  Widget _buildView() => ListView(
-        children: const [
-          MyRadioListTile(title: 'Mute Notification', isSelect: false),
-          MyRadioListTile(title: 'Friends Permission', isSelect: false),
-          MyRadioListTile(title: 'Auto Delete Chat', isSelect: false),
+  Widget _buildView(SettingsController ctl) => ListView(
+        children: [
+          Obx(
+            () => MyRadioListTile(
+              title: 'Mute Notification',
+              isSelect: ctl.isMute.isTrue,
+              onTap: ctl.onChangeMute,
+            ),
+          ),
+          Obx(() => MyRadioListTile(
+                title: 'Friends Permission',
+                isSelect: ctl.isFriendPermission.isTrue,
+                onTap: ctl.onChangeFriendsPermission,
+              )),
+          Obx(() => MyRadioListTile(
+                title: 'Auto Delete Chat',
+                isSelect: ctl.isAutoDelete.isTrue,
+                onTap: ctl.onChangeAutoDeleteChat,
+              )),
         ],
       );
 }

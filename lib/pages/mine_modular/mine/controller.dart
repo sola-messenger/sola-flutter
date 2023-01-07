@@ -38,6 +38,12 @@ class MineController extends GetxController {
     Get.toNamed(Routers.orgDetailRoute);
   }
 
+  void onNavPrivacy() {
+    Get.toNamed(Routers.privacyRoute,parameters: {
+      'type':'Privacy Policy',
+    });
+  }
+
   void onNavVersion() {
     Get.toNamed(Routers.versionInfoRoute);
   }
@@ -66,5 +72,8 @@ class MineController extends GetxController {
 
   void onScanQrCode() {
     Get.toNamed(Routers.scanQrCodeRoute);
+  }
+
+  void onChangeLanguage() {
   }
 }

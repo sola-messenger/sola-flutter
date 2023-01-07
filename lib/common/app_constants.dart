@@ -20,10 +20,12 @@ class AppConstants {
 
   static bool autoplayImages = false;
 
-  static bool renderHtml = true;
+  static bool renderHtml = false;
 
   static const String inviteLinkPrefix = 'https://matrix.to/#/';
   static const String deepLinkPrefix = 'im.fluffychat://chat/';
+
+  static bool hideTypingUsernames = true;
 
 }
 

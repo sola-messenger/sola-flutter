@@ -93,13 +93,13 @@ class MinePage extends GetView<MineController> {
         MineSettingItem(
           title: 'Language',
           image: R.assetsIconLanguageIcon,
-          onTap: ctl.onNavOrganzation,
+          onTap: ctl.onChangeLanguage,
           right: const Text('English (United States)'),
         ),
         MineSettingItem(
           title: 'Security & Privacy',
           image: R.assetsIconSecurityIcon,
-          onTap: ctl.onNavOrganzation,
+          onTap: ctl.onNavPrivacy,
           right: const Text('V1.0.1'),
         ),
         MineSettingItem(
@@ -114,7 +114,7 @@ class MinePage extends GetView<MineController> {
           title: 'Version',
           image: R.assetsIconVersionIcon,
           onTap: ctl.onNavVersion,
-          right: const Text('V1.0.1'),
+          right: Text('V${Get.find<InfoService>().packageInfo.version}'),
         ),
         const SizedBox(
           height: 16,

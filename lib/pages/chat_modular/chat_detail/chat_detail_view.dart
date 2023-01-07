@@ -3,13 +3,17 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:get/get.dart';
+import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:sola/common/extension/room_status_extension.dart';
 import 'package:sola/common/matrix_locals.dart';
+import 'package:sola/common/services/client_service.dart';
 import 'package:sola/common/style/app_colors.dart';
 import 'package:sola/common/widgets/popu/menu_popup.dart';
 
 // Project imports:
 import 'package:sola/common/widgets/pull_to_refresh/expanded_viewport.dart';
 import 'package:sola/pages/chat_modular/chat_detail/views/tool_bar_picker.dart';
+import 'package:sola/pages/chat_modular/chat_detail/views/typing_indicators.dart';
 import 'package:sola/r.dart';
 import '../../../common/widgets/index.dart';
 import 'chat_detail_controller.dart';
@@ -17,6 +21,8 @@ import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 import 'views/chat_emoji_picker.dart';
 import 'views/chat_message.dart';
+import 'views/pinned_events.dart';
+import 'views/tombstone_display.dart';
 
 class ChatDetailPage extends GetView<ChatDetailController> {
   const ChatDetailPage({Key? key}) : super(key: key);
@@ -25,7 +31,7 @@ class ChatDetailPage extends GetView<ChatDetailController> {
   Widget build(BuildContext context) {
     return GetBuilder(
         init: ChatDetailController(),
-        id: 'chat detail',
+        id: 'chat detail${Get.parameters['roomId']}',
         builder: (ctl) {
           return Scaffold(
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -34,23 +40,27 @@ class ChatDetailPage extends GetView<ChatDetailController> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Image.asset(
-                    R.assetsIconCollectionIcon,
-                    width: 18,
-                    height: 22,
-                  ),
-                  const SizedBox(
-                    width: 6,
-                  ),
-                  Text(
-                    ctl.room.value?.displayname.toString() ?? 'Not Found',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: AppColors.textBlackColor,
-                      height: 22 / 14,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
+                  // Image.asset(
+                  //   R.assetsIconCollectionIcon,
+                  //   width: 18,
+                  //   height: 22,
+                  // ),
+                  // const SizedBox(
+                  //   width: 6,
+                  // ),
+                  StreamBuilder(
+                      stream: ctl.room.value!.onUpdate.stream,
+                      builder: (context, _) {
+                        return Text(
+                          ctl.room.value?.displayname.toString() ?? 'Not Found',
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: AppColors.textBlackColor,
+                            height: 22 / 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        );
+                      }),
                   const SizedBox(
                     width: 8,
                   ),
@@ -90,11 +100,13 @@ class ChatDetailPage extends GetView<ChatDetailController> {
   Widget _buildViews(BuildContext context, ChatDetailController controller) =>
       Column(
         children: [
+          PinnedEvents(controller),
+          TombstoneDisplay(controller),
           Expanded(
               child: SmartRefresher(
             controller: controller.refreshController,
             onLoading: controller.onLoadMore,
-            enablePullUp: controller.hasMoreHistory.isTrue,
+            enablePullUp: false,
             enablePullDown: false,
             scrollController: controller.scrollController,
             footer: buildLoadMoreFooter(),
@@ -110,79 +122,141 @@ class ChatDetailPage extends GetView<ChatDetailController> {
                       Obx(
                         () => SliverList(
                             delegate: SliverChildBuilderDelegate(
-                                (BuildContext context, int index) {
-                          return Obx(
-                            () => ChatMessage(
-                              event: controller.messageList[index],
-                              timeline: controller.timeline!,
-                              onSelect: controller.onSelectMsg,
-                              scrollToEventId: (String eventId) =>
-                                  controller.scrollToEventId(eventId),
-                              longPressSelect:
-                                  controller.selectedEvents.isEmpty,
-                              onAvatarTab: controller.onNavPersonalDetail,
-                              nextEvent:
-                                  index < controller.timeline!.events.length - 2
-                                      ? controller.timeline!.events[index + 1]
+                          (BuildContext context, int index) {
+                            if (index == 0) {
+                              return Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  // SeenByRow(controller),
+                                  TypingIndicators(controller),
+                                ],
+                              );
+                            }
+                            final event =
+                                controller.timeline!.events[index - 1];
+
+                            final eventId = event.eventId;
+                            final client = Get.find<ClientService>().client;
+                            final ownMessage = event.senderId == client.userID;
+
+                            return Obx(
+                              () => AutoScrollTag(
+                                key: ValueKey(eventId),
+                                index: index - 1,
+                                controller: controller.scrollController,
+                                child: ChatMessage(
+                                  isGroup: controller.isGroup,
+                                  room: controller.room.value!,
+                                  isSelect: controller.selectedEvents
+                                      .where((p0) => p0.eventId == eventId)
+                                      .isNotEmpty,
+                                  event: event,
+                                  timeline: controller.timeline!,
+                                  onSelect: controller.onSelectMsg,
+                                  scrollToEventId: (String eventId) =>
+                                      controller.scrollToEventId(eventId),
+                                  longPressSelect:
+                                      controller.selectedEvents.isEmpty,
+                                  onResend: controller.onResendMessage,
+                                  onAvatarTab: controller.onNavPersonalDetail,
+                                  isSelectState:
+                                      controller.isSelectState.isTrue,
+                                  nextEvent: index <
+                                          controller.timeline!.events.length - 2
+                                      ? controller.timeline!.events[index]
                                       : null,
-                              menus: [
-                                SeeMenuPopupItemEntity(
-                                    title: '3 Seen',
-                                    image: R.assetsIconMakeAsReadIcon,
-                                    onTap: () {},
-                                    avatars: ['', '', '']),
-                                MenuPopupItemEntity(
-                                    title: 'Thumps Up',
-                                    image: R.assetsIconLikeIcon,
-                                    onTap: () {}),
-                                MenuPopupItemEntity(
-                                    title: 'Reply',
-                                    image: R.assetsIconReplyIcon,
-                                    onTap: () {
-                                      controller.onReply(
-                                          controller.messageList[index]);
-                                    }),
-                                MenuPopupItemEntity(
-                                    title: 'Pin',
-                                    image: R.assetsIconPinIcon,
-                                    onTap: () {}),
-                                MenuPopupItemEntity(
-                                    title: 'Copy',
-                                    image: R.assetsIconCopyIcon,
-                                    onTap: () {}),
-                                MenuPopupItemEntity(
-                                    title: 'Forward',
-                                    image: R.assetsIconForwardIcon,
-                                    onTap: controller.onForwardTo),
-                                MenuPopupItemEntity(
-                                    title: 'Delete',
-                                    image: R.assetsIconDeleteChatIcon,
-                                    onTap: () {}),
-                                MenuPopupItemEntity(
-                                    title: 'Select',
-                                    image: R.assetsIconSelectIcon,
-                                    onTap: controller.onChangeSelectState),
-                                MenuPopupItemEntity(
-                                    title: 'Edit',
-                                    image: R.assetsIconEditIcon,
-                                    onTap: controller.onShowMessageEdits),
-                              ],
-                              // menuBuilder: (msg) {
-                              //   if (msg.content is TextMessage) {
-                              //     return buildMenuItemList(controller, msg);
-                              //   }
-                              //   return [];
-                              // },
-                            ),
-                          );
-                        }, childCount: controller.messageList.length)),
+                                  onInfoTab: controller.onInfoTab,
+                                  menus: [
+                                    if (controller.room.value!
+                                            .getSeenByUsers(
+                                                controller.timeline!,
+                                                eventId: eventId)
+                                            .isNotEmpty &&
+                                        controller.isGroup)
+                                      SeeMenuPopupItemEntity(
+                                          title:
+                                              '${controller.room.value!.getSeenByUsers(controller.timeline!, eventId: eventId).length} Seen',
+                                          image: R.assetsIconMakeAsReadIcon,
+                                          onTap: () {},
+                                          users: controller.room.value!
+                                              .getSeenByUsers(
+                                                  controller.timeline!,
+                                                  eventId: eventId)),
+                                    if (controller.isGroup)
+                                      MenuPopupItemEntity(
+                                          title: 'Thumps Up',
+                                          image: R.assetsIconLikeIcon,
+                                          onTap: () {
+                                            controller.onThumpsUp(event);
+                                          }),
+                                    MenuPopupItemEntity(
+                                        title: 'Reply',
+                                        image: R.assetsIconReplyIcon,
+                                        onTap: () {
+                                          controller.onReply(event);
+                                        }),
+                                    if (controller.isGroup)
+                                      MenuPopupItemEntity(
+                                          title: 'Pin',
+                                          image: R.assetsIconPinIcon,
+                                          onTap: () {
+                                            controller.onPinEvent(event);
+                                          }),
+                                    MenuPopupItemEntity(
+                                        title: 'Copy',
+                                        image: R.assetsIconCopyIcon,
+                                        onTap: () {
+                                          controller.onCopyMessage(event);
+                                        }),
+                                    MenuPopupItemEntity(
+                                        title: 'Forward',
+                                        image: R.assetsIconForwardIcon,
+                                        onTap: () {
+                                          controller.onForwardTo(event);
+                                        }),
+                                    MenuPopupItemEntity(
+                                        title: 'Delete',
+                                        image: R.assetsIconDeleteChatIcon,
+                                        onTap: () {
+                                          controller.onDeleteMessage(event);
+                                        }),
+                                    MenuPopupItemEntity(
+                                        title: 'Select',
+                                        image: R.assetsIconSelectIcon,
+                                        onTap: () {
+                                          controller.onChangeSelectState(event);
+                                        }),
+                                    if (ownMessage)
+                                      MenuPopupItemEntity(
+                                          title: 'Edit',
+                                          image: R.assetsIconEditIcon,
+                                          onTap: () {
+                                            controller
+                                                .onShowMessageEdits(event);
+                                          }),
+                                  ],
+                                  // menuBuilder: (msg) {
+                                  //   if (msg.content is TextMessage) {
+                                  //     return buildMenuItemList(controller, msg);
+                                  //   }
+                                  //   return [];
+                                  // },
+                                ),
+                              ),
+                            );
+                          },
+                          childCount: controller.messageList.length + 1,
+                        )),
                       ),
                     ],
                   );
                 }),
           )),
           _buildReplyItem(context, controller),
-          _buildInputBar(controller),
+          _buildEditItem(context, controller),
+          Obx(() => controller.isSelectState.isTrue
+              ? _buildSelectBar(controller)
+              : _buildInputBar(controller)),
           ToolBarPicker(controller),
           ChatEmojiPicker(controller),
         ],
@@ -269,6 +343,118 @@ class ChatDetailPage extends GetView<ChatDetailController> {
         ),
       );
 
+  Widget _buildSelectBar(ChatDetailController ctl) => Container(
+        decoration: const BoxDecoration(
+            color: Color(0xFFECECEC),
+            border: Border(
+                top: BorderSide(
+              color: Color(0x33353434),
+              width: 1,
+            ))),
+        padding: EdgeInsets.only(
+          bottom: 12 + Get.mediaQuery.padding.bottom,
+          left: 10 + Get.mediaQuery.padding.left,
+          top: 15,
+          right: 12 + Get.mediaQuery.padding.bottom,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Obx(
+              () => Column(
+                children: [
+                  Text(
+                    '${controller.selectedEvents.length}',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      height: 21 / 14,
+                      color: Color(0x99353434),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 7,
+                  ),
+                  const Text(
+                    'Selected',
+                    style: TextStyle(
+                      fontSize: 14,
+                      height: 21 / 14,
+                      color: AppColors.textBlackColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                Image.asset(
+                  R.assetsIconChatForwardGreyIcon,
+                  width: 20,
+                  height: 21,
+                  color: const Color(0x66353434),
+                ),
+                const SizedBox(
+                  height: 7,
+                ),
+                const Text(
+                  'Forward',
+                  style: TextStyle(
+                    fontSize: 14,
+                    height: 21 / 14,
+                    color: AppColors.textBlackColor,
+                  ),
+                ),
+              ],
+            ),
+            Column(
+              children: [
+                Image.asset(
+                  R.assetsIconDrafIcon,
+                  width: 20,
+                  height: 21,
+                  color: const Color(0x66353434),
+                ),
+                const SizedBox(
+                  height: 7,
+                ),
+                const Text(
+                  'Delete',
+                  style: TextStyle(
+                    fontSize: 14,
+                    height: 21 / 14,
+                    color: AppColors.textBlackColor,
+                  ),
+                ),
+              ],
+            ),
+            InkWell(
+              onTap: ctl.onCancelSelectState,
+              child: Column(
+                children: [
+                  Image.asset(
+                    R.assetsIconDeleteChatGreyIcon,
+                    width: 20,
+                    height: 21,
+                    color: const Color(0x66353434),
+                  ),
+                  const SizedBox(
+                    height: 7,
+                  ),
+                  const Text(
+                    'Cancel',
+                    style: TextStyle(
+                      fontSize: 14,
+                      height: 21 / 14,
+                      color: AppColors.textBlackColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+
   Widget _buildInputBar(ChatDetailController ctl) => Container(
         decoration: const BoxDecoration(
             border: Border(
@@ -296,6 +482,7 @@ class ChatDetailPage extends GetView<ChatDetailController> {
                 controller: ctl.inputController,
                 focusNode: ctl.inputFocus,
                 onSubmitted: ctl.onSendMessage,
+                onChanged: ctl.onInputBarChanged,
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.send,
                 maxLines: null,
@@ -348,4 +535,50 @@ class ChatDetailPage extends GetView<ChatDetailController> {
         alignment: Alignment.center,
         child: const Text('更多内容'),
       );
+
+  Widget _buildEditItem(BuildContext context, ChatDetailController controller) {
+    return Obx(
+      () => Visibility(
+        visible: controller.editMsg.value != null,
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Color(0xFFEAEAEA),
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 22,
+            vertical: 12,
+          ),
+          child: Row(
+            children: [
+              Image.asset(
+                R.assetsIconEditIcon,
+                width: 18,
+                height: 20,
+              ),
+              const SizedBox(
+                width: 13,
+              ),
+              Expanded(
+                  child: Text(
+                controller.editMsg.value?.calcLocalizedBodyFallback(
+                      MatrixLocals(L10n.of(context)!),
+                      hideReply: true,
+                      hideEdit: true,
+                      plaintextBody: true,
+                      removeMarkdown: true,
+                      withSenderNamePrefix: false,
+                    ) ??
+                    '',
+                style: const TextStyle(
+                  color: Color(0xFF151515),
+                  fontSize: 16,
+                  height: 24 / 16,
+                ),
+              )),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }

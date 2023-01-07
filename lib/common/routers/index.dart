@@ -36,6 +36,7 @@ import 'package:sola/pages/org_modular/org_detail/org_detail_view.dart';
 import 'package:sola/pages/org_modular/org_manager/org_manager_view.dart';
 import 'package:sola/pages/org_modular/org_order_detail/org_order_detail_view.dart';
 import 'package:sola/pages/org_modular/org_set_info/org_set_info_view.dart';
+import 'package:sola/pages/privacy_and_terms/privacy_and_terms_view.dart';
 import 'package:sola/pages/scan_qr/scan_qr_view.dart';
 import 'package:sola/pages/search/search_view.dart';
 import 'package:sola/pages/splash/splash_view.dart';
@@ -99,6 +100,7 @@ class Routers {
   static String cropImageRoute = '/cropImage';
   static String scanQrCodeRoute = '/scanQrCode';
   static String searchRoute = '/search';
+  static String privacyRoute = '/privacy';
 
   static final unknownPage =
       GetPage(name: unknownRoute, page: () => const UnknownPage());
@@ -149,7 +151,7 @@ class Routers {
     GetPage(name: cropImageRoute, page: () => const CropImagePage()),
     GetPage(name: scanQrCodeRoute, page: () => const ScanQrPage()),
     GetPage(name: searchRoute, page: () => const SearchPage()),
-
+    GetPage(name: privacyRoute, page: () => const PrivacyAndTermsPage()),
 
   ];
 }

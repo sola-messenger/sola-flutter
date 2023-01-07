@@ -11,6 +11,7 @@ import 'package:matrix/matrix.dart';
 import 'package:sola/common/services/client_service.dart';
 import 'package:sola/common/widgets/mxc_image.dart';
 import 'package:sola/pages/chat_modular/chat_detail/views/avatar.dart';
+import 'package:sola/r.dart';
 
 class MessageReactions extends StatelessWidget {
   final Event event;
@@ -54,6 +55,7 @@ class MessageReactions extends StatelessWidget {
               reactionKey: r.key,
               count: r.count,
               reacted: r.reacted,
+              users: r.reactors,
               onTap: () {
                 if (r.reacted) {
                   final evt = allReactionEvents.firstWhereOrNull((e) =>
@@ -95,13 +97,14 @@ class _Reaction extends StatelessWidget {
   final bool? reacted;
   final void Function()? onTap;
   final void Function()? onLongPress;
+  final List<User>? users;
 
   const _Reaction({
     this.reactionKey,
     this.count,
     this.reacted,
     this.onTap,
-    this.onLongPress,
+    this.onLongPress,  this.users,
   });
 
   @override
@@ -109,7 +112,6 @@ class _Reaction extends StatelessWidget {
     final textColor = Theme.of(context).brightness == Brightness.dark
         ? Colors.white
         : Colors.black;
-    final color = Theme.of(context).scaffoldBackgroundColor;
     final fontSize = DefaultTextStyle.of(context).style.fontSize;
     Widget content;
     if (reactionKey!.startsWith('mxc://')) {
@@ -134,26 +136,46 @@ class _Reaction extends StatelessWidget {
       if (renderKey.length > 10) {
         renderKey = renderKey.getRange(0, 9) + Characters('…');
       }
-      content = Text('$renderKey $count',
-          style: TextStyle(
-            color: textColor,
-            fontSize: DefaultTextStyle.of(context).style.fontSize,
-          ));
+      if (renderKey.toString() == 'thumps up') {
+        content = Image.asset(
+          R.assetsIconLikeIcon,
+          width: 10,
+          height: 10,
+        );
+      }else{
+        content = Text('$renderKey $count',
+            style: TextStyle(
+              color: textColor,
+              fontSize: DefaultTextStyle.of(context).style.fontSize,
+            ));
+      }
+
+      if(users!= null){
+        content = Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ...users!.map((e) => Avatar(
+              mxContent: e.avatarUrl,
+              name: e.displayName,
+              size: 12,
+            )),
+            const SizedBox(
+              width: 2.5,
+            ),
+            content,
+          ],
+        );
+      }
+   
     }
     return InkWell(
       onTap: () => onTap != null ? onTap!() : null,
       onLongPress: () => onLongPress != null ? onLongPress!() : null,
-      borderRadius: BorderRadius.circular(6),
+      borderRadius: BorderRadius.circular(4),
       child: Container(
         decoration: BoxDecoration(
-          color: color,
-          border: reacted!
-              ? Border.all(
-                  width: 1,
-                  color: Theme.of(context).primaryColor,
-                )
-              : null,
-          borderRadius: BorderRadius.circular(6),
+          color: const Color(0xFFD8EAFF),
+          borderRadius: BorderRadius.circular(4),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 3),
         child: content,

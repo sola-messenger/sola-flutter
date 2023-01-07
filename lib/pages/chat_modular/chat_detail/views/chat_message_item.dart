@@ -30,9 +30,14 @@ class ChatMessageContent extends StatelessWidget {
   final List<MenuPopupItemEntity> menus;
   final Event event;
   final void Function(Event)? onInfoTab;
+  final Timeline timeline;
 
   const ChatMessageContent(
-      {super.key, required this.menus, required this.event, this.onInfoTab});
+      {super.key,
+      required this.menus,
+      required this.event,
+      this.onInfoTab,
+      required this.timeline});
 
   bool get isOwen => event.senderId == Get.find<ClientService>().client.userID;
 
@@ -214,7 +219,7 @@ class ChatMessageContent extends StatelessWidget {
           textmessage:
           default:
             if (event.redacted) {
-              child =  FutureBuilder<User?>(
+              child = FutureBuilder<User?>(
                   future: event.fetchSenderUser(),
                   builder: (context, snapshot) {
                     return _ButtonContent(
@@ -226,29 +231,44 @@ class ChatMessageContent extends StatelessWidget {
                       onPressed: () => onInfoTab!(event),
                     );
                   });
-            }else{
+            } else {
               // final bigEmotes = event.onlyEmotes &&
               //     event.numberEmotes > 0 &&
               //     event.numberEmotes <= 10;
-              child= FutureBuilder<String>(
-                  future: event.calcLocalizedBody(MatrixLocals(L10n.of(context)!),
+              child = FutureBuilder<String>(
+                  future: event.calcLocalizedBody(
+                      MatrixLocals(L10n.of(context)!),
                       hideReply: true),
                   builder: (context, snapshot) {
-                    return LinkText(
-                      text: snapshot.data ??
-                          event.calcLocalizedBodyFallback(
-                              MatrixLocals(L10n.of(context)!),
-                              hideReply: true),
-                      textStyle: textStyle.copyWith(
-                        decoration:
-                        event.redacted ? TextDecoration.lineThrough : null,
-                      ),
-                      linkStyle: textStyle.copyWith(
-                        decoration: TextDecoration.underline,
-                        color: AppColors.mainBlueColor,
-                      ),
-                      onLinkTap: (url) => launchUrl(Uri.parse(url)),
-                    );
+                    bool isEdit = event.hasAggregatedEvents(
+                        timeline, RelationshipTypes.edit);
+                    return RichText(text:
+                    TextSpan(
+                      children: [
+                        WidgetSpan(child: LinkText(
+                          text:
+                          snapshot.data ?? event.calcLocalizedBodyFallback(MatrixLocals(L10n.of(context)!), hideReply: true),
+                          textStyle: textStyle.copyWith(
+                            decoration:
+                            event.redacted ? TextDecoration.lineThrough : null,
+                          ),
+                          linkStyle: textStyle.copyWith(
+                            decoration: TextDecoration.underline,
+                            color: AppColors.mainBlueColor,
+                          ),
+                          onLinkTap: (url) => launchUrl(Uri.parse(url)),
+                        )),
+                        if(isEdit)
+                          const TextSpan(
+                            text: '（edited）',
+                            style: TextStyle(
+                              color: AppColors.mainBlueColor,
+                              fontSize: 8,
+                              height: 12/8,
+                            )
+                          )
+                      ]
+                    ));
                   });
             }
         }
@@ -282,28 +302,6 @@ class ChatMessageContent extends StatelessWidget {
               );
             });
         break;
-      // case ChatMessageType.text:
-      //   child = TextClip(
-      //     avatar: avatar,
-      //     content: message.content,
-      //     isOwen: message.isOwen,
-      //     onTapAvatar: onTapAvatar,
-      //   );
-      //   break;
-      // case ChatMessageType.voice:
-      //   child = VoiceClip(
-      //     avatar: avatar,
-      //     content: message.content,
-      //     isOwen: message.isOwen,
-      //     onTapAvatar: onTapAvatar,
-      //   );
-      //   break;
-      // case ChatMessageType.time:
-      //   child = TimeClip(time: message.content);
-      //   break;
-      // case ChatMessageType.system:
-      //   child = SystemMsgClip(time: message.content);
-      //   break;
     }
     return MenuPopup(
         menuItem: menus,

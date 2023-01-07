@@ -36,7 +36,7 @@ class LoginPage extends GetView<LoginController> {
             ),
             children: [
                InputColumnField(
-                title: 'Organization Name',
+                title: 'Organization Name/ Invite Code',
                 hint: 'Please enter your organization name',
                 formKey: 'orgName',
                 icon: Image.asset(R.assetsIconOrgNameIcon),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:get/get.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:sola/common/style/app_colors.dart';
 
 class InputColumnField extends StatelessWidget {
   final String title;
@@ -13,6 +14,7 @@ class InputColumnField extends StatelessWidget {
   final TextInputType? keyboardType;
   final Widget? icon;
   final Color? textColor;
+
   const InputColumnField(
       {super.key,
       required this.title,
@@ -20,7 +22,8 @@ class InputColumnField extends StatelessWidget {
       required this.hint,
       this.obscureText = false,
       this.keyboardType,
-      this.icon, this.textColor});
+      this.icon,
+      this.textColor});
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +32,8 @@ class InputColumnField extends StatelessWidget {
       children: [
         Text(
           title.tr,
-          style:  TextStyle(
-            color: textColor??Colors.blueAccent,
+          style: TextStyle(
+            color: textColor ?? AppColors.textBlackColor,
             fontSize: 14,
             height: 21 / 14,
             fontWeight: FontWeight.w600,
@@ -75,11 +78,13 @@ class InputColumnField extends StatelessWidget {
               fontSize: 0,
             ),
             prefixIcon: icon,
-            prefixIconConstraints: icon==null? null:const BoxConstraints(
-              maxWidth: 30,
-              minWidth: 30,
-              maxHeight: 18,
-            ),
+            prefixIconConstraints: icon == null
+                ? null
+                : const BoxConstraints(
+                    maxWidth: 30,
+                    minWidth: 30,
+                    maxHeight: 18,
+                  ),
           ),
         ),
         const SizedBox(

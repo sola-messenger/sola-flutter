@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:matrix/matrix.dart';
 import 'package:sola/common/extension/date_time_extension.dart';
+import 'package:sola/common/extension/room_status_extension.dart';
 import 'package:sola/common/services/client_service.dart';
+import 'package:sola/common/style/app_colors.dart';
+import 'package:sola/common/widgets/sola_radio_box.dart';
 import 'package:sola/pages/chat_modular/chat_detail/views/avatar.dart';
 import 'package:sola/pages/chat_modular/chat_detail/views/chat_message_item.dart';
 import 'package:sola/pages/chat_modular/chat_detail/views/message_reactions.dart';
 import 'package:sola/pages/chat_modular/chat_detail/views/state_message.dart';
+import 'package:sola/pages/chat_modular/chat_detail/views/time_clip.dart';
+import 'package:sola/r.dart';
 
 import '../../../../common/widgets/popu/menu_popup.dart';
 import 'reply_content.dart';
@@ -18,12 +23,18 @@ class ChatMessage extends StatelessWidget {
   final bool longPressSelect;
   final bool selected;
   final Event? nextEvent;
+  final Room room;
 
   final void Function(Event)? onSelect;
   final void Function(Event)? onAvatarTab;
   final void Function(Event)? onInfoTab;
   final void Function(String)? scrollToEventId;
+  final void Function(Event)? onResend;
+
   final List<MenuPopupItemEntity>? menus;
+  final bool isSelectState;
+  final bool isSelect;
+  final bool isGroup;
 
   const ChatMessage(
       {Key? key,
@@ -35,7 +46,13 @@ class ChatMessage extends StatelessWidget {
       this.onAvatarTab,
       this.onInfoTab,
       this.scrollToEventId,
-      this.menus, this.nextEvent})
+      this.menus,
+      this.nextEvent,
+      required this.isSelectState,
+      required this.isSelect,
+      required this.room,
+      this.onResend,
+      this.isGroup = false})
       : super(key: key);
 
   @override
@@ -65,13 +82,11 @@ class ChatMessage extends StatelessWidget {
         nextEvent == null ||
         !event.originServerTs.sameEnvironment(nextEvent!.originServerTs);
 
-    final borderRadius = BorderRadius.only(
-      topLeft: const Radius.circular(16),
-      topRight: const Radius.circular(16),
-      bottomLeft:
-          ownMessage ? const Radius.circular(16) : const Radius.circular(0),
-      bottomRight:
-          ownMessage ? const Radius.circular(0) : const Radius.circular(16),
+    const borderRadius = BorderRadius.only(
+      topLeft: Radius.circular(4),
+      topRight: Radius.circular(4),
+      bottomLeft: Radius.circular(4),
+      bottomRight: Radius.circular(4),
     );
     final backgroundColor = ownMessage ? const Color(0xFFCDE8F6) : Colors.white;
 
@@ -110,24 +125,122 @@ class ChatMessage extends StatelessWidget {
               event: displayEvent,
               onInfoTab: onInfoTab,
               menus: menus ?? [],
+              timeline: timeline,
             )
-          : Container(
-              decoration: BoxDecoration(
-                color: backgroundColor,
-                borderRadius: borderRadius,
-              ),
-              constraints: const BoxConstraints(
-                maxWidth: 273,
-              ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 12,
-              ),
-              child: ChatMessageContent(
-                event: displayEvent,
-                onInfoTab: onInfoTab,
-                menus: menus ?? [],
-              ),
+          : Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: backgroundColor,
+                    borderRadius: borderRadius,
+                  ),
+                  constraints: BoxConstraints(
+                    maxWidth: isSelectState ? 262 : 273,
+                    minWidth: 60,
+                  ),
+                  padding: const EdgeInsets.only(
+                    left: 16,
+                    right: 16,
+                    top: 6,
+                    bottom: 12,
+                  ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (isGroup == true&&!ownMessage)
+                        FutureBuilder<User?>(
+                          future: event.fetchSenderUser(),
+                          builder: (BuildContext context, snapshot) {
+                            return Text(
+                              '${snapshot.hasData ? snapshot.data?.displayName : ''}',
+                              style: const TextStyle(
+                                color: Color(0xFF333333),
+                                fontSize: 10,
+                                height: 15 / 10,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            );
+                          },
+                        ),
+                      if (event.relationshipType == RelationshipTypes.reply)
+                        FutureBuilder<Event?>(
+                          future: event.getReplyEvent(timeline),
+                          builder: (BuildContext context, snapshot) {
+                            final replyEvent = snapshot.hasData
+                                ? snapshot.data!
+                                : Event(
+                                    eventId: event.relationshipEventId!,
+                                    content: {
+                                      'msgtype': 'm.text',
+                                      'body': '...'
+                                    },
+                                    senderId: event.senderId,
+                                    type: 'm.room.message',
+                                    room: event.room,
+                                    status: EventStatus.sent,
+                                    originServerTs: DateTime.now(),
+                                  );
+                            return InkWell(
+                              onTap: () {
+                                if (scrollToEventId != null) {
+                                  scrollToEventId!(replyEvent.eventId);
+                                }
+                              },
+                              child: AbsorbPointer(
+                                child: ReplyContent(replyEvent,
+                                    ownMessage: ownMessage, timeline: timeline),
+                              ),
+                            );
+                          },
+                        ),
+                      ChatMessageContent(
+                        event: displayEvent,
+                        onInfoTab: onInfoTab,
+                        menus: menus ?? [],
+                        timeline: timeline,
+                      ),
+                      if (event.hasAggregatedEvents(
+                          timeline, RelationshipTypes.reaction))
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            top: 6.0,
+                          ),
+                          child: MessageReactions(event, timeline),
+                        ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  right: 6,
+                  bottom: 5,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        event.originServerTs.localizedTime(context),
+                        style: const TextStyle(
+                          fontSize: 6,
+                          height: 9 / 6,
+                          color: Color(0xFF6E8597),
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 3,
+                      ),
+                      if (ownMessage &&
+                          room
+                              .getSeenByUsers(timeline, eventId: event.eventId)
+                              .isNotEmpty)
+                        Image.asset(
+                          R.assetsIconMakeAsReadIcon,
+                          width: 13,
+                          height: 7,
+                        )
+                    ],
+                  ),
+                ),
+              ],
             )
       //
       //
@@ -282,50 +395,92 @@ class ChatMessage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: rowMainAxisAlignment,
       children: [
-        // MessageStateInherited.of(context).buildSelectIcon(),
-        ...rowChildren,
-      ],
-    );
-    Widget container;
-    if (event.hasAggregatedEvents(timeline, RelationshipTypes.reaction) ||
-        displayTime ||
-        selected) {
-      container = Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment:
-            ownMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,
-        children: <Widget>[
-          if (displayTime || selected)
-            Padding(
-              padding: EdgeInsets.zero,
-              child: Center(
-                  child: Material(
-                clipBehavior: Clip.antiAlias,
-                child: Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: Text(
-                    event.originServerTs.localizedTime(context),
-                    style: const TextStyle(fontSize: 10,
-                    color: Color(0xFF6E8597)),
+        if (isSelectState == true) ...[
+          Padding(
+            padding: const EdgeInsets.only(
+              top: 12,
+              left: 18,
+            ),
+            child: SolaRadioBox(
+                isSelect: isSelect,
+                onChange: () {
+                  onSelect?.call(event);
+                }),
+          ),
+          Expanded(
+              child: Row(
+            mainAxisAlignment: rowMainAxisAlignment,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (displayEvent.status.isError && ownMessage)
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 12.0,
+                    right: 5,
+                  ),
+                  child: Image.asset(
+                    R.assetsIconInfoIcon,
+                    width: 17,
+                    height: 17,
                   ),
                 ),
-              )),
-            ),
-          row,
-          if (event.hasAggregatedEvents(timeline, RelationshipTypes.reaction))
+              // MessageStateInherited.of(context).buildSelectIcon(),
+              ...rowChildren
+            ],
+          ))
+        ] else ...[
+          if (displayEvent.status.isError && ownMessage)
             Padding(
-              padding: EdgeInsets.only(
-                top: 4.0,
-                left: (ownMessage ? 0 : Avatar.defaultSize) + 12.0,
-                right: 12.0,
+              padding: const EdgeInsets.only(
+                top: 12.0,
+                right: 5,
               ),
-              child: MessageReactions(event, timeline),
+              child: Image.asset(
+                R.assetsIconInfoIcon,
+                width: 17,
+                height: 17,
+              ),
             ),
-        ],
-      );
-    } else {
-      container = row;
-    }
+          // MessageStateInherited.of(context).buildSelectIcon(),
+          ...rowChildren,
+        ]
+      ],
+    );
+
+    Widget container;
+    container = Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment:
+          ownMessage ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+      children: <Widget>[
+        if (event.hasAggregatedEvents(timeline, RelationshipTypes.reaction) ||
+            displayTime ||
+            selected)
+          TimeClip(time: event.originServerTs.localizedTime(context)),
+        row,
+        if (displayEvent.status.isError && ownMessage)
+          Padding(
+            padding: const EdgeInsets.only(right: 59.0),
+            child: InkWell(
+              onTap: () {
+                onResend?.call(event);
+              },
+              child: Text(
+                'Resend'.tr,
+                style: const TextStyle(
+                  fontSize: 10,
+                  height: 15 / 10,
+                  color: AppColors.mainDarkRedColor,
+                ),
+              ),
+            ),
+          ),
+        const SizedBox(
+          height: 18,
+        ),
+      ],
+    );
+
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 2,

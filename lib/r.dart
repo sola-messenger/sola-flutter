@@ -19,6 +19,8 @@ class R {
   static final String assetsIconChatContactIcon = 'assets/icon/chat_contact_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/chat_file_icon.png)
   static final String assetsIconChatFileIcon = 'assets/icon/chat_file_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/chat_forward_grey_icon.png)
+  static final String assetsIconChatForwardGreyIcon = 'assets/icon/chat_forward_grey_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/chat_gallery_icon.png)
   static final String assetsIconChatGalleryIcon = 'assets/icon/chat_gallery_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/chat_location_icon.png)
@@ -55,6 +57,8 @@ class R {
   static final String assetsIconCropIcon = 'assets/icon/crop_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/delete_blue_icon.png)
   static final String assetsIconDeleteBlueIcon = 'assets/icon/delete_blue_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/delete_chat_grey_icon.png)
+  static final String assetsIconDeleteChatGreyIcon = 'assets/icon/delete_chat_grey_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/delete_chat_icon.png)
   static final String assetsIconDeleteChatIcon = 'assets/icon/delete_chat_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/delete_grey_icon.png)
@@ -65,6 +69,8 @@ class R {
   static final String assetsIconDoneIcon = 'assets/icon/done_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/download_icon.png)
   static final String assetsIconDownloadIcon = 'assets/icon/download_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/draf_icon.png)
+  static final String assetsIconDrafIcon = 'assets/icon/draf_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/edit_icon.png)
   static final String assetsIconEditIcon = 'assets/icon/edit_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/email_icon.png)
@@ -87,8 +93,16 @@ class R {
   static final String assetsIconForwardIcon2 = 'assets/icon/forward_icon_2.png';
   /// ![](http://127.0.0.1:9527/assets/icon/grey_close_icon.png)
   static final String assetsIconGreyCloseIcon = 'assets/icon/grey_close_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/group_file_icon.png)
+  static final String assetsIconGroupFileIcon = 'assets/icon/group_file_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/group_image_icon.png)
+  static final String assetsIconGroupImageIcon = 'assets/icon/group_image_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/group_location_icon.png)
+  static final String assetsIconGroupLocationIcon = 'assets/icon/group_location_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/group_notification.png)
   static final String assetsIconGroupNotification = 'assets/icon/group_notification.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/group_voice_call_icon.png)
+  static final String assetsIconGroupVoiceCallIcon = 'assets/icon/group_voice_call_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/hand_up_icon.png)
   static final String assetsIconHandUpIcon = 'assets/icon/hand_up_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/icon.png)
@@ -125,6 +139,8 @@ class R {
   static final String assetsIconPasswordIcon = 'assets/icon/password_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/pin_icon.png)
   static final String assetsIconPinIcon = 'assets/icon/pin_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/privacy_policy.png)
+  static final String assetsIconPrivacyPolicy = 'assets/icon/privacy_policy.png';
   /// ![](http://127.0.0.1:9527/assets/icon/profile_unselect_icon.png)
   static final String assetsIconProfileUnselectIcon = 'assets/icon/profile_unselect_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/qr_icon.png)
@@ -171,10 +187,14 @@ class R {
   static final String assetsIconSuccessBlueIcon = 'assets/icon/success_blue_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/success_white_icon.png)
   static final String assetsIconSuccessWhiteIcon = 'assets/icon/success_white_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/terms_and_conditions.png)
+  static final String assetsIconTermsAndConditions = 'assets/icon/terms_and_conditions.png';
   /// ![](http://127.0.0.1:9527/assets/icon/time_icon.png)
   static final String assetsIconTimeIcon = 'assets/icon/time_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/unselect_icon.png)
   static final String assetsIconUnselectIcon = 'assets/icon/unselect_icon.png';
+  /// ![](http://127.0.0.1:9527/assets/icon/unselect_switch.png)
+  static final String assetsIconUnselectSwitch = 'assets/icon/unselect_switch.png';
   /// ![](http://127.0.0.1:9527/assets/icon/username_icon.png)
   static final String assetsIconUsernameIcon = 'assets/icon/username_icon.png';
   /// ![](http://127.0.0.1:9527/assets/icon/version_icon.png)

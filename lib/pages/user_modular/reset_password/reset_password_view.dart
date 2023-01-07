@@ -42,6 +42,15 @@ class ResetPasswordPage extends GetView<ResetPasswordController> {
                   height: 17,
                 ),
                 const InputBorderColumnField(
+                  title: 'Original Password',
+                  formKey: 'opwd',
+                  hint: 'Please set your original password',
+                  obscureText: true,
+                ),
+                const SizedBox(
+                  height: 11,
+                ),
+                const InputBorderColumnField(
                   title: 'New Password',
                   formKey: 'pwd',
                   hint: 'Please set your password',

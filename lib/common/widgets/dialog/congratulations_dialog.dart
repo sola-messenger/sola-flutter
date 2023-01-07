@@ -7,8 +7,10 @@ import 'dialog_header_widget.dart';
 
 class CongratulationsDialog extends StatelessWidget {
   final VoidCallback onContinue;
+  final String? content;
 
-  const CongratulationsDialog({Key? key, required this.onContinue})
+  const CongratulationsDialog(
+      {Key? key, required this.onContinue, this.content})
       : super(key: key);
 
   @override
@@ -29,7 +31,7 @@ class CongratulationsDialog extends StatelessWidget {
                   ),
                 ]),
             margin: const EdgeInsets.symmetric(
-              horizontal: 45,
+              horizontal: 59,
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -53,11 +55,12 @@ class CongratulationsDialog extends StatelessWidget {
                 const SizedBox(
                   height: 25,
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 28.0, right: 15),
+                Padding(
+                  padding: const EdgeInsets.only(left: 28.0, right: 15),
                   child: Text(
-                    'You have successfully joined the Matrix Organization  ',
-                    style: TextStyle(
+                    content ??
+                        'You have successfully joined the Matrix Organization  ',
+                    style: const TextStyle(
                       color: AppColors.textBlackColor,
                       fontSize: 12,
                       height: 18 / 12,

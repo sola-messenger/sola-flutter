@@ -28,7 +28,13 @@ class ContactGroupSetPage extends GetView<ContactGroupSetController> {
         builder: (ctl) {
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Group(91)'),
+              title: StreamBuilder(
+                stream: ctl.room.value?.onUpdate.stream,
+                builder: (context, _) {
+                  return Text(
+                      '${ctl.room.value!.displayname}(${ctl.room.value!.getParticipants().length})');
+                },
+              ),
               actions: [
                 IconButton(
                   onPressed: () {},
@@ -40,7 +46,12 @@ class ContactGroupSetPage extends GetView<ContactGroupSetController> {
                 ),
               ],
             ),
-            body: _buildView(ctl),
+            body: StreamBuilder(
+              stream: ctl.room.value?.onUpdate.stream,
+              builder: (context, _) {
+                return _buildView(ctl);
+              },
+            ),
           );
         });
   }
@@ -50,11 +61,11 @@ class ContactGroupSetPage extends GetView<ContactGroupSetController> {
           const SizedBox(
             height: 19,
           ),
-          MemberListWrap(
-              members: List.generate(10, (index) => ''),
+          Obx(() => MemberListWrap(
+              members: ctl.members.value,
               onMemberDetail: ctl.onNavMemberInfo,
               onAdd: ctl.onAddMember,
-              onRemove: ctl.onRemoveMember),
+              onRemove: ctl.onRemoveMember)),
           const SizedBox(
             height: 19,
           ),
@@ -88,14 +99,15 @@ class ContactGroupSetPage extends GetView<ContactGroupSetController> {
             height: 22,
           ),
           const SolaDivider(),
-          const ClickListTile(
+          ClickListTile(
             title: 'Chat Name',
-            content: 'Sola',
+            content: ctl.room.value!.displayname,
             isShowLine: false,
           ),
-          const ClickListTile(
+          ClickListTile(
+            onTap: ctl.onChangeDescription,
             title: 'Description',
-            content: 'Sola对接专用',
+            content: ctl.room.value!.topic,
             isShowLine: false,
           ),
           ClickListTile(
@@ -103,9 +115,9 @@ class ContactGroupSetPage extends GetView<ContactGroupSetController> {
             title: 'Group QR Code',
             isShowLine: false,
           ),
-          const ClickListTile(
+           ClickListTile(
             title: 'Remark',
-            content: 'sjsjsjsj',
+            content: ctl.room.value!.topic,
             isShowLine: false,
           ),
           ClickListTile(

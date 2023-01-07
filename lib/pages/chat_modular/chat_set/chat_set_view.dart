@@ -7,9 +7,11 @@ import 'package:sola/common/style/app_text_styles.dart';
 import 'package:sola/common/widgets/button/border_icon_button.dart';
 import 'package:sola/common/widgets/button/fill_button.dart';
 import 'package:sola/common/widgets/button/fill_icon_button.dart';
+import 'package:sola/common/widgets/list_tile/click_list_tile.dart';
 
 // Project imports:
 import 'package:sola/common/widgets/list_tile/my_radio_list_tile.dart';
+import 'package:sola/common/widgets/list_tile/privacy_level_list_tile.dart';
 import 'package:sola/pages/chat_modular/chat_detail/views/avatar.dart';
 import 'package:sola/r.dart';
 import 'chat_set_controller.dart';
@@ -34,6 +36,9 @@ class ChatSetPage extends GetView<ChatSetController> {
 
   Widget _buildView(ChatSetController ctl) => ListView(
         children: [
+          const SizedBox(
+            height: 16,
+          ),
           const Padding(
             padding: EdgeInsets.only(left: 20.0),
             child: Text(
@@ -46,7 +51,7 @@ class ChatSetPage extends GetView<ChatSetController> {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
-            child: Row(
+            child: Stack(
               children: [
                 InkWell(
                   onTap: ctl.onNavPersonalInfo,
@@ -56,63 +61,53 @@ class ChatSetPage extends GetView<ChatSetController> {
                     size: 45,
                   ),
                 ),
-                const SizedBox(
-                  width: 13,
-                ),
-                InkWell(
-                  onTap: ctl.onCreateGroup,
-                  child: Ink.image(
-                    image: AssetImage(R.assetsIconChatAddMoreIcon),
-                    width: 30,
-                    height: 30,
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 32,
+                    left: 40,
+                  ),
+                  child: InkWell(
+                    onTap: ctl.onCreateGroup,
+                    child: Ink.image(
+                      image: AssetImage(R.assetsIconChatAddMoreIcon),
+                      width: 19,
+                      height: 19,
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          const MyRadioListTile(
-            title: 'Pin',
-            isSelect: false,
-          ),
-          const MyRadioListTile(
-            title: 'Mute Notification ',
-            isSelect: false,
-          ),
-          const ListTile(
-            title: Text('Clear chat history'),
-          ),
-          ListTile(
-            title: Row(
-              children: [
-                const Text('Auto Delete'),
-                Image.asset(
-                  R.assetsIconWarningIcon,
-                  width: 14,
-                  height: 13,
-                )
-              ],
+          Obx(
+            () => MyRadioListTile(
+              title: 'Pin',
+              isSelect: ctl.isPin.isTrue,
+              onTap: ctl.onChangePin,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0),
-            child: Row(
-              children: [
-                FillIconButton(
-                  image: R.assetsIconCommunicationIcon,
-                  title: 'standard',
-                  onPressed: () {},
-                ),
-                const SizedBox(
-                  width: 12,
-                ),
-                BorderIconButton(
-                  onPressed: () {},
-                  image: R.assetsIconCollectionIcon,
-                  title: 'High',
-                ),
-              ],
+          Obx(
+            () => MyRadioListTile(
+              title: 'Mute Notification ',
+              isSelect: ctl.isMute.isTrue,
+              onTap: ctl.onChangeMute,
             ),
-          )
+          ),
+          ClickListTile(
+            onTap: () {},
+            title: 'Clear chat history',
+            isShowLine: false,
+          ),
+          ClickListTile(
+            onTap: () {},
+            title: 'Auto Delete',
+            isShowLine: false,
+          ),
+          Obx(
+            () => PrivacyLevelListTile(
+              isPrivate: ctl.isPrivacy.isTrue,
+              onChangePrivate: ctl.onchangePrivacyLevel,
+            ),
+          ),
         ],
       );
 }
